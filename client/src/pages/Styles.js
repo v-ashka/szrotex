@@ -47,5 +47,6 @@ export const imgFit = {
 
 export const customCardBodyHeight = {
     backgroundColor: '#E5F0F1',
-    maxHeight: '320px'
+    maxHeight: '100%',
+    height: '100%',
 }

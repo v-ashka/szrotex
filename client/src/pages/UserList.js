@@ -3,6 +3,9 @@ import {handleImageError} from '../components/ImgError'
 import {customCardBody, customCardProducts, customLink, imgFit} from './Styles'
 import {SearchList} from '../components/SearchList'
 import { Link } from 'react-router-dom'
+import style from '../components/styles.module.css'
+
+
 
 const Lists = ({ lists }) => {
     //  console.log(lists)
@@ -40,12 +43,12 @@ export const List = ({ item }) => {
     console.log('lists: ', item)
     return (
   
-        <div className="col-md-10 mb-4 " key={item._id}>
-        <Link to={item._id} state={item}>
-        <div className="card" style={customCardProducts}>
+        <div className={"col-md-10 mb-4 "} key={item._id}>
+            <Link to={item._id} className={style.customLink} state={item}>
+        <div className={"card " + style.customLink } style={customCardProducts}>
             <div className="row g-0 p-5">
                 <div className="col-md-3 d-flex ">
-                <img src={item.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} width="150px" alt="Product image" />
+                <img src={item.img} onError={handleImageError} className={"img-fluid rounded-start " + style.userListImg} alt="Product image" />
                 </div>
                 <div className="col-md-9">
                 <div className="card-body" style={customCardBody}>
@@ -157,7 +160,11 @@ const App = ({value, onClick}) => {
             <div className="row d-flex justify-content-center">
                 { isValue ? (
                 <>
-                    <div>Szukana fraza: {value}</div>
+                    <div className="row justify-content-center">
+                        <div className="col-md-8 p-3">
+                            <h3 className={"d-flex p-3 card " + style.customHeader} style={customCardProducts}>Wyszukiwana fraza: {value}</h3>
+                        </div>
+                    </div>
                     <SearchList lists={list} query={value}/>
                 </>
                 ) : (<Lists lists={list} />)}

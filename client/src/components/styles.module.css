@@ -2,7 +2,29 @@
   background-color: #003c3c !important;
 }
 
+.customHeader {
+  color: rgba(0, 68, 68, 0.9);
+  font-weight: bold;
+}
+
 .customLink {
   color: none;
   text-decoration: none;
+  transition: 0.3s all;
+}
+
+.customLink:hover {
+  background-color: rgb(19 92 60 / 25%) !important;
+}
+
+.userLogo {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.userListImg {
+  width: 90%;
+  height: 150px;
+  object-fit: cover;
 }

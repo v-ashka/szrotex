@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useDebugValue} from 'react'
 import {useLocation, useNavigate, useParams } from "react-router-dom";
-import {handleImageError} from '../components/ImgError'
+import {handleImageError, handleUserImageError} from '../components/ImgError'
 import { customCardBody, customCardProducts, imgFit, customLink, customCardBodyHeight } from '../pages/Styles';
 import { Link, Navigate } from 'react-router-dom'
 import style from './styles.module.css'
@@ -23,13 +23,13 @@ const SellerProducts = ({ list, mainProduct }) => {
         // console.log(otherProducts)
     return(
         <>
-        {otherProducts.length > 1 ? (<h3 style={customLink}>Zobacz inne produkty sprzedającego: </h3>) : (<div></div>) }
+        {otherProducts.length > 1 ? (<h3 className={'p-3 '+ style.customHeader}>Zobacz inne produkty sprzedającego: </h3>) : (<div></div>) }
         {otherProducts.length > 0 ? (
             otherProducts.map(product => {
                 return (
-                    <div className="col-md-4 mb-4" key={product._id}>
-                        <Link to={'/list/'+product._id} state={product}>
-                        <div className="card" style={customCardProducts}>
+                    <div className={"col-md-4 mb-4 "} key={product._id}>
+                        <Link to={'/list/' + product._id} className={style.customLink} state={product}>
+                        <div className={"card " + style.customLink} style={customCardProducts}>
                         <div className="row g-0 p-5">
                             <div className="col-md-10" style={customCardBody}>
                                 <h5 className="card-title">{product.name}</h5>
@@ -98,12 +98,12 @@ const ProductItem = () => {
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-5">
                         <div className="col-md-10" style={customCardBody}>
-                            <h5 className="card-title">{product.name}</h5>
+                            <h4 className={"card-title " + style.customHeader }>{product.name}</h4>
                         </div>
                         <div className="col-md-2" style={customCardBody}>
-                            <h5 className="card-title d-flex justify-content-end">{product.price} PLN</h5>
+                            <h5 className={"card-title d-flex justify-content-end " + style.customHeader}>{product.price} PLN</h5>
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-md-12 mt-4">
                         <img src={product.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} alt="Product image" />
                         </div>
                     </div>
@@ -111,7 +111,10 @@ const ProductItem = () => {
             </div>
             <div className="col-md-4 mb-4">
                 <div className="card" style={customCardBodyHeight}>
-                    <div className="row g-0 p-5">
+                        <div className="row g-0 p-5">
+                        <div className="col-md-12 mb-4">
+                             <img src={'.'} onError={handleUserImageError} className={"img-fluid rounded-start " + style.userLogo} alt="User Logo" />
+                        </div>
                         <div className="col-md-12">
                             <h6 className='card-title' style={customCardBody}>Firma <span style={customLink}>{product.creatorName}</span></h6>
                         </div>
@@ -138,17 +141,20 @@ const ProductItem = () => {
                                 </div>
                         </div>
                         </div>
+                        <div className="col-md-12">
+                            <p className='card-title' style={customCardBody}>Wyświetl profil</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            <h2 className={'p-3 ' + style.customHeader}>Opis produktu: </h2>
             <div className="col-md-12 mb-4">
                 <div className="card" style={customCardProducts}>
-                    <div className="row g-0 p-5">
+                    <div className="row g-0 p-2">
                         <div className="col-md-12">
                         <div className="card-body" style={customCardBody}>
                                 <div className="card-text">
-                                    <h4>Opis:</h4>
-                                    <h6 className="card-text">{product.desc}</h6>
+                                    <p className="card-text">{product.desc}</p>
                                 </div>
                             </div>
                         </div>
