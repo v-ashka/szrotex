@@ -24,7 +24,7 @@ export const SearchList = ({lists, query}) => {
 
     })
     
-    console.log(arr)
+    // console.log(arr)
    return(
        <>   {arr.map((item, index) => (
         <List key={index} item={item}/>
