@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 router.route('/list').get((req, res) => {
 
-    console.log('test')
+    console.log('test /list only')
      userModel.find()
         .then(user => {
             return res.json(user)
@@ -15,14 +15,37 @@ router.route('/list').get((req, res) => {
 })
 
 
-router.route('/list/:id').post(async (req, res) => {
+router.route('/list/:id').get((req, res) => {
 
-    try{
+    try {
         const id = req.params.id;
-        
-        const email = req.body.email
-        const user = await userModel.findOne({ email: email });
-        return res.json({status: 200, user: user})
+        //console.log('list/' + id)
+        const userInfo = { name: '', email: '', phoneNumber: '', description: '', workStartHour: '', workEndHour: '', products: []}
+        userModel.find({ "products._id": id }, function (err, result) {
+            if (err) {
+                console.log(err)
+            }
+            userInfo.name = result[0].name
+            userInfo.email = result[0].email
+            userInfo.phoneNumber = result[0].phoneNumber
+            userInfo.products = result[0].products
+            if (result[0].description === undefined) {
+                //console.log('result of product (basic userInfo) id: ', res, res[0].name, userInfo)    
+                return res.json({status: 200, user: userInfo})
+
+            } else {
+                userInfo.description = result[0].description
+                userInfo.workStartHour = result[0].workStartHour
+                userInfo.workEndHour = result[0].workEndHour
+                //console.log('result of product (extended userInfo) id: ', res, res[0].name, userInfo)
+                return res.json({status: 200, user: userInfo})
+            }
+        })
+        // console.log(userInfo)
+        // console.log(test)
+        //const user = await userModel.findOne({ email: email });
+      //  console.log(email, user)
+        //return res.json({status: 200, user: user})
     }catch(err){
         return res.status(400).json('Error: ' + err)
     }

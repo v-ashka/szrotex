@@ -40,6 +40,9 @@ export const customWidth = {
 
 export const imgFit = {
     objectFit: 'cover',
+    width: '100%',
+    maxWidth: '100%'
+
 }
 
 export const customCardBodyHeight = {

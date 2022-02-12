@@ -1,27 +1,26 @@
 import React, {useState, useEffect, useDebugValue} from 'react'
 import {useLocation, useNavigate, useParams } from "react-router-dom";
 import {handleImageError} from '../components/ImgError'
-import { customCard, customCardBody, customCardProducts, imgFit, customLink, customCardBodyHeight } from '../pages/Styles';
+import { customCardBody, customCardProducts, imgFit, customLink, customCardBodyHeight } from '../pages/Styles';
+import { Link, Navigate } from 'react-router-dom'
+import style from './styles.module.css'
 
-const SellerProducts = ({list, mainProduct}) => {
-    console.log(mainProduct);
+
+const SellerProducts = ({ list, mainProduct }) => {
+    // const location = useLocation();
+    // console.log('location:',location);
+    // console.log(mainProduct, list);
     const otherProducts = []
         list.products.filter(product => {
-            if(product._id != mainProduct){
+            if (product._id != mainProduct) {
+                     product['creatorName'] = list.name
+                     product['createdBy'] = list.email
                 otherProducts.push(product)
             }
         })
 
-        // list.map(item => {
-        //     item.products.filter(product => {
-        //             console.log(product._id, mainProduct)
-        //             if(product._id != mainProduct){
-        //                 otherProducts.push(product)
-        //             }
-        //     })
-        // })  
 
-        // console.log(otherProducts.length)
+        // console.log(otherProducts)
     return(
         <>
         {otherProducts.length > 1 ? (<h3 style={customLink}>Zobacz inne produkty sprzedającego: </h3>) : (<div></div>) }
@@ -29,7 +28,8 @@ const SellerProducts = ({list, mainProduct}) => {
             otherProducts.map(product => {
                 return (
                     <div className="col-md-4 mb-4" key={product._id}>
-                    <div className="card" style={customCardProducts}>
+                        <Link to={'/list/'+product._id} state={product}>
+                        <div className="card" style={customCardProducts}>
                         <div className="row g-0 p-5">
                             <div className="col-md-10" style={customCardBody}>
                                 <h5 className="card-title">{product.name}</h5>
@@ -42,6 +42,7 @@ const SellerProducts = ({list, mainProduct}) => {
                             </div>
                         </div>
                     </div>
+                    </Link>
                 </div>
                 )
             })
@@ -57,9 +58,9 @@ const SellerProducts = ({list, mainProduct}) => {
 const ProductItem = () => {
     const location = useLocation();
     const product = location.state;
-    // console.log(product)
-    const [list, setList] = useState({phoneNumber: '', description: '', startWorkHour: '', endWorkHour: '', products: []});
-
+    // console.log('product', product)
+    const [list, setList] = useState({ phoneNumber: '', description: '', startWorkHour: '', endWorkHour: '', products: [] });
+    //console.log(list)
     useEffect(() => {
         const getList = async () => {
             const listFromServer = await fetchList()
@@ -73,27 +74,23 @@ const ProductItem = () => {
     //Fetch List
     const fetchList = async () => {
         const res = await fetch('http://localhost:3500/list/' + product._id, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                email: product.createdBy
-            })
         })
         
         const data = await res.json();
         if(data.status === 200){
-            // console.log(data.user)
+           // console.log('get:', data)
             return data.user
         }else{
-            return data.user = 'Nie można załadować informacji o firmie!';
+            return data = 'Nie można załadować informacji o firmie!';
         }
     }
 
-    const ValidateData = false;
  
-    console.log(list)
+    //console.log(list)
     return (
         <>
         <div className='row'>
