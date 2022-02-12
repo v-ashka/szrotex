@@ -1,0 +1,108 @@
+.tableColor {
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.primaryColor {
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.customLink {
+  color: #003c3ce6;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid #003c3ce6;
+}
+
+.columnGap {
+  column-gap: 10px;
+}
+
+.customLinkEdit img:hover {
+  filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)
+    brightness(104%) contrast(97%);
+}
+
+.customLinkDelete img:hover {
+  filter: invert(97%) sepia(51%) saturate(2878%) hue-rotate(346deg)
+    brightness(104%) contrast(97%);
+}
+
+.addProductForm {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.addProductForm div {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+.addProductForm label {
+  width: 130px;
+  font-weight: bold;
+}
+
+.addProductForm input {
+  width: 200px;
+  height: 40px;
+}
+
+.addProductForm input[type="text"] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dotted #003c3ce6;
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.formButton {
+  margin-top: 50px;
+  background-color: rgb(19 92 60 / 14%);
+  border: none;
+  color: rgba(0, 68, 68, 0.9);
+  font-weight: 600;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.formButton:hover {
+  background-color: rgb(19 92 60 / 30%);
+  color: rgba(22, 43, 43, 0.9);
+}
+
+.formButtonDelete {
+  margin-top: 50px;
+  background-color: rgba(182, 32, 32, 0.781);
+  border: none;
+  color: rgba(235, 235, 235, 0.9);
+  font-weight: 600;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.formButton:hover {
+  background-color: rgb(19 92 60 / 30%);
+  color: rgba(22, 43, 43, 0.9);
+}
+
+.registerForm input[type="text"],
+.registerForm input[type="password"],
+.registerForm input[type="email"] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dotted #003c3ce6;
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.registerForm label {
+  margin: 0.5em 0;
+}
+
+.errorFeedback {
+  color: rgba(182, 32, 32, 0.781);
+  font-weight: 500;
+}
