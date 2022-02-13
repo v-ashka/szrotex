@@ -77,16 +77,6 @@ router.route('/register').post([
     catch (err) {
         console.log(err);
         res.json({ status: 'Error', error: 'Internal Server Error' })    }
-       // await userModel.create({
-    //     name: 'Admin',
-    //     email: 'it@eszrot.com',
-    //     password: '123',
-    //     description: 'Zespół IT portalu E-szrot',
-    //     workStartHour: 8,
-    //     workEndHour: 16,
-    //     phoneNumber: 664123091,
-    //     products: []
-    // })
 })
 
 router.route('/login').post(async (req, res) => {
@@ -145,12 +135,13 @@ router.route('/dashboard').post([
         const description =  req.body.desc;
         const workStartHour = req.body.startWorkHour;
         const workEndHour = req.body.endWorkHour;
-        
-        await userModel.findOneAndUpdate(
-			{ email: email },
-			{ description: description, workStartHour: workStartHour, workEndHour: workEndHour }
-		)
-        return res.json({ status: '200', info: 'New information added!'})
+        const workSchedule = req.body.workSchedule;
+        console.log(workSchedule)
+        // await userModel.findOneAndUpdate(
+		// 	{ email: email },
+		// 	{ description: description, workStartHour: workStartHour, workEndHour: workEndHour }
+		// )
+        //return res.json({ status: '200', info: 'New information added!'})
     } catch (err) {
         console.log(err)
         res.json({status: 'Error', error: 'Invalid token'})
