@@ -162,7 +162,7 @@ const App = ({value, onClick}) => {
                 <>
                     <div className="row justify-content-center">
                         <div className="col-md-8 p-3">
-                            <h3 className={"d-flex p-3 card " + style.customHeader} style={customCardProducts}>Wyszukiwana fraza: {value}</h3>
+                            <h6 className={"p-3 card d-flex flex-row " + style.searchResult} style={customCardProducts}>Wyszukiwana fraza:<span className="fw-bold"> {value}</span></h6>
                         </div>
                     </div>
                     <SearchList lists={list} query={value}/>

@@ -27,18 +27,18 @@ const SellerProducts = ({ list, mainProduct }) => {
         {otherProducts.length > 0 ? (
             otherProducts.map(product => {
                 return (
-                    <div className={"col-md-4 mb-4 "} key={product._id}>
+                    <div className={"col-lg-4 col-md-6 col-sm-6 mb-4 "} key={product._id}>
                         <Link to={'/list/' + product._id} className={style.customLink} state={product}>
                         <div className={"card " + style.customLink} style={customCardProducts}>
                         <div className="row g-0 p-5">
-                            <div className="col-md-10" style={customCardBody}>
+                            <div className="col-lg-10 col-md-10" style={customCardBody}>
                                 <h5 className="card-title">{product.name}</h5>
                             </div>
-                            <div className="col-md-2" style={customCardBody}>
+                            <div className="col-lg-2 col-md-2" style={customCardBody}>
                                 <h5 className="card-title d-flex justify-content-end">{product.price} PLN</h5>
                             </div>
-                            <div className="col-md-12">
-                            <img src={product.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} alt="Product image" />
+                            <div className="col-lg-12 col-md-12">
+                            <img src={product.img} onError={handleImageError} className={"img-fluid rounded-start " + style.otherUserProductsImg} alt="Product image" />
                             </div>
                         </div>
                     </div>
@@ -94,31 +94,31 @@ const ProductItem = () => {
     return (
         <>
         <div className='row'>
-            <div className="col-md-8 mb-4" key={product._id}>
+            <div className="col-lg-8 mb-4" key={product._id}>
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-5">
-                        <div className="col-md-10" style={customCardBody}>
+                        <div className="col-lg-10" style={customCardBody}>
                             <h4 className={"card-title " + style.customHeader }>{product.name}</h4>
                         </div>
-                        <div className="col-md-2" style={customCardBody}>
+                        <div className="col-lg-2" style={customCardBody}>
                             <h5 className={"card-title d-flex justify-content-end " + style.customHeader}>{product.price} PLN</h5>
                         </div>
-                        <div className="col-md-12 mt-4">
+                        <div className="col-lg-12 mt-4">
                         <img src={product.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} alt="Product image" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="col-md-4 mb-4">
+            <div className="col-lg-4 mb-4">
                 <div className="card" style={customCardBodyHeight}>
                         <div className="row g-0 p-5">
-                        <div className="col-md-12 mb-4">
+                        <div className="col-lg-12 mb-4">
                              <img src={'.'} onError={handleUserImageError} className={"img-fluid rounded-start " + style.userLogo} alt="User Logo" />
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-lg-12">
                             <h6 className='card-title' style={customCardBody}>Firma <span style={customLink}>{product.creatorName}</span></h6>
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-lg-12">
                         <div className="mt-2" style={customCardBody}>
                                 <div className="card-text">
                                     { list.description ? (
@@ -141,17 +141,17 @@ const ProductItem = () => {
                                 </div>
                         </div>
                         </div>
-                        <div className="col-md-12">
+                        <div className="col-lg-12">
                             <p className='card-title' style={customCardBody}>Wyświetl profil</p>
                         </div>
                     </div>
                 </div>
                 </div>
             <h2 className={'p-3 ' + style.customHeader}>Opis produktu: </h2>
-            <div className="col-md-12 mb-4">
+            <div className="col-lg-12 mb-4">
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-2">
-                        <div className="col-md-12">
+                        <div className="col-lg-12">
                         <div className="card-body" style={customCardBody}>
                                 <div className="card-text">
                                     <p className="card-text">{product.desc}</p>

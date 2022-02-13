@@ -14,7 +14,7 @@ const Header = styled.header`
 
 const HeaderContent = styled.section`
     width: 100%;
-    height: 92%;
+    height: 90%;
     overflow: hidden;
     display: flex;
     justify-content: space-evenly;
@@ -52,6 +52,14 @@ const HeaderPattern = styled.svg`
     border-radius: 100%;
     background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2323d18d' fill-opacity='0.71' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
 `;
+
+const SearchBar = styled.form`
+    width: 100%;
+    background: rgb(245, 245, 245);
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+`
 
 const customParagraph = {
     backgroundColor: 'rgba(35,198,134, 0.3)',
@@ -101,8 +109,6 @@ const GlobalNavbar = ({value, onChange, onClick}) => {
                 <>
                     <h1 className="display-1 fw-normal mb-4">Społeczność</h1>
                     <p className="fs-1 fw-light" style={customParagraph}>Znajdź intersujące Cię produkty w Twojej okolicy</p>
-                    <input type="text" value={value} onChange={onChange}></input>
-                    <button onClick={() => onClick && navigate('list')}>Znajdź</button>
                 </>
             )
         } else if (location.pathname === '/login' || location.pathname === '/register') {
@@ -123,17 +129,15 @@ const GlobalNavbar = ({value, onChange, onClick}) => {
          else if (location.pathname === '/list') {
             return (
                 <>
-                    <h1 className="display-1 fw-normal mb-4">Sprawdź nowe produkty!</h1>
+                    <h1 className="display-1 fw-normal mb-4">Sprawdź co nowego!</h1>
                     <p className="fs-1 fw-light" style={customParagraph}>Nowe produkty są już dostępne!</p>
-                    <input type="text" value={value} onChange={onChange} placeholder="Podaj wyszukiwaną frazę.."></input>
-                    <button onClick={onClick}>Znajdź</button>
                 </>
             )
         }
         else if (location.pathname.includes('/list/')) {
             return (
                 <>
-                    <h1 className="display-1 fw-normal mb-4">Sprawdź nowe produkty!</h1>
+                    <h1 className="display-1 fw-normal mb-4">Sprawdź co nowego!</h1>
                     <p className="fs-1 fw-light" style={customParagraph}>Nowe produkty są już dostępne!</p>
                 </>
             )
@@ -198,6 +202,10 @@ const GlobalNavbar = ({value, onChange, onClick}) => {
                         </HeaderPattern>
                     </HeaderContentImage>
                 </HeaderContent>
+                <SearchBar onSubmit={(e) => e.preventDefault()}>
+                        <input className={styles.customInput} type="text" value={value} onChange={onChange} placeholder="Wprowadź nazwę produktu.."></input>
+                        <button className={styles.searchBarButton} onClick={() => onClick && navigate('list')}>Wyszukaj</button>
+                </SearchBar>
             </Header>
         );
 
