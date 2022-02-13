@@ -66,25 +66,12 @@ const customParagraph = {
     padding: '0.2em',
 }
 
-// const Nav = styled.nav
-//     width: 100%;
-//     height: max-content;
-//     background-color: #003C3C;
-//
-
-// const NavContent = styled.section`
-//     width: 100%;
-//     height: 50px;
-//     color: white;
-// `
-
 
 const GlobalNavbar = ({value, onChange, onClick}) => {
         const location = useLocation();
         const navigate = useNavigate();
         
 
-    //   console.log(location.pathname);
     let isLogged = false;
     if (localStorage.getItem('token')) {
         isLogged = true;
@@ -151,32 +138,6 @@ const GlobalNavbar = ({value, onChange, onClick}) => {
     }
 
         return (
-            // <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-            //     <Link to={"/"} className="navbar-brand">Szrotex</Link>
-            //     <div className="collapse navbar-collapse">
-            //         <ul className="navbar-nav mr-auto">
-            //             {
-            //                 isLogged ? AuthButton() : <><li><Link to={'/register'} className="nav-link">Zarejestruj się</Link></li><li><Link to={'/login'} className="nav-link">Zaloguj się</Link></li></>
-            //             }
-            //         </ul>
-            //     </div> 
-            // </nav>
-            // <Header>
-            //     <Nav>
-            //         <NavContent>
-            //     <Link to={"/"} className="navbar-brand">Szrotex</Link>
-            //     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            //     <span className="navbar-toggler-icon"></span>
-            //     </button>
-                
-            //     <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            //        {
-            //                 isLogged ? AuthButton() : <><li><Link to={'/register'} className="nav-link">Zarejestruj się</Link></li><li><Link to={'/login'} className="nav-link">Zaloguj się</Link></li></>
-            //         }
-            //     </ul>
-            //         </NavContent>
-            //     </Nav>
-            // </Header>
             <Header>
             <Navbar collapseOnSelect expand="lg" bg="success" className={styles.primary_bg} variant="dark">
             <Container>
