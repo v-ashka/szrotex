@@ -20,15 +20,17 @@ router.route('/list/:id').get((req, res) => {
     try {
         const id = req.params.id;
         //console.log('list/' + id)
-        const userInfo = { name: '', email: '', phoneNumber: '', description: '', workStartHour: '', workEndHour: '', products: []}
+        const userInfo = { name: '', email: '', phoneNumber: '', description: '', workStartHour: '', workEndHour: '', products: [], workSchedule: {}}
         userModel.find({ "products._id": id }, function (err, result) {
             if (err) {
                 console.log(err)
             }
+            console.log(result[0])
             userInfo.name = result[0].name
             userInfo.email = result[0].email
             userInfo.phoneNumber = result[0].phoneNumber
             userInfo.products = result[0].products
+            
             if (result[0].description === undefined) {
                 //console.log('result of product (basic userInfo) id: ', res, res[0].name, userInfo)    
                 return res.json({status: 200, user: userInfo})
@@ -37,8 +39,8 @@ router.route('/list/:id').get((req, res) => {
                 userInfo.description = result[0].description
                 userInfo.workStartHour = result[0].workStartHour
                 userInfo.workEndHour = result[0].workEndHour
-                //console.log('result of product (extended userInfo) id: ', res, res[0].name, userInfo)
-                return res.json({status: 200, user: userInfo})
+                userInfo.workSchedule = result[0].workSchedule
+                return res.json({ status: 200, user: userInfo })
             }
         })
         // console.log(userInfo)
@@ -137,11 +139,11 @@ router.route('/dashboard').post([
         const workEndHour = req.body.endWorkHour;
         const workSchedule = req.body.workSchedule;
         console.log(workSchedule)
-        // await userModel.findOneAndUpdate(
-		// 	{ email: email },
-		// 	{ description: description, workStartHour: workStartHour, workEndHour: workEndHour }
-		// )
-        //return res.json({ status: '200', info: 'New information added!'})
+        await userModel.findOneAndUpdate(
+			{ email: email },
+			{ description: description, workStartHour: workStartHour, workEndHour: workEndHour, workSchedule: workSchedule }
+		)
+        return res.json({ status: '200', info: 'New information added!'})
     } catch (err) {
         console.log(err)
         res.json({status: 'Error', error: 'Invalid token'})

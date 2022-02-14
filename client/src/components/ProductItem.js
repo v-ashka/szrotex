@@ -82,13 +82,14 @@ const ProductItem = () => {
         
         const data = await res.json();
         if(data.status === 200){
-           // console.log('get:', data)
+           console.log('get:', data)
             return data.user
         }else{
             return data = 'Nie można załadować informacji o firmie!';
         }
     }
-
+    const today = new Date()
+    console.log(today.getMonth())
  
     //console.log(list)
     return (
