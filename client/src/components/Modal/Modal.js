@@ -65,8 +65,6 @@ export const Modal = ({ showModal, setShowModal}) => {
             },
             body: JSON.stringify({
                 desc,
-                startWorkHour,
-                endWorkHour,
                 workSchedule,
             })
         })
@@ -99,26 +97,6 @@ export const Modal = ({ showModal, setShowModal}) => {
                                         placeholder='Tutaj wpisz opis swojej firmy'
                                         onChange={e => setDesc(e.target.value)}
                                     ></textarea>
-                                </div>
-                                <div className={styles.form_group}>
-                                    <label>Godziny rozpoczęcia</label>
-                                    <input
-                                        type="number"
-                                        value={startWorkHour}
-                                        required
-                                        placeholder='Godzina rozpoczęcia pracy'
-                                        onChange={e => setWorkHour(e.target.value)}
-                                    />
-                                </div>
-                                <div className={styles.form_group}>
-                                    <label>Godziny zakończenia pracy</label>
-                                    <input
-                                        type="number"
-                                        value={endWorkHour}
-                                        required
-                                        placeholder='Godzina zakończenia pracy'
-                                        onChange={e => setEndWorkHour(e.target.value)}
-                                    />
                                 </div>
                                 <div style={{flexDirection: 'column'}}>
                                     <label>Ustaw harmonogram pracy</label>
