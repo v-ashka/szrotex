@@ -4,7 +4,51 @@ import {handleImageError, handleUserImageError} from '../components/ImgError'
 import { customCardBody, customCardProducts, imgFit, customLink, customCardBodyHeight } from '../pages/Styles';
 import { Link, Navigate } from 'react-router-dom'
 import style from './styles.module.css'
+import { Button, Collapse} from 'react-bootstrap'
+import expandList from '../pages/img/expand_arr.svg'
+import "./ProductItem.css"
 
+export const normalizeWeek = (date) => {
+        switch (date) {
+            case 'Monday':
+                return date = 'Poniedziałek'
+            case 'Tuesday':
+                return date = 'Wtorek'
+            case 'Wednesday':
+                return date = 'Środa'
+            case 'Thursday':
+                return date = 'Czwartek'
+            case 'Friday':
+                return date = 'Piątek'
+            case 'Saturday':
+                return date = 'Sobota'
+            case 'Sunday':
+                return date = 'Niedziela'
+        }
+}
+
+const Hours = ({ schedule, today, open }) => {
+
+    return (
+        <>
+            <Collapse in={open}>
+                <div>
+                    {
+                        Object.keys(schedule).map((day, id) => {
+                            return (<div key={id}>{day == today ? (<span className='fw-bold'>{normalizeWeek(day)}</span>) : (<span>{normalizeWeek(day)}</span>)} {schedule[day].FreeDay ? (<span className='fw-bold'>Zamknięte</span>) : (
+                              (day == today) ? (
+                                 <span className="fw-bold">{schedule[day].Start} - {schedule[day].End}</span>  
+                              ): (
+                                <span>{schedule[day].Start} - {schedule[day].End}</span>
+                              ) 
+                          )}</div>)
+                    })   
+                    }
+                </div>
+            </Collapse>
+        </>
+    )
+}
 
 const SellerProducts = ({ list, mainProduct }) => {
     // const location = useLocation();
@@ -54,12 +98,27 @@ const SellerProducts = ({ list, mainProduct }) => {
     );
 }
 
+export const getActualDate = () => {
+        const date = new Date()
+        let week = [];
+        week[0] = "Sunday"
+        week[1] = "Monday"
+        week[2] = "Tuesday"
+        week[3] = "Wednesday"
+        week[4] = "Thursday"
+        week[5] = "Friday"
+        week[6] = "Saturday"
+        let result = week[date.getDay()]
+        return result
+}
 
 const ProductItem = () => {
     const location = useLocation();
     const product = location.state;
     // console.log('product', product)
-    const [list, setList] = useState({ phoneNumber: '', description: '', startWorkHour: '', endWorkHour: '', products: [] });
+    const [list, setList] = useState({ phoneNumber: '', description: '', startWorkHour: '', endWorkHour: '', products: [], workSchedule: {}});
+    const [open, setOpen] = useState(false);
+
     //console.log(list)
     useEffect(() => {
         const getList = async () => {
@@ -88,9 +147,13 @@ const ProductItem = () => {
             return data = 'Nie można załadować informacji o firmie!';
         }
     }
-    const today = new Date()
-    console.log(today.getMonth())
+
  
+    
+  
+    const Today = getActualDate()
+    const translatedDay = normalizeWeek(Today)
+    // console.log(normalizeWeek(Today))
     //console.log(list)
     return (
         <>
@@ -127,8 +190,13 @@ const ProductItem = () => {
                                             <h6 className="card-text">Tel. <span style={customLink}>{list.phoneNumber}</span></h6>
                                             <h6 className="card-text">E-mail: <span style={customLink}>{product.createdBy}</span></h6>
                                             <h6 className='card-text'>O firmie:</h6><p>{list.description}</p>
-                                            <h6 className="card-text">Godziny otwarcia: <span style={customLink}>{list.workStartHour}</span></h6>
-                                            <h6 className="card-text">Godziny zamknięcia: <span style={customLink}>{list.workEndHour}</span></h6>
+                                                <h6>Godziny otwarcia:</h6> 
+                                            <div className='d-flex align-items-center' style={{columnGap: 10}}>    
+                                                    <h6 className="card-text" style={{margin: 0}}>{translatedDay} <span style={customLink}>{list.workSchedule[Today].Start} - {list.workSchedule[Today].End}</span></h6>
+                                                    <button className='expandListBtn' onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}><img className={`expandListSvg${open ? ("-active") : ('')}`} src={expandList} /></button>
+                                            </div>
+                                                    <Hours schedule={list.workSchedule} today={Today} open={open} />
+                                            
                                         </>
                                     ) : (
                                         <>

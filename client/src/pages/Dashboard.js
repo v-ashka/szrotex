@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { Modal } from '../components/Modal/Modal'
 import styles from '../pages/styles.module.css'
 import { handleImageError } from '../components/ImgError'
-
+import { getActualDate, normalizeWeek } from "../components/ProductItem"
+import scheduleImg from './img/schedule.svg'
 const Table = ({ products, modal }) => {
     if (products.length === 0) {
         return (<></>)
@@ -60,7 +61,7 @@ const UserProductList = ({ product, customLink }) => {
     )
 }
 
-const UserInfo = ({ user, additional, openModal, customLink}) => {
+const UserInfo = ({ user, additional, openModal}) => {
    
  console.log(user)
 
@@ -73,7 +74,7 @@ const UserInfo = ({ user, additional, openModal, customLink}) => {
                 additional ? (
                     <>
                       <p><span className="fw-bolder">Opis firmy: </span> {user.description}</p>
-                        <p><span className="fw-bolder">Godziny pracy: </span>{ user.workStartHour} - {user.workEndHour}</p></>
+                    </>
                 ) : (<>
                         <h6>Dodaj opis i godziny pracy swojej firmy</h6>
                         <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Dodaj informacje</button>  <img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
@@ -285,6 +286,8 @@ const customWidth = {
     width: '100%',
 }
 
+    
+const today = getActualDate()
     return (
         <div>
             <Modal showModal={showModal} setShowModal={setShowModal}/>
@@ -305,7 +308,33 @@ const customWidth = {
                         </div>
                     </div>
                 </div>
+                {basicInfoFilled ? (
                 <div className="col-sm-12 col-md-6 mb-4">
+                    <div className="card mb-3" style={customCard}>
+                        <div className="row g-0 p-5 flex-column">
+                            <div className={`col-md-4 d-flex align-items-center ${styles.columnGap}`} style={customWidth}>
+                                <img src={scheduleImg} className="img-fluid rounded-start" width="60px" alt="Information image" />
+                                 <h5 className={`card-title ${styles.primaryColor}`}>Harmonogram pracy</h5>
+                            </div>
+                            <div className="col-md-12">
+                            <div className="card-body" style={customCardBody}>
+                                   {  Object.keys(user.workSchedule).map((day, id) => {
+                                        return (<div key={id}>{day == today ? (<span className='fw-bold'>{normalizeWeek(day)}:</span>) : (<span>{normalizeWeek(day)}:</span>)} {user.workSchedule[day].FreeDay ? (<span className='fw-bold'>Zamknięte</span>) : (
+                                        (day == today) ? (
+                                            <span className="fw-bold">{user.workSchedule[day].Start} - {user.workSchedule[day].End}</span>  
+                                        ): (
+                                            <span>{user.workSchedule[day].Start} - {user.workSchedule[day].End}</span>
+                                        ) 
+                                    )}</div>)
+                                    })
+                                    }
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ) : (
+                    <div className="col-sm-12 col-md-6 mb-4">
                     <div className="card mb-3" style={customCard}>
                         <div className="row g-0 p-5 flex-column">
                             <div className={`col-md-4 d-flex align-items-center ${styles.columnGap}`} style={customWidth}>
@@ -321,7 +350,8 @@ const customWidth = {
                             </div>
                         </div>
                     </div>
-                </div>          
+                    </div>
+                )}          
             </div>
 
             <div className="row">

@@ -1,0 +1,15 @@
+.expandListBtn {
+  color: none;
+  background-color: rgb(207, 231, 233);
+  border: none;
+}
+
+.expandListSvg {
+  transform: rotateZ(0deg);
+  transition: 0.5s all;
+}
+
+.expandListSvg-active {
+  transition: 0.5s all;
+  transform: rotateZ(180deg);
+}

@@ -20,7 +20,7 @@ router.route('/list/:id').get((req, res) => {
     try {
         const id = req.params.id;
         //console.log('list/' + id)
-        const userInfo = { name: '', email: '', phoneNumber: '', description: '', workStartHour: '', workEndHour: '', products: [], workSchedule: {}}
+        const userInfo = { name: '', email: '', phoneNumber: '', description: '', products: [], workSchedule: {}}
         userModel.find({ "products._id": id }, function (err, result) {
             if (err) {
                 console.log(err)
@@ -37,8 +37,6 @@ router.route('/list/:id').get((req, res) => {
 
             } else {
                 userInfo.description = result[0].description
-                userInfo.workStartHour = result[0].workStartHour
-                userInfo.workEndHour = result[0].workEndHour
                 userInfo.workSchedule = result[0].workSchedule
                 return res.json({ status: 200, user: userInfo })
             }
@@ -118,9 +116,7 @@ router.route('/dashboard').get( async (req, res) => {
 })
 
 router.route('/dashboard').post([
-    check('desc').trim().isLength({ min: 5 }).withMessage('Opis nie moze byc krotszy niz 5 znakow').bail(),
-    check('startWorkHour').trim().isLength({min: 1, max: 2}).withMessage("Godzina musi byc w postaci 24H!").bail(),
-    check('endWorkHour').isLength({min: 1, max: 2}).withMessage('Godzina musi byc podana w formacie 24H!').bail()
+    check('desc').trim().isLength({ min: 5 }).withMessage('Opis nie moze byc krotszy niz 5 znakow').bail()
     ], async (req, res) => {
     const token = req.headers['x-access-token'];
 
@@ -135,13 +131,11 @@ router.route('/dashboard').post([
         const email = decoded.email;
         console.log(req.body) 
         const description =  req.body.desc;
-        const workStartHour = req.body.startWorkHour;
-        const workEndHour = req.body.endWorkHour;
         const workSchedule = req.body.workSchedule;
         console.log(workSchedule)
         await userModel.findOneAndUpdate(
 			{ email: email },
-			{ description: description, workStartHour: workStartHour, workEndHour: workEndHour, workSchedule: workSchedule }
+			{ description: description, workSchedule: workSchedule }
 		)
         return res.json({ status: '200', info: 'New information added!'})
     } catch (err) {
