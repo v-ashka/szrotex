@@ -20,16 +20,30 @@ export const Modal = ({ showModal, setShowModal}) => {
     const [desc, setDesc] = useState('');
     const [startWorkHour, setWorkHour] = useState('');
     const [endWorkHour, setEndWorkHour] = useState('');
-    const [workSchedule, setWorkSchedule] = useState({Monday: {Start: 0.00, End: 0.00}, Tuesday: {Start: 0, End: 0}, Wednesday: {Start: 0, End: 0}, Thursday: {Start: 0, End: 0}, Friday: {Start: 0, End: 0}, Saturday: {Start: 0, End: 0 }, Sunday: {Start: 0, End: 0}});
+    const [workSchedule, setWorkSchedule] = useState({Monday: {Start: 0.00, End: 0.00, FreeDay: false}, Tuesday: {Start: 0, End: 0, FreeDay: false}, Wednesday: {Start: 0, End: 0, FreeDay: false}, Thursday: {Start: 0, End: 0, FreeDay: false}, Friday: {Start: 0, End: 0, FreeDay: false}, Saturday: {Start: 0, End: 0, FreeDay: false }, Sunday: {Start: 0, End: 0, FreeDay: false}});
     const [errorFeed, setError] = useState('');
     
+    const handleOnCheck = (e) => {
+        const { name } = e.target
+        // console.log(disableInput)
+       // console.log(e.target.parentElement.childNodes)
+        const inputs = [e.target.parentElement.childNodes[1], e.target.parentElement.childNodes[2]]
+        setWorkSchedule(workSchedule => ({
+            ...workSchedule,
+            [name]: {Start: workSchedule[name].Start, End: workSchedule[name].End, FreeDay: !workSchedule[name].FreeDay}
+        }))
+        inputs.map(input => {
+            input.disabled = !input.disabled
+        })
+    }
+
     const handleScheduleStartChange = e => {
 
         console.log(e.target.value, workSchedule.Monday.Start)
         const {name, value} = e.target
         setWorkSchedule(workSchedule => ({
             ...workSchedule,
-            [name]: {Start: value, End: workSchedule[name].End},
+            [name]: {Start: value, End: workSchedule[name].End, FreeDay: workSchedule[name].FreeDay},
         }))
     }
 
@@ -37,7 +51,7 @@ export const Modal = ({ showModal, setShowModal}) => {
         const { name, value } = e.target;
         setWorkSchedule(state => ({
             ...state,
-            [name]: {Start: workSchedule[name].Start, End: value},
+            [name]: {Start: workSchedule[name].Start, End: value,  FreeDay: workSchedule[name].FreeDay},
         }));
     }
 
@@ -116,7 +130,7 @@ export const Modal = ({ showModal, setShowModal}) => {
                                             required
                                             placeholder='Godzina początku pracy'
                                             name='Monday'
-                                            onChange={ handleScheduleStartChange}
+                                            onChange={handleScheduleStartChange}
                                             />    
                                             <input
                                                 type="number"
@@ -125,7 +139,8 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                                 name='Monday'
                                                 onChange={handleScheduleEndChange}
-                                                />    
+                                        />
+                                        <input type="checkbox" name="Monday" value={workSchedule.Monday.FreeDay} onChange={handleOnCheck}/>
                                         </div>
                                         <div className={styles.form_group}>
                                             <label>Wtorek</label>
@@ -136,6 +151,7 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina początku pracy'
                                                 onChange={handleScheduleStartChange}
                                                 name='Tuesday'
+
                                             />    
                                             <input
                                                 type="number"
@@ -144,7 +160,9 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                                 onChange={handleScheduleEndChange}
                                                 name='Tuesday'
-                                                />    
+                                        />    
+                                        <input type="checkbox" name="Tuesday" value={workSchedule.Tuesday.FreeDay} onChange={handleOnCheck}/>
+
                                     </div>
                                      <div className={styles.form_group}>
                                             <label>Środa</label>
@@ -163,7 +181,8 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                             onChange={handleScheduleEndChange}
                                             name='Wednesday'
-                                                />    
+                                        />   
+                                    <input type="checkbox" name="Wednesday" value={workSchedule.Wednesday.FreeDay} onChange={handleOnCheck}/>
                                     </div>
                                         <div className={styles.form_group}>
                                             <label>Czwartek</label>
@@ -182,7 +201,8 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                             onChange={handleScheduleEndChange}
                                             name="Thursday"
-                                                />    
+                                        />    
+                                        <input type="checkbox" name="Thursday" value={workSchedule.Thursday.FreeDay} onChange={handleOnCheck}/>
                                     </div>
                                        <div className={styles.form_group}>
                                             <label>Piątek</label>
@@ -201,7 +221,8 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                             onChange={handleScheduleEndChange}
                                             name="Friday"
-                                                />    
+                                        />    
+                                        <input type="checkbox" name="Friday" value={workSchedule.Friday.FreeDay} onChange={handleOnCheck}/>
                                     </div>
                                        <div className={styles.form_group}>
                                             <label>Sobota</label>
@@ -220,7 +241,8 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                             onChange={handleScheduleEndChange}
                                             name="Saturday"
-                                                />    
+                                        />    
+                                        <input type="checkbox" name="Saturday" value={workSchedule.Saturday.FreeDay} onChange={handleOnCheck}/>
                                     </div>
                                        <div className={styles.form_group}>
                                             <label>Niedziela</label>
@@ -239,7 +261,8 @@ export const Modal = ({ showModal, setShowModal}) => {
                                                 placeholder='Godzina końca pracy'
                                             onChange={handleScheduleEndChange}
                                             name="Sunday"
-                                                />    
+                                        />    
+                                        <input type="checkbox" name="Sunday" value={workSchedule.Sunday.FreeDay} onChange={handleOnCheck}/>
                                         </div>
                                 </div>
                                 <div className={styles.form_group}>
