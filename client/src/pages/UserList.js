@@ -39,16 +39,17 @@ const Lists = ({ lists }) => {
 }
 
 export const List = ({ item }) => {
-//    console.log(list.products)
-    console.log('lists: ', item)
+
+    console.log('lists: ', item.reservation)
     return (
   
         <div className={"col-md-10 mb-4 "} key={item._id}>
             <Link to={item._id} className={style.customLink} state={item}>
         <div className={"card " + style.customLink } style={customCardProducts}>
             <div className="row g-0 p-5">
-                <div className="col-md-3 d-flex ">
-                <img src={item.img} onError={handleImageError} className={"img-fluid rounded-start " + style.userListImg} alt="Product image" />
+                <div className="col-md-3">
+                    <img src={item.img} onError={handleImageError} className={"img-fluid rounded-start " + style.userListImg} alt="Product image" />
+                <h6 className="col-md-12 mt-2  justify-content-center">{item.reservation ? ('ZAREZERWOWANY'):('')} </h6>
                 </div>
                 <div className="col-md-9">
                 <div className="card-body" style={customCardBody}>
@@ -114,6 +115,7 @@ const App = ({value, onClick}) => {
     if(value.length > 0 || onClick){
         isValue = true;
     }
+    console.log(value.length, isValue)
 
     useEffect(() => {
         const getList = async () => {
@@ -158,7 +160,7 @@ const App = ({value, onClick}) => {
         // </table>
 
             <div className="row d-flex justify-content-center">
-                { isValue ? (
+                { value.length > 0 ? (
                 <>
                     <div className="row justify-content-center">
                         <div className="col-md-8 p-3">
@@ -167,7 +169,9 @@ const App = ({value, onClick}) => {
                     </div>
                     <SearchList lists={list} query={value}/>
                 </>
-                ) : (<Lists lists={list} />)}
+                ) : (<>
+                <Lists lists={list} />
+                </>)}
             </div>
     );
 }

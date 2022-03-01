@@ -7,7 +7,7 @@ import style from './styles.module.css'
 import { Button, Collapse} from 'react-bootstrap'
 import expandList from '../pages/img/expand_arr.svg'
 import "./ProductItem.css"
-
+import styles from "../pages/styles.module.css"
 export const normalizeWeek = (date) => {
         switch (date) {
             case 'Monday':
@@ -27,7 +27,7 @@ export const normalizeWeek = (date) => {
         }
 }
 
-const Hours = ({ schedule, today, open }) => {
+export const Hours = ({ schedule, today, open }) => {
 
     return (
         <>
@@ -116,10 +116,10 @@ const ProductItem = () => {
     const location = useLocation();
     const product = location.state;
     // console.log('product', product)
-    const [list, setList] = useState({ phoneNumber: '', description: '', startWorkHour: '', endWorkHour: '', products: [], workSchedule: {}});
+    const [list, setList] = useState({ id: '', phoneNumber: '', description: '', products: [], workSchedule: {}});
     const [open, setOpen] = useState(false);
 
-    //console.log(list)
+    console.log(list)
     useEffect(() => {
         const getList = async () => {
             const listFromServer = await fetchList()
@@ -141,7 +141,7 @@ const ProductItem = () => {
         
         const data = await res.json();
         if(data.status === 200){
-           console.log('get:', data)
+           //console.log('get:', data)
             return data.user
         }else{
             return data = 'Nie można załadować informacji o firmie!';
@@ -167,8 +167,10 @@ const ProductItem = () => {
                         <div className="col-lg-2" style={customCardBody}>
                             <h5 className={"card-title d-flex justify-content-end " + style.customHeader}>{product.price} PLN</h5>
                         </div>
-                        <div className="col-lg-12 mt-4">
-                        <img src={product.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} alt="Product image" />
+                        <div className={product.reservation ? ("col-lg-12 mt-4"):("col-lg-12 mt-4")}>
+                            <picture className={product.reservation ? ('img-reservation'):('')}>
+                                <img src={product.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} alt="Product image" />
+                            </picture>
                         </div>
                     </div>
                 </div>
@@ -189,7 +191,7 @@ const ProductItem = () => {
                                         <>
                                             <h6 className="card-text">Tel. <span style={customLink}>{list.phoneNumber}</span></h6>
                                             <h6 className="card-text">E-mail: <span style={customLink}>{product.createdBy}</span></h6>
-                                            <h6 className='card-text'>O firmie:</h6><p>{list.description}</p>
+                                            <h6 className='card-text'>O firmie:</h6><p>{list.description.slice(0, 180)}...</p>
                                                 <h6>Godziny otwarcia:</h6> 
                                             <div className='d-flex align-items-center' style={{columnGap: 10}}>    
                                                     <h6 className="card-text" style={{margin: 0}}>{translatedDay} <span style={customLink}>{list.workSchedule[Today].Start} - {list.workSchedule[Today].End}</span></h6>
@@ -211,7 +213,8 @@ const ProductItem = () => {
                         </div>
                         </div>
                         <div className="col-lg-12">
-                            <p className='card-title' style={customCardBody}>Wyświetl profil</p>
+                            {product.reservation ? (''):(<><button className={styles.formButton}>Zarezerwuj teraz</button></>)}
+                            <Link to={"/user/" + list.id} className='card-title' style={customCardBody}>Wyświetl profil</Link>
                         </div>
                     </div>
                 </div>

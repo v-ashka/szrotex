@@ -5,13 +5,14 @@ const User = new mongoose.Schema(
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
-        region: {type: String, required: false},
+        region: {voivodeship: String, street: String, zip: String, city: String},
         description: { type: String, required: false },
         workStartHour: { type: Number, required: false },
         workEndHour: { type: Number, required: false },
         phoneNumber: { type: Number, required: true },
         workSchedule: {Monday: {Start: Number, End: Number, FreeDay: Boolean}, Tuesday: {Start: Number, End: Number, FreeDay: Boolean}, Wednesday: {Start: Number, End: Number, FreeDay: Boolean}, Thursday: {Start: Number, End: Number, FreeDay: Boolean}, Friday: {Start: Number, End: Number, FreeDay: Boolean}, Saturday: {Start: Number, End: Number, FreeDay: Boolean}, Sunday: {Start: Number, End: Number, FreeDay: Boolean}},
-        products: [{ name: String, date: Date, price: Number, desc: String, img: String, tags: [{ name: String }]}],
+        products: [{ name: String, date: Date, price: Number, desc: String, img: String, tags: [{ name: String }], reservation: Boolean}],
+        rating: {numbers: Array}
     },
     {collection: 'eszrotUsers'}
 )

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, } from "react"
 import { Link } from 'react-router-dom'
-import { Modal } from '../components/Modal/Modal'
+import { Modal, ModalEdit } from '../components/Modal/Modal'
 import styles from '../pages/styles.module.css'
 import { handleImageError } from '../components/ImgError'
 import { getActualDate, normalizeWeek } from "../components/ProductItem"
@@ -63,7 +63,7 @@ const UserProductList = ({ product, customLink }) => {
 
 const UserInfo = ({ user, additional, openModal}) => {
    
- console.log(user)
+//  console.log('user;;',user.region)
 
     return (
         <div className="user">
@@ -74,6 +74,8 @@ const UserInfo = ({ user, additional, openModal}) => {
                 additional ? (
                     <>
                       <p><span className="fw-bolder">Opis firmy: </span> {user.description}</p>
+                      <p><span className="fw-bolder">Adres kontaktowy:</span> {user.region.street} {user.region.city} {user.region.zip} woj. {user.region.voivodeship}</p>
+                      <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Edytuj profil</button>  <img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                     </>
                 ) : (<>
                         <h6>Dodaj opis i godziny pracy swojej firmy</h6>
@@ -97,7 +99,7 @@ const AddProduct = () => {
     const [productImg, setProductImg] = useState('');
 
     const [errorFeed, setError] = useState('');
-
+    const reservation = false;
 
     const addProduct = async (e) => {
         e.preventDefault();
@@ -113,6 +115,7 @@ const AddProduct = () => {
                 addDate,
                 productDesc,
                 productImg,
+                reservation,
             })
         })
 
@@ -290,7 +293,7 @@ const customWidth = {
 const today = getActualDate()
     return (
         <div>
-            <Modal showModal={showModal} setShowModal={setShowModal}/>
+            {basicInfoFilled ? (<ModalEdit showModal={showModal} setShowModal={setShowModal} user={user}/>): (<Modal showModal={showModal} setShowModal={setShowModal}/>) }
             <div className="row">
                 <div className="col-sm-12 col-md-6 mb-4">
                     <div className="card mb-3" style={customCard}>
@@ -299,7 +302,7 @@ const today = getActualDate()
                                 <img src="img/user.svg" className="img-fluid rounded-start" width="60px" alt="User information image" />
                                  <h5 className={`card-title ${styles.primaryColor}`}>Twoje podstawowe informacje</h5>
                             </div>
-                            <div className="col-md-8">
+                            <div className="col-md-12">
                             <div className="card-body" style={customCardBody}>
                                         <UserInfo user={user} additional={basicInfoFilled} openModal={openModal} customLink={customLink} />
                                     

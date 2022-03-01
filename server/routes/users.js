@@ -20,7 +20,7 @@ router.route('/list/:id').get((req, res) => {
     try {
         const id = req.params.id;
         //console.log('list/' + id)
-        const userInfo = { name: '', email: '', phoneNumber: '', description: '', products: [], workSchedule: {}}
+        const userInfo = { id: '', name: '', email: '', phoneNumber: '', description: '', products: [], workSchedule: {}}
         userModel.find({ "products._id": id }, function (err, result) {
             if (err) {
                 console.log(err)
@@ -30,7 +30,7 @@ router.route('/list/:id').get((req, res) => {
             userInfo.email = result[0].email
             userInfo.phoneNumber = result[0].phoneNumber
             userInfo.products = result[0].products
-            
+            userInfo.id = result[0]._id
             if (result[0].description === undefined) {
                 //console.log('result of product (basic userInfo) id: ', res, res[0].name, userInfo)    
                 return res.json({status: 200, user: userInfo})
@@ -132,10 +132,11 @@ router.route('/dashboard').post([
         console.log(req.body) 
         const description =  req.body.desc;
         const workSchedule = req.body.workSchedule;
-        console.log(workSchedule)
+        const region = req.body.region
+        // console.log(workSchedule)
         await userModel.findOneAndUpdate(
 			{ email: email },
-			{ description: description, workSchedule: workSchedule }
+			{ description: description, workSchedule: workSchedule, region: region }
 		)
         return res.json({ status: '200', info: 'New information added!'})
     } catch (err) {
@@ -166,10 +167,10 @@ router.route('/dashboard/add').post([
         const productPrice = req.body.productPrice;
         const productDesc = req.body.productDesc;
         const productImg = req.body.productImg;
-        
+        const reservation = req.body.reservation;
 
         const newProduct = {
-            products: [{name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg}]
+            products: [{name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg, reservation: reservation}]
         }
 
         console.log(newProduct)
@@ -309,6 +310,19 @@ router.route('/dashboard/delete/:id').delete(async (req, res) => {
         return res.json({status: 200, product: id})
     }
     catch (err) {
+        console.log(err)
+    }
+})
+
+router.route('/user/:id').get(async (req,res) => {
+    
+    try{
+        const id = req.params.id;
+        console.log(id)
+        const user = await userModel.findOne({ _id: id });
+        return res.json({status: 200, user: user})
+    }
+    catch(err){
         console.log(err)
     }
 })

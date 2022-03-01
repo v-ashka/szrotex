@@ -13,6 +13,7 @@ import Delete from './pages/Delete'
 import Footer from './pages/Footer'
 import { Container } from 'react-bootstrap'
 import ProductItem from './components/ProductItem'
+import UserProfile from './pages/UserProfile'
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="list/:id" element={<ProductItem/>}/>
             <Route path="dashboard/edit/:id" element={<Edit/>} />
             <Route path="dashboard/delete/:id" element={<Delete/>} />
+            <Route path="user/:id" element={<UserProfile/>}/>
           </Routes>
         </Container>
         <Footer/>
