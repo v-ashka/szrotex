@@ -95,15 +95,13 @@ function Edit() {
                             required
                             className="form-control"
                             name="productName"
-                            id="test"
                             defaultValue={product.name  == undefined ? (''):(product.name)}
                             onChange={ (e) => setName(e.target.value)}
                         />
                     </div>
                     <div className="form-group">
                         <label>Opis produktu</label>
-                        <input
-                            type="text"
+                        <textarea
                             required
                             className="form-control"
                             defaultValue={product.desc  == undefined ? (''):(product.desc)}

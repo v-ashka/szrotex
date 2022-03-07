@@ -84,7 +84,7 @@ const UserProductList = ({ product }) => {
     return (
         <tr key={product._id}>
             <td>{ product.name}</td>
-            <td>{ product.desc}</td>
+            <td><abbr style={{textDecoration: 'none'}} title={product.desc}>{ product.desc.slice(0,50)}...</abbr></td>
             <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ("/img/no-img.png")} alt={product.name}/></td>
             <td>{product.price} zł</td>
             <td style={{ justifyContent: 'center', display:'flex' }}> {product.reservation ? ('TAK'):('NIE') }</td>

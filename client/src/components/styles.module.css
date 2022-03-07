@@ -61,6 +61,7 @@
 
 .searchBarButton {
   width: 7em;
+  height: 2.5em;
   background-color: rgb(135, 172, 175);
   border: none;
   padding: 0.2em;

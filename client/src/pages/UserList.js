@@ -50,20 +50,18 @@ export const List = ({ item }) => {
     // console.log(new Date(item.date).toLocaleDateString('pl-PL', {day: 'numeric', month: 'long', year: 'numeric'} ))
     return (
   
-        <div className={"col-md-10 mb-4 "} key={item._id}>
+        <div className={item.reservation ? ('col-md-10 mb-4 img-reservation-item') : ('col-md-10 mb-4')} key={item._id} style={{position: 'relative'}}>
             <Link to={item._id} className={style.customLink} state={item}>
         <div className={"card " + style.customLink } style={customCardProducts}>
             <div className="row g-0 p-5">
                 <div className="col-md-3">
                     <img src={item.img} onError={handleImageError} className={"img-fluid rounded-start " + style.userListImg} alt="Product image" />
-                <h6 className="col-md-12 mt-2  justify-content-center">{item.reservation ? ('ZAREZERWOWANY'):('')} </h6>
                 </div>
                 <div className="col-md-9">
                 <div className="card-body" style={customCardBody}>
                         <div className="card-title d-flex justify-content-between"><h4 className="card-title">{item.name}</h4> <h4>{item.price} PLN</h4></div>
                         <div className="card-text">
-                            <h6 className="card-text">{item.desc}</h6>
-                                    <p className="card-text user-product-p">{(item.regionVoivode.length > 0 && item.regionCity.length > 0) ? (<>{ item.regionCity } | { item.regionVoivode } | </>): ('')} {new Date(item.date).toLocaleDateString('pl-PL')} </p>
+                            <p className="card-text user-product-p">{(item.regionVoivode.length > 0 && item.regionCity.length > 0) ? (<>{ item.regionCity } | { item.regionVoivode } | </>): ('')} {new Date(item.date).toLocaleDateString('pl-PL')} </p>
                         </div>
                 </div>
                 </div>

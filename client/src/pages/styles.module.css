@@ -59,6 +59,14 @@
   color: rgba(0, 68, 68, 0.9);
 }
 
+.addProductForm textarea {
+  width: 50%;
+  min-width: 30%;
+  background-color: transparent;
+  border: 1px dotted #003c3ce6;
+  color: rgba(0, 68, 68, 0.9);
+}
+
 .formButton {
   margin-top: 50px;
   background-color: rgb(19 92 60 / 14%);

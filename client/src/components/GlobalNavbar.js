@@ -7,9 +7,8 @@ import logo from '../pages/img/logo.svg'
 
 const Header = styled.header`
     width: 100%;
-    height: 700px;
     background-color: #003C3C;
-    margin-bottom: 5em;
+    margin-bottom: 2em;
 `
 
 const HeaderContent = styled.section`
@@ -55,11 +54,13 @@ const HeaderPattern = styled.svg`
 
 const SearchBar = styled.form`
     column-gap: 15px;
+    height: 150px;
     width: 100%;
-    background: rgb(245, 245, 245);
+    background: rgb(249 249 249);
     display: flex;
     justify-content: center;
     padding: 1em;
+    align-items: center;
 `
 
 const customParagraph = {
@@ -71,7 +72,8 @@ const optionForm = {
     backgroundColor: 'rgb(207, 231, 233)',
     border: 'none',
     borderRadius: '5px',
-    color: 'rgb(32,32,32)'
+    color: 'rgb(32, 32, 32)',
+    height: '2.5em'
 }
 
 
@@ -134,6 +136,14 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode}) => {
                 <>
                     <h1 className="display-1 fw-normal mb-4">Sprawdź co nowego!</h1>
                     <p className="fs-1 fw-light" style={customParagraph}>Nowe produkty są już dostępne!</p>
+                </>
+            )
+        }
+         else if (location.pathname.includes('/dashboard/edit/')) {
+            return (
+                <>
+                    <h1 className="display-1 fw-normal mb-4">Popełniłeś błąd?</h1>
+                    <p className="fs-1 fw-light" style={customParagraph}>W łatwy sposób możesz to poprawić!</p>
                 </>
             )
         }
