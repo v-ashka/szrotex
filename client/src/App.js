@@ -18,25 +18,34 @@ import UserProfile from './pages/UserProfile'
 function App() {
 
   const [query, setQuery] = useState('');
+  const [voivodeship, setVoivode] = useState('');
 
   const onClick = () =>{
     console.log('przycisk nacisniety');
     console.log('query: ', query);
+    console.log('woj:', voivodeship)
   }
+
+  const handleVoivodeChange = (e) => {
+
+    console.log(e.target.value)
+    setVoivode(e.target.value)
+  }
+
 
   const onChangeQuery = (e) => {
     setQuery(e.target.value)
   }
   return (
     <BrowserRouter> 
-        <GlobalNavbar value={query} onChange={onChangeQuery} onClick={onClick}/>
+      <GlobalNavbar value={query} onChange={onChangeQuery} onClick={onClick} onChangeVoivode={handleVoivodeChange} />
         <Container>
         <Routes>
             <Route index element={<Home/>} />
             <Route path="register" exact element={<Register/>}/>
             <Route path="login" exact element={<Login/>} />
             <Route path="dashboard" exact element={<Dashboard />} />
-            <Route path="list" element={<UserList value={query} onClick={onClick}/>} />
+          <Route path="list" element={<UserList value={query} onClick={onClick} checkedVoivode={voivodeship}/>} />
             <Route path="list/:id" element={<ProductItem/>}/>
             <Route path="dashboard/edit/:id" element={<Edit/>} />
             <Route path="dashboard/delete/:id" element={<Delete/>} />

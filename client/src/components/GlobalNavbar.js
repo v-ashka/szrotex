@@ -54,6 +54,7 @@ const HeaderPattern = styled.svg`
 `;
 
 const SearchBar = styled.form`
+    column-gap: 15px;
     width: 100%;
     background: rgb(245, 245, 245);
     display: flex;
@@ -66,8 +67,15 @@ const customParagraph = {
     padding: '0.2em',
 }
 
+const optionForm = {
+    backgroundColor: 'rgb(207, 231, 233)',
+    border: 'none',
+    borderRadius: '5px',
+    color: 'rgb(32,32,32)'
+}
 
-const GlobalNavbar = ({value, onChange, onClick}) => {
+
+const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode}) => {
         const location = useLocation();
         const navigate = useNavigate();
         
@@ -164,7 +172,25 @@ const GlobalNavbar = ({value, onChange, onClick}) => {
                     </HeaderContentImage>
                 </HeaderContent>
                 <SearchBar onSubmit={(e) => e.preventDefault()}>
-                        <input className={styles.customInput} type="text" value={value} onChange={onChange} placeholder="Wprowadź nazwę produktu.."></input>
+                    <input className={styles.customInput} type="text" value={value} onChange={onChange} placeholder="Wprowadź nazwę produktu.."></input>
+                    <select name='voivodeship' style={optionForm} onChange={onChangeVoivode}>
+                                    <option value="">Województwo</option>
+                                    <option value="dolnośląskie">woj. dolnośląskie</option>
+                                    <option value="kujawsko-pomorskie">woj. kujawsko-pomorskie</option>
+                                    <option value="lubelskie">woj. lubelskie</option>
+                                    <option value="lubuskie">woj. lubuskie</option>
+                                    <option value="łódzkie">woj. łódzkie</option>
+                                    <option value="małopolskie">woj. małopolskie</option>
+                                    <option value="mazowieckie">woj. mazowieckie</option>
+                                    <option value="opolskie">woj. opolskie</option>
+                                    <option value="podlaskie">woj. podlaskie</option>
+                                    <option value="pomorskie">woj. pomorskie</option>
+                                    <option value="śląskie">woj. śląskie</option>
+                                    <option value="świętokrzyskie">woj. świętokrzyskie</option>
+                                    <option value="warmińsko-mazurskie">woj. warmińsko-mazurskie</option>
+                                    <option value="wielkopolskie">woj. wielkopolskie</option>
+                                    <option value="zachodniopomorskie">woj. zachodniopomorskie</option>
+                                </select>
                         <button className={styles.searchBarButton} onClick={() => onClick && navigate('list')}>Wyszukaj</button>
                 </SearchBar>
             </Header>

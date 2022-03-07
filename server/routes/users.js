@@ -53,6 +53,51 @@ router.route('/list/:id').get((req, res) => {
     
 })
 
+router.route('/list/:id').post(async (req, res) => {
+    const token = req.headers['x-access-token']
+    try {
+        const decoded = jwt.verify(token, 'secret123')
+        const id = req.params.id;
+        console.log('list/' + id + '/reservation');
+        
+        // console.log(req.body, decoded.email)
+        // userModel.find({ "products._id": id }, function (err, result) {
+        //     console.log(result[0])
+        // })
+        console.log(req.body.productBasicInfo.name)
+        const reservation = {
+            reservation: [{ productId: id, reservationDate: req.body.reservationDate, expiryDate: req.body.expiryDate, productBasicInfo: {name: req.body.productBasicInfo.name, price: req.body.productBasicInfo.price, img: req.body.productBasicInfo.img}}]
+        }
+        console.log(reservation.productBasicInfo)
+        await userModel.updateOne(
+			{ email: decoded.email },
+			{ $push: reservation }
+        )
+        const query = { "products._id": id }
+
+        userModel.findOne(query, function (err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                result.products.filter(product => {
+                if (product._id == id) {
+                    product.reservation = true;
+                    }
+                })
+                result.save()
+                .then(() => res.json({status: 200, message: 'Reservation done!'}))
+                .catch((err) => console.log(err))
+            }
+        })
+
+        // return res.json({status:200, message: 'Reservation success!'})
+    }catch(err){
+        return res.status(400).json('Error: ' + err)
+    }
+})
+
+
+
 router.route('/register').post([
     check('name').trim().isLength({ min: 1, max: 25 }).withMessage('Nazwa firmy nie moze byc krotsza niz 1 znak i dluzsza niz 30 znaków').bail(),
     check('pass').trim().isLength({min: 8}).withMessage("Hasło musi składać się z minimum 8 znaków!").bail(),
@@ -142,6 +187,40 @@ router.route('/dashboard').post([
     } catch (err) {
         console.log(err)
         res.json({status: 'Error', error: 'Invalid token'})
+    }
+})
+
+router.route('/dashboard/remove-item').post(async (req, res) => {
+    const token = req.headers['x-access-token'];
+    try {
+        // console.log(req.body, token);
+        const decoded = jwt.verify(token, 'secret123');
+
+        console.log(decoded.email)
+        await userModel.updateOne(
+			{ email: decoded.email },
+            { $pull: { reservation: req.body.product } }
+        )
+        const query = { "products._id": req.body.product.productId }
+
+        userModel.findOne(query, function (err, result) {
+            if (err) {
+                console.log(err)
+            } else {
+                result.products.filter(product => {
+                    if (product._id == req.body.product.productId) {
+                        product.reservation = false;
+                    }
+                })
+                 result.save()
+                .catch((err) => console.log(err))
+            }
+        })
+        return res.json({status: 200, message: 'Successfully deleted!'})
+    }
+    catch (err) {
+        console.log(err)
+        return res.json({status: 'Error', error: err})
     }
 })
 

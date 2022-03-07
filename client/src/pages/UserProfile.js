@@ -97,7 +97,7 @@ const App = () => {
         <>
           <div className='row'>
             <div className="col-lg-8 mb-4">
-                <div className="card" style={customCardProducts}>
+                <div className="card user-profile-box" style={customCardProducts}>
                     <div className="row g-0 p-3">
                         <div className="col-lg-4 mt-4">
                             <img src={'.'} onError={handleImageError} className="img-fluid rounded-start user-logo" alt="Product image" />
@@ -113,7 +113,7 @@ const App = () => {
                 </div>
             </div>
             <div className="col-lg-4 mb-4">
-                <div className="card" style={customCardProducts}>
+                    <div className="card user-profile-box" style={customCardProducts}>
                     <div className="row g-0 p-3">
                        
                         <div className="col-lg-12 mt-4">
@@ -123,13 +123,13 @@ const App = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>  
+            <h3 className="p-3">Opis:</h3>
             <div className="col-lg-12 mb-4">
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-3">
                         <div className="col-lg-12 mt-4">
                             <div className="card-body">
-                                <h5 className="card-title">Opis:</h5>
                                 <p className="card-text">{user.description}</p>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ const App = () => {
                 </div>
             </div>
                 <SellerProducts  user={user}/>
-            <h5 className="p-3">Opinie użytkowników: </h5>
+            <h3 className="p-3">Opinie użytkowników: </h3>
             <div className="col-lg-12 mb-4">
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-3">

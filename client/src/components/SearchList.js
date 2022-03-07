@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import {List} from '../pages/UserList'
 
 
-export const SearchList = ({lists, query}) => {
+export const SearchList = ({ lists, query, checkedVoivode }) => {
+    console.log('searchlkist', checkedVoivode)
+    console.log('queyr', query)
     const arr = []
     lists.map((user) => {
         // user.products.map(products => {
@@ -17,8 +19,14 @@ export const SearchList = ({lists, query}) => {
             item['creatorName'] = user.name;
             item['createdBy'] = user.email;
             //console.log(item.name, item.name.toLowerCase().includes(query.toLowerCase()))
-            if(item.name.toLowerCase().includes(query.toLowerCase()))
-                arr.push(item)
+            // console.log('sortbyVoivode', checkedVoivode)
+            console.log('filter', item.regionVoivode, checkedVoivode, item.regionVoivode == checkedVoivode)
+            console.log('pass test?', item.regionVoivode == checkedVoivode)
+                // if (item.name.toLowerCase().includes(query.toLowerCase()))
+                if(item.regionVoivode.includes(checkedVoivode) && item.name.toLowerCase().includes(query.toLowerCase()))
+                arr.push(item)    
+            
+            console.log('arrr', arr)
         })
 
 

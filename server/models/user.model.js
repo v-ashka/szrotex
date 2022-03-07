@@ -10,9 +10,10 @@ const User = new mongoose.Schema(
         workStartHour: { type: Number, required: false },
         workEndHour: { type: Number, required: false },
         phoneNumber: { type: Number, required: true },
-        workSchedule: {Monday: {Start: Number, End: Number, FreeDay: Boolean}, Tuesday: {Start: Number, End: Number, FreeDay: Boolean}, Wednesday: {Start: Number, End: Number, FreeDay: Boolean}, Thursday: {Start: Number, End: Number, FreeDay: Boolean}, Friday: {Start: Number, End: Number, FreeDay: Boolean}, Saturday: {Start: Number, End: Number, FreeDay: Boolean}, Sunday: {Start: Number, End: Number, FreeDay: Boolean}},
+        workSchedule: {Monday: {Start: String, End: String, FreeDay: Boolean}, Tuesday: {Start: String, End: String, FreeDay: Boolean}, Wednesday: {Start: String, End: String, FreeDay: Boolean}, Thursday: {Start: String, End: String, FreeDay: Boolean}, Friday: {Start: String, End: String, FreeDay: Boolean}, Saturday: {Start: String, End: String, FreeDay: Boolean}, Sunday: {Start: String, End: String, FreeDay: Boolean}},
         products: [{ name: String, date: Date, price: Number, desc: String, img: String, tags: [{ name: String }], reservation: Boolean}],
-        rating: {numbers: Array}
+        rating: { numbers: Array },
+        reservation: [{ productId: mongoose.SchemaTypes.ObjectId, reservationDate: Date, expiryDate: Date, productBasicInfo: { name: String, price: Number, img: String } }]
     },
     {collection: 'eszrotUsers'}
 )

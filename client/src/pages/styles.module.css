@@ -106,3 +106,10 @@
   color: rgba(182, 32, 32, 0.781);
   font-weight: 500;
 }
+
+.otherUserProductsImg {
+  object-fit: cover;
+  width: 200px;
+  height: 150px;
+  max-width: 100%;
+}

@@ -5,6 +5,51 @@ import styles from '../pages/styles.module.css'
 import { handleImageError } from '../components/ImgError'
 import { getActualDate, normalizeWeek } from "../components/ProductItem"
 import scheduleImg from './img/schedule.svg'
+import Reservation from "../components/ReservationList"
+
+const customCard = {
+        height: '100%',
+        width: '100%',
+    backgroundColor: '#E5F0F1',
+};
+    
+const customCardProducts = {
+    backgroundColor: '#E5F0F1',
+};
+
+
+// const customImg = {
+//     width: '100px',
+//     height: '100px',
+// }
+
+// const customButton = {
+//     backgroundColor: '#003c3c'
+// }
+
+const customCardBody = {
+    color: 'rgba(0,68,68,0.9)',
+}
+
+const customCardHeader = {
+    color: 'rgba(0,68,68,0.9)',
+    backgroundColor: 'rgb(19 92 60 / 14%)',
+}
+    
+    
+const customLink = {
+    color: 'rgb(0 68 68)',
+    fontWeight: 'bold',
+    fontDecoration: 'none',
+}
+
+const customWidth = {
+    width: '100%',
+}
+
+
+
+
 const Table = ({ products, modal }) => {
     if (products.length === 0) {
         return (<></>)
@@ -17,6 +62,7 @@ const Table = ({ products, modal }) => {
                                 <th scope="col">Opis produktu</th>
                                 <th scope="col">Zdjęcie</th>
                                 <th scope="col">Cena</th>
+                                <th scope="col" style={{ justifyContent: 'center', display:'flex' }}>Zarezerwowany</th>
                                 <th scope="col">Opcja</th>
                             </tr>
                         </thead>
@@ -43,7 +89,7 @@ const Lists = ({ products, modal}) => {
         )
 }
 
-const UserProductList = ({ product, customLink }) => {
+const UserProductList = ({ product }) => {
     // console.log(product)
     // console.log(show)
 
@@ -52,7 +98,8 @@ const UserProductList = ({ product, customLink }) => {
             <td>{ product.name}</td>
             <td>{ product.desc}</td>
             <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ("/img/no-img.png")} alt={product.name}/></td>
-            <td>{ product.price} zł</td>
+            <td>{product.price} zł</td>
+            <td style={{ justifyContent: 'center', display:'flex' }}> {product.reservation ? ('TAK'):('NIE') }</td>
             <td>
                 <Link to={"edit/" + product._id} className={ styles.customLinkEdit} ><img src="img/edit.svg" width="25" alt="Edit"/></Link> |
                 <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src="img/delete.svg" width="25" alt="Delete"/></Link>
@@ -185,7 +232,7 @@ const Dashboard = () => {
     // const [products, setProducts] = useState('')
     const [products, setProduct] = useState([]);
     const [user, getUser] = useState([]);
-
+    const [loading, setLoading] = useState(false);
     let basicInfoFilled = false;
     if (user.description) {
         basicInfoFilled = true;
@@ -198,19 +245,24 @@ const Dashboard = () => {
         const getProduct = async () => {
             const productsFromDb = await fetchProducts()
             setProduct(productsFromDb)
+                    setLoading(false);
+
         }
 
         const getUserInfo = async () => {
             const userInfoFromDb = await fetchUserInfo()
             getUser(userInfoFromDb);
+                    setLoading(false);
+
         }
 
         getProduct()
         getUserInfo()
-    }, [])
+}, [])
 
 
     const fetchProducts = async () => {
+        setLoading(true);
         const res = await fetch('http://localhost:3500/dashboard', {
             headers: {
                 'x-access-token': localStorage.getItem('token')
@@ -229,6 +281,7 @@ const Dashboard = () => {
     }
 
     const fetchUserInfo = async () => {
+        setLoading(true);
         const res = await fetch('http://localhost:3500/dashboard', {
             headers: {
                 'x-access-token': localStorage.getItem('token')
@@ -249,49 +302,14 @@ const Dashboard = () => {
         setShowModal(prev => !prev);
     }
 
-const customCard = {
-        height: '100%',
-        width: '100%',
-    backgroundColor: '#E5F0F1',
-};
+
+    const today = getActualDate()
     
-const customCardProducts = {
-    backgroundColor: '#E5F0F1',
-};
-
-
-// const customImg = {
-//     width: '100px',
-//     height: '100px',
-// }
-
-// const customButton = {
-//     backgroundColor: '#003c3c'
-// }
-
-const customCardBody = {
-    color: 'rgba(0,68,68,0.9)',
-}
-
-const customCardHeader = {
-    color: 'rgba(0,68,68,0.9)',
-    backgroundColor: 'rgb(19 92 60 / 14%)',
-}
-    
-    
-const customLink = {
-    color: 'rgb(0 68 68)',
-    fontWeight: 'bold',
-    fontDecoration: 'none',
-}
-
-const customWidth = {
-    width: '100%',
-}
-
-    
-const today = getActualDate()
-    return (
+    if (loading) {
+        return (<h1>Loading</h1>)
+    } else {
+        console.log(user.reservation)
+          return (
         <div>
             {basicInfoFilled ? (<ModalEdit showModal={showModal} setShowModal={setShowModal} user={user}/>): (<Modal showModal={showModal} setShowModal={setShowModal}/>) }
             <div className="row">
@@ -358,6 +376,7 @@ const today = getActualDate()
             </div>
 
             <div className="row">
+                      {loading ? ('Loading'): (<Reservation products={user} loading={ loading }/>) }
                   <div className="col-sm-12 col-md-6 mb-4" style={customWidth}>
                     <div className="card mb-3" style={customCardProducts}>
                         <div className="row g-0 p-5 flex-column">
@@ -390,6 +409,9 @@ const today = getActualDate()
             </div>
         </div>
     );
+    }
+
+  
 }
 
 export default Dashboard;

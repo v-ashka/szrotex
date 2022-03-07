@@ -118,7 +118,7 @@ const ProductItem = () => {
     // console.log('product', product)
     const [list, setList] = useState({ id: '', phoneNumber: '', description: '', products: [], workSchedule: {}});
     const [open, setOpen] = useState(false);
-
+    const [booked, setBooked] = useState(false);
     console.log(list)
     useEffect(() => {
         const getList = async () => {
@@ -155,6 +155,38 @@ const ProductItem = () => {
     const translatedDay = normalizeWeek(Today)
     // console.log(normalizeWeek(Today))
     //console.log(list)
+
+    const bookProduct = async () => {
+        setBooked(true);
+        const date = new Date();
+        date.setDate(date.getDate() + 7);
+        // console.log(date.toLocaleDateString(), today.toLocaleDateString())
+        const user = localStorage.getItem('token');
+        if (user.length < 1) {
+            user = ''
+        }
+        const res = await fetch('http://localhost:3500/list/' + product._id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': user,
+            },
+            body: JSON.stringify({
+                productId: product._id,
+                productBasicInfo: {name: product.name, price: product.price, img: product.img},
+                reservationDate: new Date(),
+                expiryDate: date,
+            })
+        })
+
+        const data = await res.json();
+        if (data.status == 200) {
+            setBooked(true);
+        } else {
+            setBooked(false);
+        }
+    }
+    console.log(!localStorage.getItem('token'))
     return (
         <>
         <div className='row'>
@@ -168,7 +200,7 @@ const ProductItem = () => {
                             <h5 className={"card-title d-flex justify-content-end " + style.customHeader}>{product.price} PLN</h5>
                         </div>
                         <div className={product.reservation ? ("col-lg-12 mt-4"):("col-lg-12 mt-4")}>
-                            <picture className={product.reservation ? ('img-reservation'):('')}>
+                            <picture className={(product.reservation || booked ) ? ('img-reservation'):('')}>
                                 <img src={product.img} onError={handleImageError} className="img-fluid rounded-start" style={imgFit} alt="Product image" />
                             </picture>
                         </div>
@@ -213,7 +245,7 @@ const ProductItem = () => {
                         </div>
                         </div>
                         <div className="col-lg-12">
-                            {product.reservation ? (''):(<><button className={styles.formButton}>Zarezerwuj teraz</button></>)}
+                            {(product.reservation || booked || !localStorage.getItem('token')) ? (''):(<><button onClick={bookProduct} className={styles.formButton}>Zarezerwuj teraz</button></>)}
                             <Link to={"/user/" + list.id} className='card-title' style={customCardBody}>Wyświetl profil</Link>
                         </div>
                     </div>

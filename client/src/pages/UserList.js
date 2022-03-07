@@ -4,8 +4,7 @@ import {customCardBody, customCardProducts, customLink, imgFit} from './Styles'
 import {SearchList} from '../components/SearchList'
 import { Link } from 'react-router-dom'
 import style from '../components/styles.module.css'
-
-
+import "../pages/UserList.css"
 
 const Lists = ({ lists }) => {
     //  console.log(lists)
@@ -13,9 +12,16 @@ const Lists = ({ lists }) => {
     const arr = []
     lists.map((user) => {
         user.products.map(products => {
-            // console.log(products, user)
+            //  console.log('all info', products, user)
             products['creatorName'] = user.name
             products['createdBy'] = user.email
+            if (user.region) {
+                products['regionVoivode'] = user.region.voivodeship
+                products['regionCity'] = user.region.city
+            } else {
+                products['regionVoivode'] = ''
+                products['regionCity'] = ''
+            }
             arr.push(products)
 
         })
@@ -40,7 +46,8 @@ const Lists = ({ lists }) => {
 
 export const List = ({ item }) => {
 
-    console.log('lists: ', item.reservation)
+    // console.log('lists: ', item.reservation)
+    // console.log(new Date(item.date).toLocaleDateString('pl-PL', {day: 'numeric', month: 'long', year: 'numeric'} ))
     return (
   
         <div className={"col-md-10 mb-4 "} key={item._id}>
@@ -56,8 +63,7 @@ export const List = ({ item }) => {
                         <div className="card-title d-flex justify-content-between"><h4 className="card-title">{item.name}</h4> <h4>{item.price} PLN</h4></div>
                         <div className="card-text">
                             <h6 className="card-text">{item.desc}</h6>
-                            <h6 className="card-text">Wystawił: {item.creatorName}</h6>
-                            <h6 className="card-text">E-mail: <p style={customLink}>{item.createdBy}</p></h6>
+                                    <p className="card-text user-product-p">{(item.regionVoivode.length > 0 && item.regionCity.length > 0) ? (<>{ item.regionCity } | { item.regionVoivode } | </>): ('')} {new Date(item.date).toLocaleDateString('pl-PL')} </p>
                         </div>
                 </div>
                 </div>
@@ -65,63 +71,26 @@ export const List = ({ item }) => {
         </div>
         </Link>
     </div>
-    
-
-
-            // <>
-            // {list.products.length > 0 ? (
-            //     list.products.map((item) => {
-            //         return (
-            //             // <tr className="products" key={item._id}>
-            //             //     <td>{list.name}</td>
-            //             //     <td>{list.email}</td>
-            //             //     <td>{item.name}</td>
-            //             //     <td>{item.desc}</td>
-            //             //     <td><img onError={handleImageError} height="50px" width="50px" src={item.img.length > 0 ? (item.img) : ("/img/no-img.png")} /></td>
-            //             //     <td>{item.price} zł</td>
-            //             // </tr>
-                
-            //             <div className="col-md-12 mb-4" key={item._id}>
-            //                 <div className="card" style={customCardProducts}>
-            //                     <div className="row g-0 p-5">
-            //                         <div className="col-md-4 d-flex justify-content-center align-items-center">
-            //                         <img src={item.img} onError={handleImageError} className="img-fluid rounded-start" width="350px" alt="Product image" />
-            //                         </div>
-            //                         <div className="col-md-8">
-            //                         <div className="card-body" style={customCardBody}>
-            //                                 <div className="card-title d-flex justify-content-between"><h4 className="card-title">{item.name}</h4> <h4>{item.price} PLN</h4></div>
-            //                                 <div className="card-text">
-            //                                     <h6 className="card-text">{item.desc}</h6>
-            //                                     <h6 className="card-text">Wystawił: {list.name} {item.date}</h6>
-            //                                     <h6 className="card-text">E-mail: <a href={`mailto:${list.email}`} style={customLink}>{list.email}</a></h6>
-            //                                 </div>
-            //                         </div>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //             </div>
-                
-            //         );
-            //     })
-            // ) : (<div></div>)}
-            // </>
     )
 }
 
-const App = ({value, onClick}) => {
+const App = ({value, onClick, checkedVoivode}) => {
 
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
     let isValue = false;
     if(value.length > 0 || onClick){
         isValue = true;
     }
-    console.log(value.length, isValue)
+    console.log(value.length, isValue, checkedVoivode)
 
     useEffect(() => {
         const getList = async () => {
+            setLoading(true);
             const listFromServer = await fetchList()
             // console.log(listFromServer)
             setList(listFromServer)
+            setLoading(false);
         }
 
         getList() 
@@ -142,23 +111,12 @@ const App = ({value, onClick}) => {
         console.log(data, productList);
         return productList;
     }
-    return (
-        // <table className={`table ${styles.tableColor}`}>
-        //     <thead>
-        //         <tr>
-        //             <th scope="col">Sprzedający</th>
-        //             <th scope="col">Email</th>
-        //             <th scope="col">Nazwa produktu</th>
-        //             <th scope="col">Opis produktu</th>
-        //             <th scope="col">Zdjęcie</th>
-        //             <th scope="col">Cena</th>
-        //         </tr>
-        //     </thead>
-        //     <tbody>
-        //         <Lists lists={ list }/>
-        //     </tbody>
-        // </table>
 
+    if (loading) {
+        return <h2>Loading...</h2>
+    }
+    console.log('list:', list)
+    return (
             <div className="row d-flex justify-content-center">
                 { value.length > 0 ? (
                 <>
@@ -167,11 +125,11 @@ const App = ({value, onClick}) => {
                             <h6 className={"p-3 card d-flex flex-row " + style.searchResult} style={customCardProducts}>Wyszukiwana fraza:<span className="fw-bold"> {value}</span></h6>
                         </div>
                     </div>
-                    <SearchList lists={list} query={value}/>
+                    <SearchList lists={list} query={value} checkedVoivode={checkedVoivode}/>
                 </>
-                ) : (<>
-                <Lists lists={list} />
-                </>)}
+            ) : (<>
+                    <Lists lists={list} />
+            </>)}
             </div>
     );
 }

@@ -12,7 +12,7 @@ const CloseModalButton = styled(MdClose)`
         height: 32px;
         padding: 0;
         z-index: 10;
-    `;
+`;
 
 
 
