@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import reservationIco from '../pages/img/remove_reservation.svg'
 import styles from '../pages/styles.module.css'
 import { handleImageError } from '../components/ImgError'
-import { getActualDate } from "./ProductItem";
+
     
 const customCardProducts = {
     backgroundColor: '#E5F0F1',
@@ -68,10 +68,6 @@ const ReservationList = ({ products }) => {
         )
     }
     
-        
-        
- 
-   
 }
 
 const Reservation = ({ products, loading }) => {

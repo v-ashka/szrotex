@@ -17,16 +17,6 @@ const customCardProducts = {
     backgroundColor: '#E5F0F1',
 };
 
-
-// const customImg = {
-//     width: '100px',
-//     height: '100px',
-// }
-
-// const customButton = {
-//     backgroundColor: '#003c3c'
-// }
-
 const customCardBody = {
     color: 'rgba(0,68,68,0.9)',
 }
@@ -46,8 +36,6 @@ const customLink = {
 const customWidth = {
     width: '100%',
 }
-
-
 
 
 const Table = ({ products, modal }) => {
