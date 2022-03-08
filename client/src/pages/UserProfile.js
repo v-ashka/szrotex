@@ -28,9 +28,9 @@ const SellerProducts = ({ user }) => {
         {otherProducts.length > 0 ? (
             otherProducts.map(product => {
                 return (
-                    <div className={"col-lg-4 col-md-6 col-sm-6 mb-4 "} key={product._id}>
-                        <Link to={'/list/' + product._id} className={customLink} state={product}>
-                        <div className={"card " + customLink} style={customCardProducts}>
+                    <div className={"col-lg-4 col-md-6 col-sm-12 mb-4 "} key={product._id}>
+                        <Link to={'/list/' + product._id} className={styles.customLinkItem} state={product}>
+                        <div className={"card " + styles.customLinkItem} style={customCardProducts}>
                         <div className="row g-0 p-5">
                             <div className="col-lg-10 col-md-10" style={customCardBody}>
                                 <h5 className="card-title">{product.name}</h5>
@@ -92,7 +92,7 @@ const App = () => {
     }
 
     //console.log(user.workSchedule[Today])
-    console.log(user.description)
+    //console.log(user.description)
     return(
         <>
           <div className='row'>
@@ -118,7 +118,7 @@ const App = () => {
                        
                         <div className="col-lg-12 mt-4">
                             <div className="card-body">
-                            {user.description ? (<><h6>Godziny otwarcia:</h6><div className='d-flex align-items-center' style={{columnGap: 10}}><h6 className="card-text" style={{margin: 0}}>{translatedDay} <span style={customLink}>{user.workSchedule[Today].Start} - {user.workSchedule[Today].End}</span></h6><button className='expandListBtn' onClick={() => setOpen(!open)} aria-controls="example-collapse-text" aria-expanded={open}><img className={`expandListSvg${open ? ("-active") : ('')}`} src={expandList} /></button></div><Hours schedule={user.workSchedule} today={Today} open={open} /></>):(<><h6>Godziny otwarcia:</h6><p>Użytkownik nie podał godzin pracy</p></>) }
+                            {user.description ? (<><h6>Godziny otwarcia:</h6><div className='d-flex align-items-center' style={{columnGap: 10}}> </div><Hours schedule={user.workSchedule} today={Today} open={!open} /></>):(<><h6>Godziny otwarcia:</h6><p>Użytkownik nie podał godzin pracy</p></>) }
                             </div>
                         </div>
                     </div>

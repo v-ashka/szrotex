@@ -15,6 +15,12 @@
   border-bottom: 2px solid #003c3ce6;
 }
 
+.customLinkItem {
+  text-decoration: none;
+  transition: 0.3s all;
+  min-height: 380px;
+}
+
 .columnGap {
   column-gap: 10px;
 }

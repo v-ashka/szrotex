@@ -71,9 +71,9 @@ const SellerProducts = ({ list, mainProduct }) => {
         {otherProducts.length > 0 ? (
             otherProducts.map(product => {
                 return (
-                    <div className={"col-lg-4 col-md-6 col-sm-6 mb-4 "} key={product._id}>
-                        <Link to={'/list/' + product._id} className={style.customLink} state={product}>
-                        <div className={"card " + style.customLink} style={customCardProducts}>
+                    <div className={"col-lg-4 col-md-6 col-sm-12 mb-4 "} key={product._id}>
+                        <Link to={'/list/' + product._id} className={style.customLinkItem} state={product}>
+                        <div className={"card " + style.customLinkItem} style={customCardProducts}>
                         <div className="row g-0 p-5">
                             <div className="col-lg-10 col-md-10" style={customCardBody}>
                                 <h5 className="card-title">{product.name}</h5>
@@ -214,7 +214,7 @@ const ProductItem = () => {
                              <img src={'.'} onError={handleUserImageError} className={"img-fluid rounded-start " + style.userLogo} alt="User Logo" />
                         </div>
                         <div className="col-lg-12">
-                            <h6 className='card-title' style={customCardBody}>Firma <span style={customLink}>{product.creatorName}</span></h6>
+                            <h6 className='card-title' style={customCardBody}>Firma <Link to={"/user/" + list.id} className='card-title fw-bold' style={customCardBody}>{product.creatorName}</Link></h6>
                         </div>
                         <div className="col-lg-12">
                         <div className="mt-2" style={customCardBody}>
@@ -244,10 +244,10 @@ const ProductItem = () => {
                                 </div>
                         </div>
                         </div>
-                        <div className="col-lg-12">
-                            {(product.reservation || booked || !localStorage.getItem('token')) ? (''):(<><button onClick={bookProduct} className={styles.formButton}>Zarezerwuj teraz</button></>)}
-                            <Link to={"/user/" + list.id} className='card-title' style={customCardBody}>Wyświetl profil</Link>
-                        </div>
+                        <div className="col-lg-12 mb-5">
+                                {(product.reservation || booked || !localStorage.getItem('token')) ? ('') : (<><button onClick={bookProduct} className={styles.formButton} style={{padding: '0.5em', width:'100%'}}>Zarezerwuj teraz</button></>)}
+                            </div>
+                            <div className='col-lg-12 mt-5'></div>
                     </div>
                 </div>
                 </div>

@@ -32,6 +32,7 @@ export const customLink = {
     color: 'rgb(0 68 68)',
     fontWeight: 'bold',
     fontDecoration: 'none',
+    minHeight: '420px',
 }
 
 export const customWidth = {

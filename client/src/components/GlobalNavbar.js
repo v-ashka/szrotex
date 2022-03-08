@@ -119,7 +119,7 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode}) => {
             return (
                 <>
                     <h1 className="display-1 fw-normal mb-4">Dodawaj produkty i zarabiaj!</h1>
-                    <p className="fs-1 fw-light" style={customParagraph}>Twórz interesujące opisy, konkuruj ceną a klienci będą twoi!</p>
+                    <p className="fs-1 fw-light" style={customParagraph}>Twórz interesujące opisy, konkuruj ceną, a klienci będą twoi!</p>
                 </>
             )
         }
@@ -144,6 +144,14 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode}) => {
                 <>
                     <h1 className="display-1 fw-normal mb-4">Popełniłeś błąd?</h1>
                     <p className="fs-1 fw-light" style={customParagraph}>W łatwy sposób możesz to poprawić!</p>
+                </>
+            )
+        }
+         else if (location.pathname.includes('/user/')) {
+            return (
+                <>
+                    <h1 className="display-1 fw-normal mb-4">Brak konkretów?</h1>
+                    <p className="fs-1 fw-light" style={customParagraph}>Poproś sprzedawcę aby dodał dodatkowe informacje!</p>
                 </>
             )
         }

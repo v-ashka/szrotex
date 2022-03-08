@@ -12,6 +12,11 @@
   text-decoration: none;
   transition: 0.3s all;
 }
+.customLinkItem {
+  text-decoration: none;
+  transition: 0.3s all;
+  min-height: 380px;
+}
 
 .customLink:hover {
   background-color: rgb(19 92 60 / 25%) !important;
