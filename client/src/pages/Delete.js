@@ -1,6 +1,7 @@
-import React, { useState, Component, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom";
-import styles from '../pages/styles.module.css'
+// import styles from '../pages/styles.module.css'
+import styles from '../styles/styles.module.css';
 import icon from '../pages/img/warning.svg';
 
 const customCard = {

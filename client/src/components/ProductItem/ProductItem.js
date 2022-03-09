@@ -1,13 +1,16 @@
-import React, {useState, useEffect, useDebugValue} from 'react'
-import {useLocation, useNavigate, useParams } from "react-router-dom";
-import {handleImageError, handleUserImageError} from '../components/ImgError'
-import { customCardBody, customCardProducts, imgFit, customLink, customCardBodyHeight } from '../pages/Styles';
-import { Link, Navigate } from 'react-router-dom'
-import style from './styles.module.css'
-import { Button, Collapse} from 'react-bootstrap'
-import expandList from '../pages/img/expand_arr.svg'
+import React, {useState, useEffect } from 'react'
+import {useLocation } from "react-router-dom";
+import {handleImageError, handleUserImageError} from '../ImgError/ImgError.js'
+import { customCardBody, customCardProducts, imgFit, customLink, customCardBodyHeight } from '../../pages/Styles';
+import { Link } from 'react-router-dom'
+// import style from './styles.module.css'
+import { Collapse} from 'react-bootstrap'
+import expandList from '../../pages/img/expand_arr.svg'
 import "./ProductItem.css"
-import styles from "../pages/styles.module.css"
+// import styles from "../pages/styles.module.css"
+import styles from '../../styles/styles.module.css';
+import sellerIco from '../../pages/img/face.svg'
+
 export const normalizeWeek = (date) => {
         switch (date) {
             case 'Monday':
@@ -51,9 +54,6 @@ export const Hours = ({ schedule, today, open }) => {
 }
 
 const SellerProducts = ({ list, mainProduct }) => {
-    // const location = useLocation();
-    // console.log('location:',location);
-    // console.log(mainProduct, list);
     const otherProducts = []
         list.products.filter(product => {
             if (product._id != mainProduct) {
@@ -62,18 +62,15 @@ const SellerProducts = ({ list, mainProduct }) => {
                 otherProducts.push(product)
             }
         })
-
-
-        // console.log(otherProducts)
     return(
         <>
-        {otherProducts.length > 1 ? (<h3 className={'p-3 '+ style.customHeader}>Zobacz inne produkty sprzedającego: </h3>) : (<div></div>) }
+        {otherProducts.length > 1 ? (<h3 className={'p-3 '+ styles.customHeader}>Zobacz inne produkty sprzedającego: </h3>) : (<div></div>) }
         {otherProducts.length > 0 ? (
             otherProducts.map(product => {
                 return (
                     <div className={"col-lg-4 col-md-6 col-sm-12 mb-4 "} key={product._id}>
-                        <Link to={'/list/' + product._id} className={style.customLinkItem} state={product}>
-                        <div className={"card " + style.customLinkItem} style={customCardProducts}>
+                        <Link to={'/list/' + product._id} className={styles.customLinkItem} state={product}>
+                        <div className={"card " + styles.customLinkItem} style={customCardProducts}>
                         <div className="row g-0 p-5">
                             <div className="col-lg-10 col-md-10" style={customCardBody}>
                                 <h5 className="card-title">{product.name}</h5>
@@ -82,7 +79,7 @@ const SellerProducts = ({ list, mainProduct }) => {
                                 <h5 className="card-title d-flex justify-content-end">{product.price} PLN</h5>
                             </div>
                             <div className="col-lg-12 col-md-12">
-                            <img src={product.img} onError={handleImageError} className={"img-fluid rounded-start " + style.otherUserProductsImg} alt="Product image" />
+                            <img src={product.img} onError={handleImageError} className={"img-fluid rounded-start " + styles.otherUserProductsImg} alt="Product image" />
                             </div>
                         </div>
                     </div>
@@ -115,15 +112,13 @@ export const getActualDate = () => {
 const ProductItem = () => {
     const location = useLocation();
     const product = location.state;
-    // console.log('product', product)
     const [list, setList] = useState({ id: '', phoneNumber: '', description: '', products: [], workSchedule: {}});
     const [open, setOpen] = useState(false);
     const [booked, setBooked] = useState(false);
-    console.log(list)
+    // const [bookingCheck, setBookingCheck] = useState(false);
     useEffect(() => {
         const getList = async () => {
             const listFromServer = await fetchList()
-            // console.log(listFromServer)
             setList(listFromServer)
         }
 
@@ -140,8 +135,8 @@ const ProductItem = () => {
         })
         
         const data = await res.json();
-        if(data.status === 200){
-           //console.log('get:', data)
+        if (data.status === 200) {
+            console.log(data)
             return data.user
         }else{
             return data = 'Nie można załadować informacji o firmie!';
@@ -153,14 +148,11 @@ const ProductItem = () => {
   
     const Today = getActualDate()
     const translatedDay = normalizeWeek(Today)
-    // console.log(normalizeWeek(Today))
-    //console.log(list)
 
     const bookProduct = async () => {
         setBooked(true);
         const date = new Date();
         date.setDate(date.getDate() + 7);
-        // console.log(date.toLocaleDateString(), today.toLocaleDateString())
         const user = localStorage.getItem('token');
         if (user.length < 1) {
             user = ''
@@ -180,13 +172,17 @@ const ProductItem = () => {
         })
 
         const data = await res.json();
+        console.log(data)
         if (data.status == 200) {
             setBooked(true);
+        } else if (data.status == 409) {
+            // setBookingCheck(true);
+            setBooked(false);
         } else {
             setBooked(false);
         }
     }
-    console.log(!localStorage.getItem('token'))
+    // console.log(!localStorage.getItem('token'))
     return (
         <>
         <div className='row'>
@@ -194,10 +190,10 @@ const ProductItem = () => {
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-5">
                         <div className="col-lg-10" style={customCardBody}>
-                            <h4 className={"card-title " + style.customHeader }>{product.name}</h4>
+                            <h4 className={"card-title " + styles.customHeader }>{product.name}</h4>
                         </div>
                         <div className="col-lg-2" style={customCardBody}>
-                            <h5 className={"card-title d-flex justify-content-end " + style.customHeader}>{product.price} PLN</h5>
+                            <h5 className={"card-title d-flex justify-content-end " + styles.customHeader}>{product.price} PLN</h5>
                         </div>
                         <div className={product.reservation ? ("col-lg-12 mt-4"):("col-lg-12 mt-4")}>
                             <picture className={(product.reservation || booked ) ? ('img-reservation'):('')}>
@@ -210,8 +206,12 @@ const ProductItem = () => {
             <div className="col-lg-4 mb-4">
                 <div className="card" style={customCardBodyHeight}>
                         <div className="row g-0 p-5">
+                            <div className="col-lg-12 mb-4 d-flex align-items-center" style={{columnGap: '10px'}}>
+                                <img src={sellerIco} className={"img-fluid rounded-start"} style={{width:'50px'}} />
+                            <h5 className=''>Informacje o sprzedającym</h5>
+                        </div>
                         <div className="col-lg-12 mb-4">
-                             <img src={'.'} onError={handleUserImageError} className={"img-fluid rounded-start " + style.userLogo} alt="User Logo" />
+                             <img src={'.'} onError={handleUserImageError} className={"img-fluid rounded-start " + styles.userLogo} alt="User Logo" />
                         </div>
                         <div className="col-lg-12">
                             <h6 className='card-title' style={customCardBody}>Firma <Link to={"/user/" + list.id} className='card-title fw-bold' style={customCardBody}>{product.creatorName}</Link></h6>
@@ -251,7 +251,7 @@ const ProductItem = () => {
                     </div>
                 </div>
                 </div>
-            <h2 className={'p-3 ' + style.customHeader}>Opis produktu: </h2>
+            <h2 className={'p-3 ' + styles.customHeader}>Opis produktu: </h2>
             <div className="col-lg-12 mb-4">
                 <div className="card" style={customCardProducts}>
                     <div className="row g-0 p-2">

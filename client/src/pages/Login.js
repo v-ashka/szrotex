@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import styles from '../pages/styles.module.css'
+// import styles from '../pages/styles.module.css'
+import styles from '../styles/styles.module.css';
 import {customCardBody, customCard, customWidth} from './Styles'
 
 function App() {

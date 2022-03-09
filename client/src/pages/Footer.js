@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import React from "react";
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`

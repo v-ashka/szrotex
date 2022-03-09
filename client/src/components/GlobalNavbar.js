@@ -1,8 +1,9 @@
-import React, {useState} from "react";
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import React from "react";
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components';
 import { Navbar, Container, Nav} from 'react-bootstrap'
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
+import styles from '../styles/styles.module.css';
 import logo from '../pages/img/logo.svg'
 
 const Header = styled.header`
@@ -73,11 +74,12 @@ const optionForm = {
     border: 'none',
     borderRadius: '5px',
     color: 'rgb(32, 32, 32)',
-    height: '2.5em'
+    height: '2.5em',
+    width: '10%'
 }
 
 
-const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode}) => {
+const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductCategory}) => {
         const location = useLocation();
         const navigate = useNavigate();
         
@@ -190,7 +192,32 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode}) => {
                     </HeaderContentImage>
                 </HeaderContent>
                 <SearchBar onSubmit={(e) => e.preventDefault()}>
-                    <input className={styles.customInput} type="text" value={value} onChange={onChange} placeholder="Wprowadź nazwę produktu.."></input>
+                    <input className={styles.customInput} type="text" value={value} onChange={onChange} onClick={() => navigate('list')} placeholder="Wprowadź nazwę produktu.."></input>
+                     <select name='category' style={optionForm} onChange={handleProductCategory}>
+                        <option value="">Wybierz kategorię</option>
+                        <option value="Karoseria">Karoseria</option>
+                        <option value="Filtry">Filtry</option>
+                        <option value="Oleje">Oleje i smary</option>
+                        <option value="Oświetlenie">Oświetlenie</option>
+                        <option value="Silniki i osprzęt">Silnik i osprzęt</option>
+                        <option value="Układ chłodzenia silnika">Układ chłodzenia silnika</option>
+                        <option value="Układ elektryczny,zapłon">Układ elektryczny, zapłon</option>
+                        <option value="Układ hamulcowy">Układ hamulcowy</option>
+                        <option value="Układ kierowniczy">Układ kierowniczy</option>
+                        <option value="Układ klimatyzacji">Układ klimatyzacji</option>
+                        <option value="Układ napędowy">Układ napędowy</option>
+                        <option value="Układ paliwowy">Układ paliwowy</option>
+                        <option value="Układ pneumatyczny">Układ pneumatyczny</option>
+                        <option value="Układ wentylacji">Układ wentylacji</option>
+                        <option value="Układ wydechowy">Układ wydechowy</option>
+                        <option value="Układ zawieszenia">Układ zawieszenia</option>
+                        <option value="wycieraczki spryskiwacze">Wycieraczki i spryskiwacze</option>
+                        <option value="wyposażenie wnętrza">Wyposażenie wnętrza</option>
+                        <option value="Ogrzewanie postojowe i chłodnictwo samochodowe">Ogrzewanie postjowe i chłodnictwo samochodowe</option>
+                        <option value="Tuning mechaniczny">Tuning mechaniczny</option>
+                        <option value="Pozostałe">Pozostałe</option>
+                        <option value="Akcesoria samochodowe">Akcesoria samochodowe</option>
+                    </select>
                     <select name='voivodeship' style={optionForm} onChange={onChangeVoivode}>
                                     <option value="">Województwo</option>
                                     <option value="dolnośląskie">woj. dolnośląskie</option>

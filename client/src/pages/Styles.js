@@ -14,10 +14,6 @@ export const customImg = {
     height: '100px',
 }
 
-// const customButton = {
-//     backgroundColor: '#003c3c'
-// }
-
 export const customCardBody = {
     color: 'rgba(0,68,68,0.9)',
 }

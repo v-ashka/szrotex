@@ -11,7 +11,7 @@ const User = new mongoose.Schema(
         workEndHour: { type: Number, required: false },
         phoneNumber: { type: Number, required: true },
         workSchedule: {Monday: {Start: String, End: String, FreeDay: Boolean}, Tuesday: {Start: String, End: String, FreeDay: Boolean}, Wednesday: {Start: String, End: String, FreeDay: Boolean}, Thursday: {Start: String, End: String, FreeDay: Boolean}, Friday: {Start: String, End: String, FreeDay: Boolean}, Saturday: {Start: String, End: String, FreeDay: Boolean}, Sunday: {Start: String, End: String, FreeDay: Boolean}},
-        products: [{ name: String, date: Date, price: Number, desc: String, img: String, tags: [{ name: String }], reservation: Boolean}],
+        products: [{ name: String, date: Date, price: Number, desc: String, img: String, tags: [{ name: String }], reservation: Boolean, category: String}],
         rating: { numbers: Array },
         reservation: [{ productId: mongoose.SchemaTypes.ObjectId, reservationDate: Date, expiryDate: Date, productBasicInfo: { name: String, price: Number, img: String } }]
     },

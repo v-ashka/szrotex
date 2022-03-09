@@ -4,11 +4,7 @@ import bugico from '../pages/img/bug.svg'
 import editico from '../pages/img/edit.svg'
 import moneyico from '../pages/img/money.svg'
 import faceico from '../pages/img/face.svg'
-// const Button = styled.button`
-//     padding: 1em;
-//     background-color: ${props => props.primary ? "#23c686" : "white"};
-//     color: ${props => props.primary ? "white" : "23c686"}
-// `
+
 const customCard = {
     minHeight: '330px',
     maxWidth: '540px',
@@ -20,10 +16,6 @@ const customImg = {
     width: '100px',
     height: '100px',
 }
-
-// const customButton = {
-//     backgroundColor: '#003c3c'
-// }
 
 const customCardBody = {
     color: 'rgba(0,68,68,0.9)',

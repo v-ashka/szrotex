@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {handleImageError} from '../components/ImgError'
-import {customCardBody, customCardProducts, customLink, imgFit} from './Styles'
-import {SearchList} from '../components/SearchList'
+import {handleImageError} from '../../components/ImgError/ImgError.js'
+import {customCardBody, customCardProducts} from '../Styles'
+import {SearchList} from '../../components/SearchList'
 import { Link } from 'react-router-dom'
-import style from '../components/styles.module.css'
-import "../pages/UserList.css"
+import style from '../../styles/styles.module.css';
+import "./UserList.css"
 
 const Lists = ({ lists }) => {
-    //  console.log(lists)
-   // console.log('after', lists)
     const arr = []
     lists.map((user) => {
         user.products.map(products => {
-            //  console.log('all info', products, user)
             products['creatorName'] = user.name
             products['createdBy'] = user.email
             if (user.region) {
@@ -22,13 +19,17 @@ const Lists = ({ lists }) => {
                 products['regionVoivode'] = ''
                 products['regionCity'] = ''
             }
+            if (products.category === undefined) {
+                products.category = 'Pozostałe'
+            }
+
             arr.push(products)
 
         })
     })
     
    
-    console.log(arr)
+    // console.log(arr)
     // console.log('products:', lists)
 
     arr.sort((a,b) => {
@@ -46,13 +47,13 @@ const Lists = ({ lists }) => {
 
 export const List = ({ item }) => {
 
-    // console.log('lists: ', item.reservation)
+    // console.log('lista export: ', item.regionVoivode, item.regionCity, item.regionVoivode.length)
     // console.log(new Date(item.date).toLocaleDateString('pl-PL', {day: 'numeric', month: 'long', year: 'numeric'} ))
     return (
   
-        <div className={item.reservation ? ('col-md-10 mb-4 img-reservation-item') : ('col-md-10 mb-4')} key={item._id} style={{position: 'relative'}}>
-            <Link to={item._id} className={style.customLink} state={item}>
-        <div className={"card " + style.customLink } style={customCardProducts}>
+        <div className={item.reservation ? ('col-md-10 mb-4 img-reservation-item') : ('col-md-10 mb-4 ' + style.customLinkList)} key={item._id} style={{position: 'relative'}}>
+            <Link to={item._id} className={style.customLinkList} state={item}>
+        <div className={"card" + style.customLinkList} style={customCardProducts}>
             <div className="row g-0 p-5">
                 <div className="col-md-3">
                     <img src={item.img} onError={handleImageError} className={"img-fluid rounded-start " + style.userListImg} alt="Product image" />
@@ -61,7 +62,7 @@ export const List = ({ item }) => {
                 <div className="card-body" style={customCardBody}>
                         <div className="card-title d-flex justify-content-between"><h4 className="card-title">{item.name}</h4> <h4>{item.price} PLN</h4></div>
                         <div className="card-text">
-                            <p className="card-text user-product-p">{(item.regionVoivode.length > 0 && item.regionCity.length > 0) ? (<>{ item.regionCity } | { item.regionVoivode } | </>): ('')} {new Date(item.date).toLocaleDateString('pl-PL')} </p>
+                                    <p className="card-text user-product-p"> {item.category } | {(item.regionVoivode.length > 0 && item.regionCity.length > 0) ? (<>{item.regionCity} | {item.regionVoivode} | </>) : ('')} {new Date(item.date).toLocaleDateString('pl-PL')} </p>
                         </div>
                 </div>
                 </div>
@@ -72,7 +73,7 @@ export const List = ({ item }) => {
     )
 }
 
-const App = ({value, onClick, checkedVoivode}) => {
+const App = ({value, onClick, checkedVoivode, category}) => {
 
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -80,7 +81,7 @@ const App = ({value, onClick, checkedVoivode}) => {
     if(value.length > 0 || onClick){
         isValue = true;
     }
-    console.log(value.length, isValue, checkedVoivode)
+    // console.log(value.length, isValue, checkedVoivode)
 
     useEffect(() => {
         const getList = async () => {
@@ -99,21 +100,21 @@ const App = ({value, onClick, checkedVoivode}) => {
     const fetchList = async () => {
         const res = await fetch('http://localhost:3500/list')
         const data = await res.json()
-         console.log(data);
+        //  console.log(data);
         const productList= [];
         data.filter((product) => {
             if(product.products.length > 0){
                 productList.unshift(product)
             }
         })
-        console.log(data, productList);
+        // console.log(data, productList);
         return productList;
     }
 
     if (loading) {
         return <h2>Loading...</h2>
     }
-    console.log('list:', list)
+    // console.log('list:', list)
     return (
             <div className="row d-flex justify-content-center">
                 { value.length > 0 ? (
@@ -123,7 +124,7 @@ const App = ({value, onClick, checkedVoivode}) => {
                             <h6 className={"p-3 card d-flex flex-row " + style.searchResult} style={customCardProducts}>Wyszukiwana fraza:<span className="fw-bold"> {value}</span></h6>
                         </div>
                     </div>
-                    <SearchList lists={list} query={value} checkedVoivode={checkedVoivode}/>
+                    {loading ? ('Loading...') : (<SearchList lists={list} query={value} checkedVoivode={checkedVoivode} category={category} />)}
                 </>
             ) : (<>
                     <Lists lists={list} />

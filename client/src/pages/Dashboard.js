@@ -1,9 +1,10 @@
 import React, { useEffect, useState, } from "react"
 import { Link } from 'react-router-dom'
 import { Modal, ModalEdit } from '../components/Modal/Modal'
-import styles from '../pages/styles.module.css'
-import { handleImageError } from '../components/ImgError'
-import { getActualDate, normalizeWeek } from "../components/ProductItem"
+// import styles from '../pages/styles.module.css'
+import styles from '../styles/styles.module.css';
+import { handleImageError } from '../components/ImgError/ImgError.js'
+import { getActualDate, normalizeWeek } from "../components/ProductItem/ProductItem.js"
 import scheduleImg from './img/schedule.svg'
 import Reservation from "../components/ReservationList"
 
@@ -35,6 +36,15 @@ const customLink = {
 
 const customWidth = {
     width: '100%',
+}
+
+const optionForm = {
+    backgroundColor: 'rgb(207, 231, 233)',
+    border: 'none',
+    borderRadius: '5px',
+    color: 'rgb(32, 32, 32)',
+    height: '2.5em',
+    width: '20%'
 }
 
 
@@ -132,9 +142,15 @@ const AddProduct = () => {
     const [productDesc, setProductDesc] = useState('');
     const addDate = new Date();
     const [productImg, setProductImg] = useState('');
+    const [productTags, setProductTags] = useState([]);
+    const [productCategory, setProductCategory] = useState('');
 
     const [errorFeed, setError] = useState('');
     const reservation = false;
+
+     const handleProductCategory = (e) => {
+        setProductCategory(e.target.value)
+    }
 
     const addProduct = async (e) => {
         e.preventDefault();
@@ -151,6 +167,8 @@ const AddProduct = () => {
                 productDesc,
                 productImg,
                 reservation,
+                productTags,
+                productCategory,
             })
         })
 
@@ -162,8 +180,6 @@ const AddProduct = () => {
             console.log(data.errors[0].msg);
             setError(data.errors[0].msg)
         }
-        
-
     }
 
     return (
@@ -188,8 +204,7 @@ const AddProduct = () => {
             </div>
              <div className="form-group">
                 <label>Opis produktu</label>
-                <input
-                    type="text"
+                <textarea
                     placeholder="Dodaj opis produktu"
                     value={productDesc}
                     onChange={e => setProductDesc(e.target.value)}
@@ -203,6 +218,43 @@ const AddProduct = () => {
                     value={productImg}
                     onChange={e => setProductImg(e.target.value)}
                 />
+            </div>
+              <div className="form-group">
+                <label>Tagi</label>
+                <input
+                    type="text"
+                    placeholder="Wprowadź tagi do łatwiejszego znalezienia produktu"
+                    value={productTags}
+                    onChange={e => setProductTags(e.target.value)}
+                />
+            </div>
+            <div className="form-group">
+                <label>Kategoria</label>
+                <select name='category' style={optionForm} onChange={handleProductCategory}>
+                        <option value="">Wybierz kategorię</option>
+                        <option value="Karoseria">Karoseria</option>
+                        <option value="Filtry">Filtry</option>
+                        <option value="Oleje">Oleje i smary</option>
+                        <option value="Oświetlenie">Oświetlenie</option>
+                        <option value="Silniki i osprzęt">Silnik i osprzęt</option>
+                        <option value="Układ chłodzenia silnika">Układ chłodzenia silnika</option>
+                        <option value="Układ elektryczny,zapłon">Układ elektryczny, zapłon</option>
+                        <option value="Układ hamulcowy">Układ hamulcowy</option>
+                        <option value="Układ kierowniczy">Układ kierowniczy</option>
+                        <option value="Układ klimatyzacji">Układ klimatyzacji</option>
+                        <option value="Układ napędowy">Układ napędowy</option>
+                        <option value="Układ paliwowy">Układ paliwowy</option>
+                        <option value="Układ pneumatyczny">Układ pneumatyczny</option>
+                        <option value="Układ wentylacji">Układ wentylacji</option>
+                        <option value="Układ wydechowy">Układ wydechowy</option>
+                        <option value="Układ zawieszenia">Układ zawieszenia</option>
+                        <option value="wycieraczki spryskiwacze">Wycieraczki i spryskiwacze</option>
+                        <option value="wyposażenie wnętrza">Wyposażenie wnętrza</option>
+                        <option value="Ogrzewanie postojowe i chłodnictwo samochodowe">Ogrzewanie postjowe i chłodnictwo samochodowe</option>
+                        <option value="Tuning mechaniczny">Tuning mechaniczny</option>
+                        <option value="Akcesoria samochodowe">Akcesoria samochodowe</option>
+                        <option value="Pozostałe">Pozostałe</option>
+                    </select>
             </div>
             <br/>
             <div className="form-group">

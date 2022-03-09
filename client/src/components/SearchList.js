@@ -1,32 +1,50 @@
-import React, { useEffect, useState } from "react";
-import {List} from '../pages/UserList'
+import React from "react";
+import {List} from '../pages/UserList/UserList.js'
 
 
-export const SearchList = ({ lists, query, checkedVoivode }) => {
-    console.log('searchlkist', checkedVoivode)
-    console.log('queyr', query)
+export const SearchList = ({ lists, query, checkedVoivode, category}) => {
+    
+    if (lists.length == 0) {
+        console.log('searching...')
+        return <>Searching...</>
+    }
+    console.log('voivode:', checkedVoivode)
+    console.log('query:', query)
+    console.log('lists:', lists)
+    console.log('category:', category)
+
+    console.log(window.location.pathname.includes('/list'))
+    if (!window.location.pathname.includes('/list')) {
+        window.location = '/list'
+    }
+
+  
+
     const arr = []
     lists.map((user) => {
-        // user.products.map(products => {
-        //     // console.log(products, user)
-        //     products['creatorName'] = user.name
-        //     products['createdBy'] = user.email
-        //     arr.push(products)
 
-        // })
-        
+    
         user.products.filter(item => {
             item['creatorName'] = user.name;
             item['createdBy'] = user.email;
-            //console.log(item.name, item.name.toLowerCase().includes(query.toLowerCase()))
-            // console.log('sortbyVoivode', checkedVoivode)
-            console.log('filter', item.regionVoivode, checkedVoivode, item.regionVoivode == checkedVoivode)
-            console.log('pass test?', item.regionVoivode == checkedVoivode)
-                // if (item.name.toLowerCase().includes(query.toLowerCase()))
-                if(item.regionVoivode.includes(checkedVoivode) && item.name.toLowerCase().includes(query.toLowerCase()))
+            if (user.region === undefined) {
+                item['regionVoivode'] = ''
+                item['regionCity'] = ''
+            } else {
+                item['regionVoivode'] = user.region.voivodeship
+                item['regionCity'] = user.region.city
+            }
+            if (item.category === undefined) {
+                item.category = 'Pozostałe'
+            }
+
+            // console.log('filter', item.regionVoivode, checkedVoivode, item.regionVoivode == checkedVoivode)
+            // console.log('pass test?', item.regionVoivode == checkedVoivode)
+            // console.log(item)
+                if(item.regionVoivode.includes(checkedVoivode) && item.name.toLowerCase().includes(query.toLowerCase()) && item.category.toLowerCase().includes(category.toLowerCase()))
                 arr.push(item)    
             
-            console.log('arrr', arr)
+            // console.log('arrr', arr)
         })
 
 

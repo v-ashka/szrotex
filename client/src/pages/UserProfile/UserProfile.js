@@ -1,12 +1,12 @@
 import React, { useState, useEffect} from "react"
-import { Navigate, useNavigate, useParams, Link } from "react-router-dom";
-import styles from '../pages/styles.module.css'
-import { handleImageError } from "../components/ImgError";
-import { customCardProducts, customLink, customCardBody} from "./Styles";
+import {useParams, Link } from "react-router-dom";
+// import styles from '../pages/styles.module.css'
+import styles from '../../styles/styles.module.css';
+import { handleImageError } from "../../components/ImgError/ImgError.js";
+import { customCardProducts, customCardBody} from "../Styles";
 import "./UserProfile.css"
-import { Hours, normalizeWeek, getActualDate } from "../components/ProductItem";
-import expandList from '../pages/img/expand_arr.svg'
-
+import { Hours, normalizeWeek, getActualDate } from "../../components/ProductItem/ProductItem.js";
+import clockIco from '../../pages/img/schedule.svg'
 
 const SellerProducts = ({ user }) => {
     // const location = useLocation();
@@ -114,11 +114,14 @@ const App = () => {
             </div>
             <div className="col-lg-4 mb-4">
                     <div className="card user-profile-box" style={customCardProducts}>
-                    <div className="row g-0 p-3">
-                       
-                        <div className="col-lg-12 mt-4">
-                            <div className="card-body">
-                            {user.description ? (<><h6>Godziny otwarcia:</h6><div className='d-flex align-items-center' style={{columnGap: 10}}> </div><Hours schedule={user.workSchedule} today={Today} open={!open} /></>):(<><h6>Godziny otwarcia:</h6><p>Użytkownik nie podał godzin pracy</p></>) }
+                        <div className="row g-0 p-3">
+                            <div className="col-lg-12 d-flex align-items-center p-2" style={{columnGap: '10px', color: '#003c3ce6'}}>
+                                    <img src={clockIco} style={{ width: '50px' }} />
+                                    <h3 className="card-title">Godziny pracy</h3>
+                            </div>
+                            <div className="col-lg-12 mt-4">
+                                <div className="card-body">
+                            {user.description ? (<><div className='d-flex align-items-center' style={{columnGap: 10}}> </div><Hours schedule={user.workSchedule} today={Today} open={!open} /></>):(<><h6>Godziny otwarcia:</h6><p>Użytkownik nie podał godzin pracy</p></>) }
                             </div>
                         </div>
                     </div>

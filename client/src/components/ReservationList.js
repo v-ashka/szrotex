@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import reservationIco from '../pages/img/remove_reservation.svg'
-import styles from '../pages/styles.module.css'
-import { handleImageError } from '../components/ImgError'
+// import styles from '../pages/styles.module.css'
+import styles from '../styles/styles.module.css';
+import { handleImageError } from './ImgError/ImgError.js'
 
     
 const customCardProducts = {

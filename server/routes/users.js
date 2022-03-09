@@ -59,41 +59,54 @@ router.route('/list/:id').post(async (req, res) => {
         const decoded = jwt.verify(token, 'secret123')
         const id = req.params.id;
         console.log('list/' + id + '/reservation');
-        
         // console.log(req.body, decoded.email)
         // userModel.find({ "products._id": id }, function (err, result) {
         //     console.log(result[0])
         // })
+        console.log(decoded.email, req.body)
+        // userModel.findOne({"products._id": id}, function(err, result) {
+        //     console.log(result.email)
+        //     if (result.email == decoded.email) {
+        //         result.save()
+        //             .then(() => res.status(409).json({message: 'Reservation error!'}))
+        //     }
+        // })
+    
+        // console.log(checkUser)
+        // console.log(authError)
+        // if (authError) {
+        //     return res.status(409).json({ message: 'Nie można rezerwować swoich produktów!' })
+        // } 
         console.log(req.body.productBasicInfo.name)
         const reservation = {
-            reservation: [{ productId: id, reservationDate: req.body.reservationDate, expiryDate: req.body.expiryDate, productBasicInfo: {name: req.body.productBasicInfo.name, price: req.body.productBasicInfo.price, img: req.body.productBasicInfo.img}}]
+            reservation: [{ productId: id, reservationDate: req.body.reservationDate, expiryDate: req.body.expiryDate, productBasicInfo: { name: req.body.productBasicInfo.name, price: req.body.productBasicInfo.price, img: req.body.productBasicInfo.img } }]
         }
         console.log(reservation.productBasicInfo)
         await userModel.updateOne(
-			{ email: decoded.email },
-			{ $push: reservation }
+            { email: decoded.email },
+            { $push: reservation }
         )
         const query = { "products._id": id }
 
         userModel.findOne(query, function (err, result) {
             if (err) {
-                console.log(err)
+                console.log('error message:', err)
             } else {
                 result.products.filter(product => {
-                if (product._id == id) {
-                    product.reservation = true;
+                    if (product._id == id) {
+                        product.reservation = true;
                     }
                 })
                 result.save()
-                .then(() => res.json({status: 200, message: 'Reservation done!'}))
-                .catch((err) => console.log(err))
+                    .then(() => res.json({ status: 200, message: 'Reservation done!' }))
+                    .catch((err) => console.log(err))
             }
         })
-
-        // return res.json({status:200, message: 'Reservation success!'})
-    }catch(err){
-        return res.status(400).json('Error: ' + err)
     }
+    catch (err) {
+        return err
+     }
+    
 })
 
 
@@ -247,9 +260,11 @@ router.route('/dashboard/add').post([
         const productDesc = req.body.productDesc;
         const productImg = req.body.productImg;
         const reservation = req.body.reservation;
+        const tags = req.body.productTags;
+        const category = req.body.productCategory
 
         const newProduct = {
-            products: [{name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg, reservation: reservation}]
+            products: [{ name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg, reservation: reservation, tags: [{ name: tags }], category: category}]
         }
 
         console.log(newProduct)

@@ -1,6 +1,7 @@
-import React, { useState, Component } from "react"
-import { Navigate, useNavigate } from "react-router-dom";
-import styles from '../pages/styles.module.css'
+import React, { useState} from "react"
+import {useNavigate } from "react-router-dom";
+// import styles from '../pages/styles.module.css'
+import styles from '../styles/styles.module.css';
 import {customCardBody, customCard, customWidth} from './Styles'
 function App() {
     let navigation = useNavigate();
