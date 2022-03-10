@@ -73,16 +73,16 @@ export const List = ({ item }) => {
     )
 }
 
-const App = ({value, onClick, checkedVoivode, category}) => {
+const App = ({value, isClicked, checkedVoivode, category}) => {
 
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
+
     let isValue = false;
-    if(value.length > 0 || onClick){
+    if(value.length > 0){
         isValue = true;
     }
-    // console.log(value.length, isValue, checkedVoivode)
-
+    console.log(value, checkedVoivode, category);
     useEffect(() => {
         const getList = async () => {
             setLoading(true);
@@ -115,15 +115,20 @@ const App = ({value, onClick, checkedVoivode, category}) => {
         return <h2>Loading...</h2>
     }
     // console.log('list:', list)
+    // console.log('is clicked?:', isClicked);
+
+    if (isClicked && (category.length > 1 || checkedVoivode.length > 1)) {
+        return (
+                <div className="row d-flex justify-content-center">
+                    {loading ? ('Loading...') : (<SearchList lists={list} query={value} checkedVoivode={checkedVoivode} category={category} />)}
+            </div>
+        )
+    }
+
     return (
             <div className="row d-flex justify-content-center">
                 { value.length > 0 ? (
                 <>
-                    <div className="row justify-content-center">
-                        <div className="col-md-8 p-3">
-                            <h6 className={"p-3 card d-flex flex-row " + style.searchResult} style={customCardProducts}>Wyszukiwana fraza:<span className="fw-bold"> {value}</span></h6>
-                        </div>
-                    </div>
                     {loading ? ('Loading...') : (<SearchList lists={list} query={value} checkedVoivode={checkedVoivode} category={category} />)}
                 </>
             ) : (<>
@@ -134,3 +139,4 @@ const App = ({value, onClick, checkedVoivode, category}) => {
 }
 
 export default App;
+{/* <SearchList lists={list} query={value} checkedVoivode={checkedVoivode} category={category} /> */}

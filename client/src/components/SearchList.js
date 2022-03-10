@@ -22,8 +22,6 @@ export const SearchList = ({ lists, query, checkedVoivode, category}) => {
 
     const arr = []
     lists.map((user) => {
-
-    
         user.products.filter(item => {
             item['creatorName'] = user.name;
             item['createdBy'] = user.email;
@@ -50,10 +48,16 @@ export const SearchList = ({ lists, query, checkedVoivode, category}) => {
 
     })
     
-    // console.log(arr)
+    console.log(arr.length)
+    if (arr.length == 0) {
+        return <>Nie znaleziono szukanego produktu :(</>
+    }
+
+
    return(
        <>   {arr.map((item, index) => (
         <List key={index} item={item}/>
     ))} </>
-   );
+    );
+    
 }

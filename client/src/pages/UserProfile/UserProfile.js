@@ -7,6 +7,7 @@ import { customCardProducts, customCardBody} from "../Styles";
 import "./UserProfile.css"
 import { Hours, normalizeWeek, getActualDate } from "../../components/ProductItem/ProductItem.js";
 import clockIco from '../../pages/img/schedule.svg'
+import contactIco from '../../pages/img/face.svg'
 
 const SellerProducts = ({ user }) => {
     // const location = useLocation();
@@ -96,9 +97,13 @@ const App = () => {
     return(
         <>
           <div className='row'>
-            <div className="col-lg-8 mb-4">
-                <div className="card user-profile-box" style={customCardProducts}>
-                    <div className="row g-0 p-3">
+                <div className="col-lg-8 mb-4">
+                    <div className="card user-profile-box" style={customCardProducts}>
+                        <div className="row g-0 p-3">
+                            <div className="col-lg-12 mb-4 d-flex align-items-center p-2" style={{ columnGap: '10px', color: '#003c3ce6' }} >
+                                <img src={contactIco} style={{ width: '60px' }} />
+                                <h3 className="card-title">Dane kontaktowe</h3>
+                            </div>
                         <div className="col-lg-4 mt-4">
                             <img src={'.'} onError={handleImageError} className="img-fluid rounded-start user-logo" alt="Product image" />
                         </div>

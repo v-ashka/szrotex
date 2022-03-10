@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 // import Navbar from './pages/Navbar'
 import Login from './pages/Login'
@@ -16,15 +16,13 @@ import ProductItem from './components/ProductItem/ProductItem.js'
 import UserProfile from './pages/UserProfile/UserProfile.js'
 import "./styles/style.css"
 function App() {
-
   const [query, setQuery] = useState('');
   const [voivodeship, setVoivode] = useState('');
   const [category, setCategory] = useState('');
+  const [clicked, setClicked] = useState(false);
 
-  const onClick = () =>{
-    console.log('przycisk nacisniety');
-    console.log('query: ', query);
-    console.log('woj:', voivodeship)
+  const onClick = () => {
+    setClicked(true);
   }
 
   const handleVoivodeChange = (e) => {
@@ -34,23 +32,27 @@ function App() {
   }
 
   const handleProductCategory = (e) => {
+    console.log(e.target.value)
     setCategory(e.target.value);
   }
 
+  const handleClickBtn = () => {
+    console.log('clicked');
+  }
 
   const onChangeQuery = (e) => {
     setQuery(e.target.value)
   }
   return (
     <BrowserRouter> 
-      <GlobalNavbar value={query} onChange={onChangeQuery} onClick={onClick} onChangeVoivode={handleVoivodeChange} handleProductCategory={handleProductCategory} />
+      <GlobalNavbar value={query} onChange={onChangeQuery} onClick={onClick} onChangeVoivode={handleVoivodeChange} handleProductCategory={handleProductCategory} handleClickBtn={ handleClickBtn}/>
         <Container>
         <Routes>
             <Route index element={<Home/>} />
             <Route path="register" exact element={<Register/>}/>
             <Route path="login" exact element={<Login/>} />
             <Route path="dashboard" exact element={<Dashboard />} />
-          <Route path="list" element={<UserList value={query} onClick={onClick} checkedVoivode={voivodeship} category={category}/>} />
+          <Route path="list" element={<UserList value={query} isClicked={clicked} checkedVoivode={voivodeship} category={category}/>} />
             <Route path="list/:id" element={<ProductItem/>}/>
             <Route path="dashboard/edit/:id" element={<Edit/>} />
             <Route path="dashboard/delete/:id" element={<Delete/>} />

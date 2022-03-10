@@ -68,7 +68,7 @@ function App() {
                                 <div className="form-group">
                                     <label>E-mail:</label>
                                     <input
-                                        type="text"
+                                        type="email"
                                         required
                                         className="form-control"
                                         value={email}

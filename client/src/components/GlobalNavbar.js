@@ -79,7 +79,7 @@ const optionForm = {
 }
 
 
-const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductCategory}) => {
+const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductCategory, handleClickBtn}) => {
         const location = useLocation();
         const navigate = useNavigate();
         
@@ -192,7 +192,7 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
                     </HeaderContentImage>
                 </HeaderContent>
                 <SearchBar onSubmit={(e) => e.preventDefault()}>
-                    <input className={styles.customInput} type="text" value={value} onChange={onChange} onClick={() => navigate('list')} placeholder="Wprowadź nazwę produktu.."></input>
+                    <input className={styles.customInput} type="text" value={value} onChange={onChange} onClick={() => { onClick(); navigate('list') }} placeholder="Wprowadź nazwę produktu.."></input>
                      <select name='category' style={optionForm} onChange={handleProductCategory}>
                         <option value="">Wybierz kategorię</option>
                         <option value="Karoseria">Karoseria</option>
@@ -219,7 +219,7 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
                         <option value="Akcesoria samochodowe">Akcesoria samochodowe</option>
                     </select>
                     <select name='voivodeship' style={optionForm} onChange={onChangeVoivode}>
-                                    <option value="">Województwo</option>
+                                    <option value="">Cała Polska</option>
                                     <option value="dolnośląskie">woj. dolnośląskie</option>
                                     <option value="kujawsko-pomorskie">woj. kujawsko-pomorskie</option>
                                     <option value="lubelskie">woj. lubelskie</option>
@@ -236,7 +236,7 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
                                     <option value="wielkopolskie">woj. wielkopolskie</option>
                                     <option value="zachodniopomorskie">woj. zachodniopomorskie</option>
                                 </select>
-                        <button className={styles.searchBarButton} onClick={() => onClick && navigate('list')}>Wyszukaj</button>
+                    <button className={styles.searchBarButton} onClick={() => { onClick(); navigate('list');}}>Wyszukaj</button>
                 </SearchBar>
             </Header>
         );

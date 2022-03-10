@@ -118,7 +118,7 @@ const UserInfo = ({ user, additional, openModal}) => {
             {
                 additional ? (
                     <>
-                      <p><span className="fw-bolder">Opis firmy: </span> {user.description}</p>
+                        <p><span className="fw-bolder">Opis firmy: </span> <abbr title={user.description} style={{ textDecoration: 'none' }}>{user.description.slice(0, 200)}...</abbr></p>
                       <p><span className="fw-bolder">Adres kontaktowy:</span> {user.region.street} {user.region.city} {user.region.zip} woj. {user.region.voivodeship}</p>
                       <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Edytuj profil</button>  <img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                     </>
