@@ -51,7 +51,7 @@ export const List = ({ item }) => {
     // console.log(new Date(item.date).toLocaleDateString('pl-PL', {day: 'numeric', month: 'long', year: 'numeric'} ))
     return (
   
-        <div className={item.reservation ? ('col-md-10 mb-4 img-reservation-item') : ('col-md-10 mb-4 ' + style.customLinkList)} key={item._id} style={{position: 'relative'}}>
+        <div className={item.reservation ? ('col-md-10 mb-4 img-reservation-item  animate__animated animate__fadeIn') : ('col-md-10 mb-4  animate__animated animate__fadeIn ' + style.customLinkList)} key={item._id} style={{position: 'relative'}}>
             <Link to={item._id} className={style.customLinkList} state={item}>
         <div className={"card" + style.customLinkList} style={customCardProducts}>
             <div className="row g-0 p-5">
@@ -112,7 +112,7 @@ const App = ({value, isClicked, checkedVoivode, category}) => {
     }
 
     if (loading) {
-        return <h2>Loading...</h2>
+        return <h2 className="animate__animated animate__heartBeat d-flex justify-content-center">Loading...</h2>
     }
     // console.log('list:', list)
     // console.log('is clicked?:', isClicked);
@@ -126,7 +126,7 @@ const App = ({value, isClicked, checkedVoivode, category}) => {
     }
 
     return (
-            <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center ">
                 { value.length > 0 ? (
                 <>
                     {loading ? ('Loading...') : (<SearchList lists={list} query={value} checkedVoivode={checkedVoivode} category={category} />)}

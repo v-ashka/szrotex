@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, {useRef} from "react";
+import { Link, useLocation, useNavigate} from 'react-router-dom'
 import styled from 'styled-components';
 import { Navbar, Container, Nav} from 'react-bootstrap'
 // import styles from './styles.module.css';
@@ -14,29 +14,31 @@ const Header = styled.header`
 
 const HeaderContent = styled.section`
     width: 100%;
-    height: 90%;
     overflow: hidden;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     color: #dedede;
+    position: 'relative';
+    height: 700px;
 `
 
 const HeaderContentText = styled.div`
-    width: 30%;
-    height: 100%;
+    width: 33%;
     display: flex;
     flex-direction: column;
     align-items: flex-start; 
     justify-content: center;
+    position: absolute;
+    top: 25%;
+    left: 15%;
 `
 
 const HeaderContentImage = styled.div`
-    width: 25%;
-    height: 100%;
+    width: 10%;
     display: flex;
     flex-direction: column;
-    
+    position: relative;
+    top: 100px;
+    left: 70%;
 `
 
 const HeaderPattern = styled.svg`
@@ -82,7 +84,9 @@ const optionForm = {
 const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductCategory, handleClickBtn}) => {
         const location = useLocation();
         const navigate = useNavigate();
-        
+        const myRef = useRef(null);
+    
+    const executeScroll = () => myRef.current.scrollIntoView()
 
     let isLogged = false;
     if (localStorage.getItem('token')) {
@@ -114,7 +118,7 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
             return (
                 <>
                     <h1 className="display-1 fw-normal mb-4">Dołącz do nas!</h1>
-                    <p className="fs-1 fw-light" style={customParagraph}>Stworzenie konta to tylko kilka sekund, a konto pozwala na tak wiele!</p>
+                    <p className="fs-1 fw-light" style={customParagraph}>Stworzenie konta to tylko kilka sekund, a przynosi wiele korzyści!</p>
                 </>
             )
         } else if (location.pathname === '/dashboard') {
@@ -167,28 +171,30 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
 
         return (
             <Header>
-            <Navbar collapseOnSelect expand="lg" bg="success" className={styles.primary_bg} variant="dark">
+                <Navbar collapseOnSelect expand="lg" bg="success" className={styles.primary_bg} variant="dark" style={{position: 'relative'}}>
             <Container>
-                <Link to={"/"} className="navbar-brand"><img src={logo} className="d-inline-block align-top"width="45" height="35" alt="Logo"/>Szrotex</Link>
+                        <Link to={"/"} onClick={executeScroll} className="navbar-brand"><img src={logo} className="d-inline-block align-top"width="45" height="35" alt="Logo"/>Szrotex</Link>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                 </Nav>
                 <Nav>
                 {
-                isLogged ? AuthButton() : <><li><Link to={'/register'} className="nav-link">Zarejestruj się</Link></li><li><Link to={'/login'} className="nav-link">Zaloguj się</Link></li></>
+                isLogged ? AuthButton() : <><li><Link to={'/register'} className="nav-link" onClick={executeScroll}>Zarejestruj się</Link></li><li><Link to={'/login'} className="nav-link" onClick={executeScroll}>Zaloguj się</Link></li></>
                 }
                 </Nav>
             </Navbar.Collapse>  
             </Container>
                 </Navbar>
                 <HeaderContent>
-                    <HeaderContentText>
+                    <HeaderContentImage style={{top:'-200px',left: '20px', zIndex: '0'}}>
+                        <HeaderPattern style={{ left: '100%', top: '50px', transform: 'translateX(-100%)' }} />                        
+                    </HeaderContentImage>
+                    <HeaderContentText className="animate__animated animate__bounceInDown">
                         {checkLocalAdress()}
                     </HeaderContentText>
                     <HeaderContentImage>
-                        <HeaderPattern>
-                        </HeaderPattern>
+                        <HeaderPattern/>                        
                     </HeaderContentImage>
                 </HeaderContent>
                 <SearchBar onSubmit={(e) => e.preventDefault()}>
@@ -236,7 +242,7 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
                                     <option value="wielkopolskie">woj. wielkopolskie</option>
                                     <option value="zachodniopomorskie">woj. zachodniopomorskie</option>
                                 </select>
-                    <button className={styles.searchBarButton} onClick={() => { onClick(); navigate('list');}}>Wyszukaj</button>
+                    <button ref={myRef} className={styles.searchBarButton} onClick={() => { onClick(); navigate('list');}}>Wyszukaj</button>
                 </SearchBar>
             </Header>
         );

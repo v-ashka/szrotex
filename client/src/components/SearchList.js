@@ -13,6 +13,7 @@ export const SearchList = ({ lists, query, checkedVoivode, category}) => {
     console.log('lists:', lists)
     console.log('category:', category)
 
+
     console.log(window.location.pathname.includes('/list'))
     if (!window.location.pathname.includes('/list')) {
         window.location = '/list'
@@ -56,7 +57,7 @@ export const SearchList = ({ lists, query, checkedVoivode, category}) => {
 
    return(
        <>   {arr.map((item, index) => (
-        <List key={index} item={item}/>
+           <List key={index} item={item}/>
     ))} </>
     );
     

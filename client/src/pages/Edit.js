@@ -31,8 +31,12 @@ function Edit() {
         })
 
         const data = await res.json();
-        //console.log(data);
-        return data.product;
+        if (data.status === 200) {
+            return data.product;    
+        } else {
+            window.location = '/dashboard';
+        }
+        
     }
 
 

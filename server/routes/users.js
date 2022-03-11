@@ -264,7 +264,7 @@ router.route('/dashboard/add').post([
         const category = req.body.productCategory
 
         const newProduct = {
-            products: [{ name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg, reservation: reservation, tags: [{ name: tags }], category: category}]
+            products: [{ name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg, reservation: reservation, tags: [tags], category: category}]
         }
 
         console.log(newProduct)

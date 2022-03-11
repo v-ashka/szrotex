@@ -15,6 +15,8 @@ import { Container } from 'react-bootstrap'
 import ProductItem from './components/ProductItem/ProductItem.js'
 import UserProfile from './pages/UserProfile/UserProfile.js'
 import "./styles/style.css"
+import 'animate.css';
+
 function App() {
   const [query, setQuery] = useState('');
   const [voivodeship, setVoivode] = useState('');
