@@ -48,10 +48,17 @@ const optionForm = {
 }
 
 
-const Table = ({ products, modal }) => {
+const Table = ({ products, modal, tableWidth }) => {
     if (products.length === 0) {
         return (<></>)
     } else {
+        if (tableWidth < 800) {
+            return (
+            <table className={`table ${styles.tableColor}`}>
+                    <Lists products={products} modal={modal} tableWidth={tableWidth} />
+            </table>
+            )
+        } 
         return (
             <table className={`table ${styles.tableColor}`}>
                         <thead>
@@ -68,12 +75,13 @@ const Table = ({ products, modal }) => {
                             <Lists products={ products } modal={modal} />
                         </tbody>
             </table>
-        )
+            )  
+        
     }
 }
 
 
-const Lists = ({ products, modal}) => {
+const Lists = ({ products, modal, tableWidth}) => {
     products.sort((a,b) => {
             return new Date(b.date) - new Date(a.date);
         })
@@ -81,19 +89,52 @@ const Lists = ({ products, modal}) => {
         return (
             <>
             {products.map((product, index) => (
-                <UserProductList key={index} product={product} modal={modal}/>
+                <UserProductList key={index} product={product} modal={modal} tableWidth={tableWidth}/>
             ))}
         </>
         )
 }
 
-const UserProductList = ({ product }) => {
+const UserProductList = ({ product, tableWidth }) => {
     // console.log(product)
     // console.log(show)
+    if (tableWidth < 800) {
+              return (
+                  <tbody key={product._id} style={{borderTop: '50px solid rgb(229, 240, 241)'}}>
+               <tr>
+                    <th scope="col">Nazwa produktu</th>
+                   <td><abbr style={{ textDecoration: 'none' }} title={product.name}>{product.name.slice(0, 25)}...</abbr></td>
+                </tr>
+                <tr>
+                    <th scope="col">Opis produktu</th>
+                    <td><abbr style={{ textDecoration: 'none' }} title={product.desc}>{product.desc.slice(0, 50)}...</abbr></td>
+                </tr>
+                <tr>
+                    <th scope="col">Zdjęcie</th>
+                    <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ("/img/no-img.png")} alt={product.name} /></td>
+                </tr>
+                <tr>
+                    <th scope="col">Cena</th>
+                    <td>{product.price} zł</td>
+                </tr>
+                <tr>
+                    <th scope="col">Zarezerwowany</th>
+                    <td> {product.reservation ? ('TAK') : ('NIE')}</td>
+                </tr>
+                <tr>
+                    <th scope="col">Opcja</th>
+                    <td>
+                        <Link to={"edit/" + product._id} className={ styles.customLinkEdit} ><img src="img/edit.svg" width="25" alt="Edit"/></Link> |
+                        <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src="img/delete.svg" width="25" alt="Delete"/></Link>
+                    </td>
+               </tr>
+           </tbody>
+        )
+        }
 
-    return (
+      return (
         <tr key={product._id}>
-            <td>{ product.name}</td>
+            <td><abbr style={{ textDecoration: 'none' }} title={product.name}>{ product.name.slice(0,25)}...</abbr></td>
             <td><abbr style={{textDecoration: 'none'}} title={product.desc}>{ product.desc.slice(0,50)}...</abbr></td>
             <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ("/img/no-img.png")} alt={product.name}/></td>
             <td>{product.price} zł</td>
@@ -103,7 +144,9 @@ const UserProductList = ({ product }) => {
                 <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src="img/delete.svg" width="25" alt="Delete"/></Link>
             </td>
         </tr>
-    )
+        )  
+    
+    
 }
 
 const UserInfo = ({ user, additional, openModal}) => {
@@ -267,6 +310,28 @@ const AddProduct = () => {
     );
 }
 
+const getWindowDimensions = () => {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+            width,
+            height
+        };
+}
+
+export const useWindowDimensions = () => {
+        const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+        useEffect(() => {
+            const handleResize = () => {
+                setWindowDimensions(getWindowDimensions());
+            }
+
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
+        }, []);
+        return windowDimensions;    
+    }
+
 const Dashboard = () => {
     
     // const [products, setProducts] = useState('')
@@ -278,26 +343,31 @@ const Dashboard = () => {
         basicInfoFilled = true;
     }
     
+
+    const { height, width } = useWindowDimensions();
+
+
+
     //   console.log(basicInfoFilled)
     //const [tempProduct, setTempProduct] = useState('')
-
+    // console.log(height, width);
     useEffect(() => {
         const getProduct = async () => {
             const productsFromDb = await fetchProducts()
             setProduct(productsFromDb)
-                    setLoading(false);
+            setLoading(false);
 
         }
 
         const getUserInfo = async () => {
             const userInfoFromDb = await fetchUserInfo()
             getUser(userInfoFromDb);
-                    setLoading(false);
-
+            setLoading(false);
         }
-
+      
         getProduct()
         getUserInfo()
+
 }, [])
 
 
@@ -310,7 +380,7 @@ const Dashboard = () => {
         })
 
         const data = await res.json()
-        console.log(data.products);
+        // console.log(data.products);
         if (data.status === 'verify') {
             return data.products;
         } else if (data.status === 'Error') {
@@ -348,7 +418,7 @@ const Dashboard = () => {
     if (loading) {
         return (<h1>Loading</h1>)
     } else {
-        console.log(user.reservation)
+        // console.log(user.reservation)
           return (
         <div>
             {basicInfoFilled ? (<ModalEdit showModal={showModal} setShowModal={setShowModal} user={user}/>): (<Modal showModal={showModal} setShowModal={setShowModal}/>) }
@@ -416,7 +486,7 @@ const Dashboard = () => {
             </div>
 
             <div className="row">
-                      {loading ? ('Loading'): (<Reservation products={user} loading={ loading }/>) }
+                      {loading ? ('Loading') : (<Reservation products={user} loading={loading} tableWidth={width}/>) }
                   <div className="col-sm-12 col-md-6 mb-4" style={customWidth}>
                     <div className="card mb-3" style={customCardProducts}>
                         <div className="row g-0 p-5 flex-column">
@@ -439,10 +509,10 @@ const Dashboard = () => {
                 <div className="col-md-12">
                     <div className="card" style={customCardProducts}>
                         <h5 className="card-header" style={customCardHeader}>
-                            Lista produktów
+                                  Lista produktów
                         </h5>
                         <div className="card-body">
-                            <Table products={products} customLink={ customLink}/>
+                            <Table products={products} customLink={ customLink}  tableWidth={width}/>
                         </div>
                     </div>
                 </div>

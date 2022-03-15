@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
 router.route('/list').get((req, res) => {
-
-    console.log('test /list only')
      userModel.find()
         .then(user => {
             return res.json(user)
@@ -19,20 +17,17 @@ router.route('/list/:id').get((req, res) => {
 
     try {
         const id = req.params.id;
-        //console.log('list/' + id)
         const userInfo = { id: '', name: '', email: '', phoneNumber: '', description: '', products: [], workSchedule: {}}
         userModel.find({ "products._id": id }, function (err, result) {
             if (err) {
                 console.log(err)
             }
-            console.log(result[0])
             userInfo.name = result[0].name
             userInfo.email = result[0].email
             userInfo.phoneNumber = result[0].phoneNumber
             userInfo.products = result[0].products
             userInfo.id = result[0]._id
             if (result[0].description === undefined) {
-                //console.log('result of product (basic userInfo) id: ', res, res[0].name, userInfo)    
                 return res.json({status: 200, user: userInfo})
 
             } else {
@@ -41,11 +36,7 @@ router.route('/list/:id').get((req, res) => {
                 return res.json({ status: 200, user: userInfo })
             }
         })
-        // console.log(userInfo)
-        // console.log(test)
-        //const user = await userModel.findOne({ email: email });
-      //  console.log(email, user)
-        //return res.json({status: 200, user: user})
+   
     }catch(err){
         return res.status(400).json('Error: ' + err)
     }
@@ -58,30 +49,10 @@ router.route('/list/:id').post(async (req, res) => {
     try {
         const decoded = jwt.verify(token, 'secret123')
         const id = req.params.id;
-        console.log('list/' + id + '/reservation');
-        // console.log(req.body, decoded.email)
-        // userModel.find({ "products._id": id }, function (err, result) {
-        //     console.log(result[0])
-        // })
-        console.log(decoded.email, req.body)
-        // userModel.findOne({"products._id": id}, function(err, result) {
-        //     console.log(result.email)
-        //     if (result.email == decoded.email) {
-        //         result.save()
-        //             .then(() => res.status(409).json({message: 'Reservation error!'}))
-        //     }
-        // })
-    
-        // console.log(checkUser)
-        // console.log(authError)
-        // if (authError) {
-        //     return res.status(409).json({ message: 'Nie można rezerwować swoich produktów!' })
-        // } 
-        console.log(req.body.productBasicInfo.name)
+
         const reservation = {
             reservation: [{ productId: id, reservationDate: req.body.reservationDate, expiryDate: req.body.expiryDate, productBasicInfo: { name: req.body.productBasicInfo.name, price: req.body.productBasicInfo.price, img: req.body.productBasicInfo.img } }]
         }
-        console.log(reservation.productBasicInfo)
         await userModel.updateOne(
             { email: decoded.email },
             { $push: reservation }
@@ -141,7 +112,6 @@ router.route('/login').post(async (req, res) => {
     const user = await userModel.findOne({
       email: req.body.email
     })
-    //console.log(user.email)
     if (!user) {
         return res.json({status: 'error', error: 'Nie znaleziono użytkownika o takim emailu'})
     }
@@ -187,11 +157,9 @@ router.route('/dashboard').post([
 
         const decoded = jwt.verify(token, 'secret123');
         const email = decoded.email;
-        console.log(req.body) 
         const description =  req.body.desc;
         const workSchedule = req.body.workSchedule;
         const region = req.body.region
-        // console.log(workSchedule)
         await userModel.findOneAndUpdate(
 			{ email: email },
 			{ description: description, workSchedule: workSchedule, region: region }
@@ -206,10 +174,7 @@ router.route('/dashboard').post([
 router.route('/dashboard/remove-item').post(async (req, res) => {
     const token = req.headers['x-access-token'];
     try {
-        // console.log(req.body, token);
         const decoded = jwt.verify(token, 'secret123');
-
-        console.log(decoded.email)
         await userModel.updateOne(
 			{ email: decoded.email },
             { $pull: { reservation: req.body.product } }
@@ -285,12 +250,8 @@ router.route('/dashboard/edit/:id').get(async (req, res) => {
         const decoded = jwt.verify(token, 'secret123');
         const email = decoded.email;
         const id = req.params.id;
-        // const user = userModel.find({ 'products._id' : req.params.id }, 'products', function (err, product){
-        //     if(err) console.log(err)
-        //    return res.json({item: product[0].products[0]});
-        // })
             
-        const user = userModel.findOne({email: email}, function(err, userFind){
+        userModel.findOne({email: email}, function(err, userFind){
         if(err) console.log('error message', err);
                    userFind.products.filter((product) => {
                        if(product.id == id){
@@ -298,21 +259,6 @@ router.route('/dashboard/edit/:id').get(async (req, res) => {
                        }
                    })
         });
-
-            // if(err) console.log('error message', err);
-            // userFind.products.filter((product) => {
-            //     if(product.id == id){
-            //         console.log(product)
-            //     }
-            // })
-       
-
-        //return res.json({user: user})
-        // console.log(user);
-
-        //console.log(req.params.id, user);
-        // const product = userModel.where('products._id').equals(req.params.id);
-        // console.log(product)
       
     }catch(err){
         console.log(err);
@@ -328,15 +274,12 @@ router.route('/dashboard/edit/:id').post(async (req, res) => {
         const email = decoded.email;
 
         const id = req.body.productId;
-        console.log('id', id)
-        console.log(req.body);
         const productName = req.body.name;
         const newDate = req.body.newDate;
         const productPrice = req.body.price;
         const productDesc = req.body.desc;
         const productImg = req.body.img;
 
-        console.log(productName, productPrice, productDesc, productImg)
         userModel.findOne({email: email})
             .then(item => {
                // console.log(item)
@@ -356,27 +299,6 @@ router.route('/dashboard/edit/:id').post(async (req, res) => {
                 
             })
             .catch(err => console.log(err))
-        // const newProduct = {
-        //     products: [{name: productName, date: dateAdd, price: productPrice, desc: productDesc, img: productImg}]
-        // }
-        // userModel.findOneAnd({email: email}, function(err, userFind){
-        //     if(err) console.log('error message', err);
-        //                userFind.products.filter((product) => {
-        //                    if(product.id == id){
-        //                        product.name = productName;
-        //                        product.price = productPrice;
-        //                        product.date = newDate;
-        //                        product.desc = productDesc;
-        //                        product.img = productImg;
-                               
-
-                               
-        //                        product.updateOne()
-        //                             .then(() => res.json({updatedProduct: product}))
-        //                             .catch((err) => res.status(400).json('Error' + err))
-        //                    }
-        //                })
-        //     });
 
     } catch (err) {
         console.log(err)
@@ -400,13 +322,13 @@ router.route('/dashboard/delete/:id').delete(async (req, res) => {
 			{ email: email },
 			{ $pull: newProduct }
 		)
-        // console.log(req.body.product)
         return res.json({status: 200, product: id})
     }
     catch (err) {
         console.log(err)
     }
 })
+
 
 router.route('/user/:id').get(async (req,res) => {
     

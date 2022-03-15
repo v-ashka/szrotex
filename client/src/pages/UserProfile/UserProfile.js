@@ -22,7 +22,7 @@ const SellerProducts = ({ user }) => {
         })
 
 
-        console.log(otherProducts.length)
+        // console.log(otherProducts.length)
     return(
         <>
         {otherProducts.length >= 1 ? (<h3 className={'p-3 '+ styles.customHeader}>Produkty sprzedającego: </h3>) : (<div>Sprzedający nie dodał jeszcze żadnego produktu!</div>) }

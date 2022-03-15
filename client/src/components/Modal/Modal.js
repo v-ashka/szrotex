@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdClose} from 'react-icons/md'
 import styles from './styles.module.css';
@@ -25,21 +25,6 @@ export const Modal = ({ showModal, setShowModal}) => {
     const [errorFeed, setError] = useState('');
     
 
-    // useEffect(() => {
-    //     const handleOldValues = (user) =>{
-    //         if(validate){
-    //             setDesc(user.description);
-    //         setRegion({voivodeship: user.region.voivodeship, street: user.region.street, zip: user.region.zip, city: user.region.city})
-    //         setWorkSchedule({Monday: {Start: user.workSchedule.Monday.Start, End: user.workSchedule.Monday.End, FreeDay: user.workSchedule.Monday.FreeDay}, Tuesday: {Start: user.workSchedule.Tuesday.Start, End: user.workSchedule.Tuesday.End, FreeDay: user.workSchedule.Tuesday.FreeDay}, Wednesday: {Start: user.workSchedule.Wednesday.Start, End: user.workSchedule.Wednesday.End, FreeDay: user.workSchedule.Wednesday.FreeDay}, Thursday: {Start: user.workSchedule.Thursday.Start, End: user.workSchedule.Thursday.End, FreeDay: user.workSchedule.Thursday.FreeDay}, Friday: {Start: user.workSchedule.Friday.Start, End: user.workSchedule.Friday.End, FreeDay: user.workSchedule.Friday.FreeDay}, Saturday: {Start: user.workSchedule.Saturday.Start, End: user.workSchedule.Saturday.End, FreeDay: user.workSchedule.Saturday.FreeDay }, Sunday: {Start: user.workSchedule.Sunday.Start, End: user.workSchedule.Sunday.End, FreeDay: user.workSchedule.Sunday.FreeDay}});
-    //         console.log('validated', desc)
-    //         }
-    //     }
-    //     handleOldValues(user)
-    // }, [])
-
-
-    // console.log(user, desc)
-
     const handleOnCheck = (e) => {
         const { name } = e.target
         // console.log(disableInput)
@@ -50,91 +35,7 @@ export const Modal = ({ showModal, setShowModal}) => {
             [name]: {Start: workSchedule[name].Start, End: workSchedule[name].End, FreeDay: !workSchedule[name].FreeDay}
         }))
         inputs.map(input => {
-            input.disabled = !input.disabled
-        })
-    }
-
-    const handleScheduleStartChange = e => {
-
-        console.log(e.target.value, workSchedule.Monday.Start)
-        const {name, value} = e.target
-        setWorkSchedule(workSchedule => ({
-            ...workSchedule,
-            [name]: {Start: value, End: workSchedule[name].End, FreeDay: workSchedule[name].FreeDay},
-        }))
-    }
-
-    const handleScheduleEndChange = e => {
-        const { name, value } = e.target;
-        setWorkSchedule(state => ({
-            ...state,
-            [name]: {Start: workSchedule[name].Start, End: value,  FreeDay: workSchedule[name].FreeDay},
-        }));
-    }
-
-    const handleRegionChange = e => {
-        const {name ,value} = e.target
-        console.log(region)
-        setRegion(state => ({
-            ...state,
-            [name]: value
-        }))
-    }
-    console.log(region)
-    const addUserInfo = async (e) => {
-        e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-access-token': localStorage.getItem('token'),
-            },
-            body: JSON.stringify({
-                desc,
-                workSchedule,
-                region
-            })
-        })
-        const data = await res.json()
-        console.log('test', data);
-        if (data.status == 200) {
-            setError('');
-            window.location.href = '/dashboard';
-        } else if (data.errors) {
-            console.log(data.errors[0].msg);
-            setError(data.errors[0].msg)
-        }
-    }
-
-    console.log(workSchedule)
-
-    return (
-        <>
-            <ModalContent showModal={showModal} setShowModal={setShowModal} desc={desc} setDesc={setDesc} region={region} workSchedule={workSchedule} errorFeed={errorFeed} addUserInfo={addUserInfo} handleRegionChange={handleRegionChange} handleScheduleEndChange={handleScheduleEndChange} handleScheduleStartChange={handleScheduleStartChange} handleOnCheck={handleOnCheck} />
-        </>
-    );
-}
-
-
-
-export const ModalEdit = ({ showModal, setShowModal, user}) => {
-    
-    const [desc, setDesc] = useState(user.description);
-    const [region, setRegion] = useState({voivodeship: user.region.voivodeship, street: user.region.street, zip: user.region.zip, city: user.region.city})
-    const [workSchedule, setWorkSchedule] = useState({Monday: {Start: user.workSchedule.Monday.Start, End: user.workSchedule.Monday.End, FreeDay: user.workSchedule.Monday.FreeDay}, Tuesday: {Start: user.workSchedule.Tuesday.Start, End: user.workSchedule.Tuesday.End, FreeDay: user.workSchedule.Tuesday.FreeDay}, Wednesday: {Start: user.workSchedule.Wednesday.Start, End: user.workSchedule.Wednesday.End, FreeDay: user.workSchedule.Wednesday.FreeDay}, Thursday: {Start: user.workSchedule.Thursday.Start, End: user.workSchedule.Thursday.End, FreeDay: user.workSchedule.Thursday.FreeDay}, Friday: {Start: user.workSchedule.Friday.Start, End: user.workSchedule.Friday.End, FreeDay: user.workSchedule.Friday.FreeDay}, Saturday: {Start: user.workSchedule.Saturday.Start, End: user.workSchedule.Saturday.End, FreeDay: user.workSchedule.Saturday.FreeDay }, Sunday: {Start: user.workSchedule.Sunday.Start, End: user.workSchedule.Sunday.End, FreeDay: user.workSchedule.Sunday.FreeDay}});
-    const [errorFeed, setError] = useState('');
-
-    const handleOnCheck = (e) => {
-        const { name } = e.target
-        // console.log(disableInput)
-       // console.log(e.target.parentElement.childNodes)
-        const inputs = [e.target.parentElement.childNodes[1], e.target.parentElement.childNodes[2]]
-        setWorkSchedule(workSchedule => ({
-            ...workSchedule,
-            [name]: {Start: workSchedule[name].Start, End: workSchedule[name].End, FreeDay: !workSchedule[name].FreeDay}
-        }))
-        inputs.map(input => {
-            input.disabled = !input.disabled
+            return input.disabled = !input.disabled
         })
     }
 
@@ -181,7 +82,92 @@ export const ModalEdit = ({ showModal, setShowModal, user}) => {
         })
         const data = await res.json()
         console.log('test', data);
-        if (data.status == 200) {
+        if (data.status === '200') {
+            setError('');
+            window.location.href = '/dashboard';
+        } else if (data.errors) {
+            console.log(data.errors[0].msg);
+            setError(data.errors[0].msg)
+        }
+    }
+
+    // console.log(workSchedule)
+
+    return (
+        <>
+            <ModalContent showModal={showModal} setShowModal={setShowModal} desc={desc} setDesc={setDesc} region={region} workSchedule={workSchedule} errorFeed={errorFeed} addUserInfo={addUserInfo} handleRegionChange={handleRegionChange} handleScheduleEndChange={handleScheduleEndChange} handleScheduleStartChange={handleScheduleStartChange} handleOnCheck={handleOnCheck} />
+        </>
+    );
+}
+
+
+
+export const ModalEdit = ({ showModal, setShowModal, user}) => {
+    
+    const [desc, setDesc] = useState(user.description);
+    const [region, setRegion] = useState({voivodeship: user.region.voivodeship, street: user.region.street, zip: user.region.zip, city: user.region.city})
+    const [workSchedule, setWorkSchedule] = useState({Monday: {Start: user.workSchedule.Monday.Start, End: user.workSchedule.Monday.End, FreeDay: user.workSchedule.Monday.FreeDay}, Tuesday: {Start: user.workSchedule.Tuesday.Start, End: user.workSchedule.Tuesday.End, FreeDay: user.workSchedule.Tuesday.FreeDay}, Wednesday: {Start: user.workSchedule.Wednesday.Start, End: user.workSchedule.Wednesday.End, FreeDay: user.workSchedule.Wednesday.FreeDay}, Thursday: {Start: user.workSchedule.Thursday.Start, End: user.workSchedule.Thursday.End, FreeDay: user.workSchedule.Thursday.FreeDay}, Friday: {Start: user.workSchedule.Friday.Start, End: user.workSchedule.Friday.End, FreeDay: user.workSchedule.Friday.FreeDay}, Saturday: {Start: user.workSchedule.Saturday.Start, End: user.workSchedule.Saturday.End, FreeDay: user.workSchedule.Saturday.FreeDay }, Sunday: {Start: user.workSchedule.Sunday.Start, End: user.workSchedule.Sunday.End, FreeDay: user.workSchedule.Sunday.FreeDay}});
+    const [errorFeed, setError] = useState('');
+
+    console.log(workSchedule)
+    const handleOnCheck = (e) => {
+        const { name } = e.target
+        // console.log(disableInput)
+       // console.log(e.target.parentElement.childNodes)
+        const inputs = [e.target.parentElement.childNodes[1], e.target.parentElement.childNodes[2]]
+        setWorkSchedule(workSchedule => ({
+            ...workSchedule,
+            [name]: {Start: workSchedule[name].Start, End: workSchedule[name].End, FreeDay: !workSchedule[name].FreeDay}
+        }))
+        inputs.map(input => {
+            return input.disabled = !input.disabled
+        })
+    }
+
+    const handleScheduleStartChange = e => {
+
+        console.log(e.target.value, workSchedule.Monday.Start)
+        const {name, value} = e.target
+        setWorkSchedule(workSchedule => ({
+            ...workSchedule,
+            [name]: {Start: value, End: workSchedule[name].End, FreeDay: workSchedule[name].FreeDay},
+        }))
+    }
+
+    const handleScheduleEndChange = e => {
+        const { name, value } = e.target;
+        setWorkSchedule(state => ({
+            ...state,
+            [name]: {Start: workSchedule[name].Start, End: value,  FreeDay: workSchedule[name].FreeDay},
+        }));
+    }
+
+    const handleRegionChange = e => {
+        const {name ,value} = e.target
+        console.log(region)
+        setRegion(state => ({
+            ...state,
+            [name]: value
+        }))
+    }
+    // console.log(region)
+    const addUserInfo = async (e) => {
+        e.preventDefault();
+        const res = await fetch('http://localhost:3500/dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem('token'),
+            },
+            body: JSON.stringify({
+                desc,
+                workSchedule,
+                region
+            })
+        })
+        const data = await res.json()
+        console.log('test', data);
+        if (data.status === '200') {
             setError('');
             window.location.href = '/dashboard';
         } else if (data.errors) {
@@ -251,7 +237,9 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                         required
                                         placeholder='Godzina początku pracy'
                                         name='Monday'
-                                        onChange={handleScheduleStartChange}
+                                            onChange={handleScheduleStartChange}
+                                        disabled={workSchedule.Monday.FreeDay ? (true) : (false)}
+                                            
                                         />    
                                         <input
                                             type="time"
@@ -260,8 +248,11 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             placeholder='Godzina końca pracy'
                                             name='Monday'
                                             onChange={handleScheduleEndChange}
-                                    />
-                                    <input type="checkbox" name="Monday" value={workSchedule.Monday.FreeDay} onChange={handleOnCheck}/>
+                                            disabled={workSchedule.Monday.FreeDay ? (true) : (false)}
+
+                                        />                                                                        
+                                        <label>{workSchedule.Monday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>
+                                        <input type="checkbox" name="Monday" value={workSchedule.Monday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Monday.FreeDay ? (true):(false)} />
                                     </div>
                                     <div className={styles.form_group}>
                                         <label>Wtorek</label>
@@ -272,7 +263,7 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             placeholder='Godzina początku pracy'
                                             onChange={handleScheduleStartChange}
                                             name='Tuesday'
-
+                                            disabled={workSchedule.Tuesday.FreeDay ? (true) : (false)}
                                         />    
                                         <input
                                             type="time"
@@ -281,8 +272,11 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             placeholder='Godzina końca pracy'
                                             onChange={handleScheduleEndChange}
                                             name='Tuesday'
-                                    />    
-                                    <input type="checkbox" name="Tuesday" value={workSchedule.Tuesday.FreeDay} onChange={handleOnCheck}/>
+                                            disabled={workSchedule.Tuesday.FreeDay ? (true) : (false)}
+                                            
+                                        />    
+                                    <label>{workSchedule.Tuesday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>
+                                    <input type="checkbox" name="Tuesday" value={workSchedule.Tuesday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Tuesday.FreeDay ? (true) : (false)}/>
 
                                 </div>
                                  <div className={styles.form_group}>
@@ -293,7 +287,8 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina początku pracy'
                                         onChange={handleScheduleStartChange}
-                                        name='Wednesday'
+                                            name='Wednesday'
+                                            disabled={workSchedule.Wednesday.FreeDay ? (true) : (false)}
                                         />    
                                         <input
                                             type="time"
@@ -301,9 +296,11 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina końca pracy'
                                         onChange={handleScheduleEndChange}
-                                        name='Wednesday'
-                                    />   
-                                <input type="checkbox" name="Wednesday" value={workSchedule.Wednesday.FreeDay} onChange={handleOnCheck}/>
+                                            name='Wednesday'
+                                            disabled={workSchedule.Wednesday.FreeDay ? (true) : (false)}
+                                        />   
+                                <label>{workSchedule.Wednesday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>
+                                <input type="checkbox" name="Wednesday" value={workSchedule.Wednesday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Wednesday.FreeDay ? (true) : (false)}/>
                                 </div>
                                     <div className={styles.form_group}>
                                         <label>Czwartek</label>
@@ -313,7 +310,8 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina początku pracy'
                                         onChange={handleScheduleStartChange}
-                                        name="Thursday"
+                                            name="Thursday"
+                                            disabled={workSchedule.Thursday.FreeDay ? (true) : (false)}
                                         />    
                                         <input
                                             type="time"
@@ -321,9 +319,12 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina końca pracy'
                                         onChange={handleScheduleEndChange}
-                                        name="Thursday"
-                                    />    
-                                    <input type="checkbox" name="Thursday" value={workSchedule.Thursday.FreeDay} onChange={handleOnCheck}/>
+                                            name="Thursday"
+                                            disabled={workSchedule.Thursday.FreeDay ? (true) : (false)}
+
+                                        /> 
+                                    <label>{workSchedule.Thursday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>    
+                                    <input type="checkbox" name="Thursday" value={workSchedule.Thursday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Thursday.FreeDay ? (true) : (false)}/>
                                 </div>
                                    <div className={styles.form_group}>
                                         <label>Piątek</label>
@@ -333,7 +334,9 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina początku pracy'
                                         onChange={handleScheduleStartChange}
-                                        name="Friday"
+                                            name="Friday"
+                                            disabled={workSchedule.Friday.FreeDay ? (true) : (false)}
+
                                         />    
                                         <input
                                             type="time"
@@ -341,9 +344,12 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina końca pracy'
                                         onChange={handleScheduleEndChange}
-                                        name="Friday"
-                                    />    
-                                    <input type="checkbox" name="Friday" value={workSchedule.Friday.FreeDay} onChange={handleOnCheck}/>
+                                            name="Friday"
+                                            disabled={workSchedule.Friday.FreeDay ? (true) : (false)}
+
+                                        /> 
+                                        <label>{workSchedule.Friday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>
+                                    <input type="checkbox" name="Friday" value={workSchedule.Friday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Friday.FreeDay ? (true) : (false)}/>
                                 </div>
                                    <div className={styles.form_group}>
                                         <label>Sobota</label>
@@ -353,7 +359,9 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina początku pracy'
                                         onChange={handleScheduleStartChange}
-                                        name="Saturday"
+                                            name="Saturday"
+                                            disabled={workSchedule.Saturday.FreeDay ? (true) : (false)}
+
                                         />    
                                         <input
                                             type="time"
@@ -361,9 +369,12 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             required
                                             placeholder='Godzina końca pracy'
                                         onChange={handleScheduleEndChange}
-                                        name="Saturday"
-                                    />    
-                                    <input type="checkbox" name="Saturday" value={workSchedule.Saturday.FreeDay} onChange={handleOnCheck}/>
+                                            name="Saturday"
+                                            disabled={workSchedule.Saturday.FreeDay ? (true) : (false)}
+
+                                        />    
+                                        <label>{workSchedule.Saturday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>
+                                    <input type="checkbox" name="Saturday" value={workSchedule.Saturday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Saturday.FreeDay ? (true) : (false)}/>
                                 </div>
                                    <div className={styles.form_group}>
                                         <label>Niedziela</label>
@@ -374,16 +385,20 @@ const ModalContent = ({showModal, addUserInfo, handleOnCheck, handleScheduleEndC
                                             placeholder='Godzina początku pracy'
                                             onChange={handleScheduleStartChange}
                                             name="Sunday"
+                                            disabled={workSchedule.Sunday.FreeDay ? (true) : (false)}
+
                                         />    
                                         <input
                                             type="time"
                                             value={workSchedule.Sunday.End}
                                             required
                                             placeholder='Godzina końca pracy'
-                                        onChange={handleScheduleEndChange}
-                                        name="Sunday"
-                                    />    
-                                    <input type="checkbox" name="Sunday" value={workSchedule.Sunday.FreeDay} onChange={handleOnCheck}/>
+                                            onChange={handleScheduleEndChange}
+                                            name="Sunday"
+                                            disabled={workSchedule.Sunday.FreeDay ? (true) : (false)}
+                                        />   
+                                        <label>{workSchedule.Sunday.FreeDay ? ('Dzień wolny') : ('Dzień pracujący')}</label>    
+                                    <input type="checkbox" name="Sunday" value={workSchedule.Sunday.FreeDay} onChange={handleOnCheck} defaultChecked={workSchedule.Sunday.FreeDay ? (true) : (false)}/>
                                     </div>
                             </div>
                             <div className={styles.form_group}>

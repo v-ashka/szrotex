@@ -12,8 +12,9 @@
 }
 
 .modalWrapper {
-  width: 50%;
-  height: max-content;
+  width: 80%;
+  height: 90%;
+  overflow: scroll;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -38,9 +39,10 @@
 }
 
 .content form {
-  width: 100%;
+  width: 90%;
   display: flex;
-  flex-flow: column;
+  flex-flow: wrap;
+  color: rgba(0, 68, 68, 0.9);
 }
 
 .form_group {
@@ -73,7 +75,6 @@ textarea {
   column-gap: 20px;
 }
 .addProductForm label {
-  width: max-content;
   font-weight: bold;
 }
 
@@ -102,4 +103,25 @@ textarea {
 .formButton:hover {
   background-color: rgb(19 92 60 / 30%);
   color: rgba(22, 43, 43, 0.9);
+}
+
+.form_group:first-child {
+  flex-flow: column;
+}
+
+.form_group > label {
+  width: 100px;
+}
+
+.form_group input[type="time"] {
+  width: 80px;
+}
+
+.form_group:first-child textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.form_group:nth-of-type(2) {
+  justify-content: start !important;
 }

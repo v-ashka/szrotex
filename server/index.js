@@ -26,6 +26,7 @@ connection.once('open', () => {
 // Routes
 const userRouter = require('./routes/users');
 
+//imgUpload
 app.use('', userRouter);
 
 app.listen(port, () => {

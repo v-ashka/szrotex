@@ -190,14 +190,14 @@ const GlobalNavbar = ({value, onChange, onClick, onChangeVoivode, handleProductC
                     <HeaderContentImage style={{top:'-200px',left: '20px', zIndex: '0'}}>
                         <HeaderPattern style={{ left: '100%', top: '50px', transform: 'translateX(-100%)' }} />                        
                     </HeaderContentImage>
-                    <HeaderContentText className="animate__animated animate__bounceInDown">
+                    <HeaderContentText className={"animate__animated animate__bounceInDown " + styles.header__title}>
                         {checkLocalAdress()}
                     </HeaderContentText>
                     <HeaderContentImage>
                         <HeaderPattern/>                        
                     </HeaderContentImage>
                 </HeaderContent>
-                <SearchBar onSubmit={(e) => e.preventDefault()}>
+                <SearchBar onSubmit={(e) => e.preventDefault()} className={styles.search__form}>
                     <input className={styles.customInput} type="text" value={value} onChange={onChange} onClick={() => { onClick(); navigate('list') }} placeholder="Wprowadź nazwę produktu.."></input>
                      <select name='category' style={optionForm} onChange={handleProductCategory}>
                         <option value="">Wybierz kategorię</option>

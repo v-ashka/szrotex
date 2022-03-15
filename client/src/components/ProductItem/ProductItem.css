@@ -14,8 +14,8 @@
   transform: rotateZ(180deg);
 }
 
-.img-reservation::after{
-  content:"ZAREZERWOWANE";
+.img-reservation::after {
+  content: "ZAREZERWOWANE";
   font-size: 40px;
   font-weight: bold;
   background-color: rgba(114, 114, 114, 0.384);
@@ -28,4 +28,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media only screen and (max-width: 800px) {
+  .img-reservation::after {
+    font-size: 30px;
+  }
 }

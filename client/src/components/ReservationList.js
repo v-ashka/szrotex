@@ -23,7 +23,7 @@ const customBtn = {
 
 
 
-const ReservationList = ({ products }) => {
+const ReservationList = ({ products, tableWidth }) => {
     // console.log('loading?', loading, products, products == undefined)
     const cancelReservation = async (e, product) => {
         // console.log('cancel reservation, prodId: ', productId, reservationId, product)
@@ -51,6 +51,44 @@ const ReservationList = ({ products }) => {
     if (products.length === 0) {
         return <></>
     } else {
+        if (tableWidth < 800) { 
+            return (
+            <>
+                    {products.reservation.map(product => {
+                        return (
+                            <tbody key={product._id} style={{ borderTop: '50px solid rgb(229, 240, 241)' }}>
+                                <tr>
+                                    <th scope="col">Nazwa produktu</th>
+                                    <td>{product.productBasicInfo.name}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Cena</th>
+                                    <td>{product.productBasicInfo.price} zł</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Zdjęcie</th>
+                                    <td><img onError={handleImageError} width="50px" height="50px" src={product.productBasicInfo.img.length > 0 ? (product.productBasicInfo.img) : ("/img/no-img.png")} alt={product.productBasicInfo.name} /></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Zarezerwowano dnia</th>
+                                    <td>{new Date(product.reservationDate).toLocaleDateString()}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Data końca rezerwacji</th>
+                                    <td>{new Date(product.expiryDate).toLocaleDateString()}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Opcja</th>
+                                    <td><button style={customBtn} name={product._id} onClick={(e) => cancelReservation(e, product)}><img src={reservationIco} /></button></td>
+                                </tr>
+                            </tbody>
+                        )
+                    })}
+            </>
+            )
+        }
+
+
         return (
             <>
                 {products.reservation.map(product => {
@@ -71,11 +109,11 @@ const ReservationList = ({ products }) => {
     
 }
 
-const Reservation = ({ products, loading }) => {
+const Reservation = ({ products, loading, tableWidth }) => {
     if (products === undefined) {
         return <>Still loading...</>
     }
-    console.log('prod:',products.reservation == undefined)
+    // console.log('prod:',products.reservation == undefined)
     return (
          <div className="col-md-12 mb-4">
                     <div className="card" style={customCardProducts}>
@@ -83,8 +121,9 @@ const Reservation = ({ products, loading }) => {
                             Lista zarezerwowanych produktów
                         </h5>
                         <div className="card-body">
-                             <table className={`table ${styles.tableColor}`}>
-                                <thead>
+                        <table className={`table ${styles.tableColor}`}>
+                        {tableWidth < 800 ? (<ReservationList products={products} loading={loading} tableWidth={tableWidth} />):(<>
+                        <thead>
                                   <tr>
                                     <th scope="col">Nazwa produktu</th>
                                     <th scope="col">Cena</th>
@@ -95,8 +134,10 @@ const Reservation = ({ products, loading }) => {
                                 </tr>
                                 </thead>
                                     <tbody>
-                                        <ReservationList products={products} loading={loading}/>
+                                <ReservationList products={products} loading={loading}/>
                                     </tbody>
+                                    </>) }
+                                
                             </table>
                         </div>
                     </div>

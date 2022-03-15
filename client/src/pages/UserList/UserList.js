@@ -82,7 +82,7 @@ const App = ({value, isClicked, checkedVoivode, category}) => {
     if(value.length > 0){
         isValue = true;
     }
-    console.log(value, checkedVoivode, category);
+    // console.log(value, checkedVoivode, category);
     useEffect(() => {
         const getList = async () => {
             setLoading(true);

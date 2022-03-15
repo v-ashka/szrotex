@@ -214,3 +214,32 @@
   height: 150px;
   max-width: 100%;
 }
+/* dashboard */
+@media only screen and (max-width: 800px) {
+  .addProductForm div {
+    flex-direction: column;
+    align-items: baseline;
+  }
+
+  .addProductForm div select {
+    width: 100% !important;
+  }
+
+  .header__title {
+    width: 58% !important;
+  }
+
+  .search__form {
+    flex-flow: column;
+    height: 250px !important;
+    gap: 5px;
+  }
+
+  .search__form * {
+    width: 80% !important;
+  }
+
+  .search__form select {
+    padding: 0.4em;
+  }
+}
