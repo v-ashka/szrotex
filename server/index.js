@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const path = require('path');
 
 // DB Mongo
 const mongoose = require('mongoose');
@@ -26,8 +27,17 @@ connection.once('open', () => {
 // Routes
 const userRouter = require('./routes/users');
 
-//imgUpload
 app.use('', userRouter);
+//Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    //Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
 
 app.listen(port, () => {
     console.log(`Server start running at port: ${port}`);

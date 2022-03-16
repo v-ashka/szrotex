@@ -195,6 +195,18 @@ const AddProduct = () => {
         setProductCategory(e.target.value)
     }
 
+    const handleTagsChange = (e) => {
+        setProductTags(e.target.value.split(','));
+        // if (setProductTags.includes(',')) { 
+        //     setProductTags(e.target.value.);
+        //     console.log(productTags)
+        // }
+        console.log(productTags)
+        if (productTags.length > 1) {
+            productTags.map(tag => console.log(tag))
+        }
+    }
+
     const addProduct = async (e) => {
         e.preventDefault();
         const res = await fetch('http://localhost:3500/dashboard/add', {
@@ -268,8 +280,9 @@ const AddProduct = () => {
                     type="text"
                     placeholder="Wprowadź tagi do łatwiejszego znalezienia produktu"
                     value={productTags}
-                    onChange={e => setProductTags(e.target.value)}
+                    onChange={handleTagsChange}
                 />
+                <div className={styles.productTag}>{productTags.length > 1 ? (<>{ productTags.map(item => <span>{item}</span>)}</>):('')}</div>
             </div>
             <div className="form-group">
                 <label>Kategoria</label>

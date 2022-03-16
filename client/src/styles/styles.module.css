@@ -214,6 +214,17 @@
   height: 150px;
   max-width: 100%;
 }
+
+.productTag span {
+  border-radius: 20px;
+  background-color: rgb(19 92 60 / 14%);
+  padding: 0.5em;
+}
+
+.productTag {
+  gap: 10px !important;
+}
+
 /* dashboard */
 @media only screen and (max-width: 800px) {
   .addProductForm div {
