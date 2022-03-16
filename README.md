@@ -6,7 +6,7 @@ This project was created in React (as frontend) and Node.js with Express (as bac
 
 Tested version npm: 6.14.15
 
-## In /client and /server directory:
+### In `/client` and `/server` directory:
 
 ### `npm install` it's necessary, to start project properly
 
