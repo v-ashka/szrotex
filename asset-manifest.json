@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/szrotex/static/css/main.f0c1acbb.css",
+    "main.js": "/szrotex/static/js/main.f3e8b5e4.js",
+    "static/media/logo.svg": "/szrotex/static/media/logo.24a8026647756b006e2b47ae9816bdb1.svg",
+    "static/media/edit.svg": "/szrotex/static/media/edit.c1de1a534fb362c5b13ed2a077a0c7c2.svg",
+    "static/media/bug.svg": "/szrotex/static/media/bug.8d6e2cb7e6482d80f7c18fca205a6c96.svg",
+    "static/media/face.svg": "/szrotex/static/media/face.60a044b4f1c0f1926c92bff49c8311b3.svg",
+    "index.html": "/szrotex/index.html",
+    "static/media/repair.svg": "/szrotex/static/media/repair.c01bc2bfc46542c3da3875bfb9f21df1.svg",
+    "static/media/money.svg": "/szrotex/static/media/money.ea7e41a42e67a98ea0ee79197ee3e8e1.svg",
+    "static/media/schedule.svg": "/szrotex/static/media/schedule.fcd4be85136a47539a603ab50a989014.svg",
+    "static/media/remove_reservation.svg": "/szrotex/static/media/remove_reservation.5691a8e08f7abc2b11b20bfffccbb6c5.svg",
+    "static/media/expand_arr.svg": "/szrotex/static/media/expand_arr.20be1578b52336c89726673391c6cecd.svg",
+    "static/media/warning.svg": "/szrotex/static/media/warning.3b42a993f6946347f42648e7a3e00c28.svg",
+    "main.f0c1acbb.css.map": "/szrotex/static/css/main.f0c1acbb.css.map",
+    "main.f3e8b5e4.js.map": "/szrotex/static/js/main.f3e8b5e4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0c1acbb.css",
+    "static/js/main.f3e8b5e4.js"
+  ]
+}
