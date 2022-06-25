@@ -10,7 +10,7 @@ After that, in `/server` directory, you should create a .env file, and add speci
 Finally in `/server` dir, run project by `npm run dev` (for developer puropse)
 
 
-#Main page
+# Main page
 ![image](https://user-images.githubusercontent.com/47278535/175505340-00c475d6-f21d-4daf-9f23-8d03326aac84.png)
 
 # Products list
