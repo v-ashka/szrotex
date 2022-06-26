@@ -26,10 +26,11 @@ connection.once('open', () => {
 })
 
 // Routes
+console.log('before user router');
 const userRouter = require('./routes/users');
 
 app.use('', userRouter);
-
+console.log('after user router');
 // deploy
 
 __dirname = path.resolve();
