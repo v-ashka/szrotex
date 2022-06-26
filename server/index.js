@@ -39,6 +39,7 @@ __dirname = path.resolve();
 // __dirname = "";
 // newArr.map((item) => __dirname+=item+'\\');
 
+console.log(__dirname);
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname, "/frontend/build")));
 
