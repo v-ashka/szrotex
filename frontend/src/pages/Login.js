@@ -10,6 +10,7 @@ function App() {
     const [pass, setPass] = useState('');
     const [errorFeed, setError] = useState('');
     async function loginUser(e) {
+        let location = useLocation();
         e.preventDefault();
 
         const response = await fetch('http://localhost:3500/login', {
@@ -29,7 +30,7 @@ function App() {
         if (data.user) {
             setError('');
             localStorage.setItem('token', data.user);
-            window.location.href = '/dashboard';
+            window.location.href = '/';
         } else {
             setError(data.error);
         }
