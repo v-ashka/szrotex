@@ -8,8 +8,8 @@ router.route('/list').get((req, res) => {
     console.log('list');
      userModel.find()
         .then(user => {
-            // console.log(user)
-            return res.json(user)
+            console.log(user)
+            // return res.json(user)
         })
         .catch(err => res.status(400).json(`Error: ${err}`));
 })
