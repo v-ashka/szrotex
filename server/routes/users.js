@@ -132,7 +132,7 @@ router.route('/login').post(async (req, res) => {
 
 router.route('/dashboard').get( async (req, res) => {
     const token = req.headers['x-access-token']
-
+    console.log(req.headers);
     try {
         const decoded = jwt.verify(token, 'secret123')
         const email = decoded.email;
