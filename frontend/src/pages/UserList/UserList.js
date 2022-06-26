@@ -98,7 +98,7 @@ const App = ({value, isClicked, checkedVoivode, category}) => {
     // console.log(list)
     //Fetch List
     const fetchList = async () => {
-        const res = await fetch('http://localhost:3500/list')
+        const res = await fetch('http://localhost:3500/lists')
         const data = await res.json()
         //  console.log(data);
         const productList= [];
