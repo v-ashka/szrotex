@@ -21,7 +21,7 @@ mongoose.connect(uri, { useNewUrlParser: true }).catch((err) => {
 // Connect to the database
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log('Pomyślnie połączono z bazą danych MongoDB')
+    console.log('Pomyślnie połączono z bazą danych MongoDB!')
 })
 
 // Routes
@@ -42,7 +42,7 @@ if(process.env.NODE_ENV === 'production'){
 
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-        // console.log(__dirname);
+        console.log(__dirname);
     }
     );
 }
