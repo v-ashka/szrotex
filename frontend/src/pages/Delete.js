@@ -52,7 +52,7 @@ function Delete() {
     const { id } = useParams()
 
     const getProductName = async () => {
-        const res = await fetch('http://localhost:3500/dashboard/edit/' + id, {
+        const res = await fetch('http://localhost:3500/dashboard_panel/edit/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function Delete() {
 
     const deleteProduct = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard/delete/' + id, {
+        const res = await fetch('http://localhost:3500/dashboard_panel/delete/' + id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

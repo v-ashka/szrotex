@@ -22,7 +22,7 @@ function Edit() {
     const { id } = useParams()
 
     const editProduct = async () => {
-        const res = await fetch('http://localhost:3500/dashboard/edit/' + id, {
+        const res = await fetch('http://localhost:3500/dashboard_panel/edit/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function Edit() {
 
     const updateProduct = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard/edit/' + id, {
+        const res = await fetch('http://localhost:3500/dashboard_panel/edit/' + id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

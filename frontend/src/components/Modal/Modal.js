@@ -68,7 +68,7 @@ export const Modal = ({ showModal, setShowModal}) => {
     // console.log(region)
     const addUserInfo = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard', {
+        const res = await fetch('http://localhost:3500/dashboard_panel', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ export const ModalEdit = ({ showModal, setShowModal, user}) => {
     // console.log(region)
     const addUserInfo = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard', {
+        const res = await fetch('http://localhost:3500/dashboard_panel', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

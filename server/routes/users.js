@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
-router.route('/list').get((req, res) => {
+router.route('/lists').get((req, res) => {
     console.log('list');
      userModel.find()
         .then(user => {
@@ -15,7 +15,7 @@ router.route('/list').get((req, res) => {
 })
 
 
-router.route('/list/:id').get((req, res) => {
+router.route('/lists/:id').get((req, res) => {
 
     try {
         const id = req.params.id;
@@ -46,7 +46,7 @@ router.route('/list/:id').get((req, res) => {
     
 })
 
-router.route('/list/:id').post(async (req, res) => {
+router.route('/lists/:id').post(async (req, res) => {
     const token = req.headers['x-access-token']
     try {
         const decoded = jwt.verify(token, 'secret123')
@@ -84,7 +84,7 @@ router.route('/list/:id').post(async (req, res) => {
 
 
 
-router.route('/register').post([
+router.route('/register_user').post([
     check('name').trim().isLength({ min: 1, max: 25 }).withMessage('Nazwa firmy nie moze byc krotsza niz 1 znak i dluzsza niz 30 znaków').bail(),
     check('pass').trim().isLength({min: 8}).withMessage("Hasło musi składać się z minimum 8 znaków!").bail(),
     check('tel').isNumeric().withMessage('Numer telefonu musi skladac sie tylko z liczb!').isLength(9).withMessage('Numer telefonu ma sie skladac z 9 bez prefiksu!').bail()
@@ -110,7 +110,7 @@ router.route('/register').post([
         res.json({ status: 'Error', error: 'Internal Server Error' })    }
 })
 
-router.route('/login').post(async (req, res) => {
+router.route('/login_user').post(async (req, res) => {
     const user = await userModel.findOne({
       email: req.body.email
     })
@@ -130,7 +130,7 @@ router.route('/login').post(async (req, res) => {
     }
 })
 
-router.route('/dashboard').get( async (req, res) => {
+router.route('/dashboard_panel').get( async (req, res) => {
     const token = req.headers['x-access-token']
     console.log(req.headers);
     try {
@@ -145,7 +145,7 @@ router.route('/dashboard').get( async (req, res) => {
     }
 })
 
-router.route('/dashboard').post([
+router.route('/dashboard_panel').post([
     check('desc').trim().isLength({ min: 5 }).withMessage('Opis nie moze byc krotszy niz 5 znakow').bail()
     ], async (req, res) => {
     const token = req.headers['x-access-token'];
@@ -173,7 +173,7 @@ router.route('/dashboard').post([
     }
 })
 
-router.route('/dashboard/remove-item').post(async (req, res) => {
+router.route('/dashboard_panel/remove-item').post(async (req, res) => {
     const token = req.headers['x-access-token'];
     try {
         const decoded = jwt.verify(token, 'secret123');
@@ -205,7 +205,7 @@ router.route('/dashboard/remove-item').post(async (req, res) => {
 })
 
 
-router.route('/dashboard/add').post([
+router.route('/dashboard_panel/add').post([
     check('productName').trim().isLength({ min: 3 }).withMessage('Nazwa produktu nie moze byc krotsza niz 3 znaki!').bail(),
     check('productPrice').trim().isNumeric().withMessage('Wprowadzono błędną cenę!').isLength({min: 1}).withMessage("Nie podano ceny!").bail(),
     ], async (req, res) => {
@@ -246,7 +246,7 @@ router.route('/dashboard/add').post([
     }
 })
 
-router.route('/dashboard/edit/:id').get(async (req, res) => {
+router.route('/dashboard_panel/edit/:id').get(async (req, res) => {
     const token = req.headers['x-access-token']
     try{
         const decoded = jwt.verify(token, 'secret123');
@@ -268,7 +268,7 @@ router.route('/dashboard/edit/:id').get(async (req, res) => {
     }
 })
 
-router.route('/dashboard/edit/:id').post(async (req, res) => {
+router.route('/dashboard_panel/edit/:id').post(async (req, res) => {
     const token = req.headers['x-access-token'];
 
     try { 
@@ -308,7 +308,7 @@ router.route('/dashboard/edit/:id').post(async (req, res) => {
     }
 })
 
-router.route('/dashboard/delete/:id').delete(async (req, res) => {
+router.route('/dashboard_panel/delete/:id').delete(async (req, res) => {
     const token = req.headers['x-access-token'];
 
     try {

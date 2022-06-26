@@ -12,7 +12,7 @@ function App() {
     async function loginUser(e) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:3500/login', {
+        const response = await fetch('http://localhost:3500/login_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
