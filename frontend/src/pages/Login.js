@@ -10,7 +10,6 @@ function App() {
     const [pass, setPass] = useState('');
     const [errorFeed, setError] = useState('');
     async function loginUser(e) {
-        let location = useLocation();
         e.preventDefault();
 
         const response = await fetch('http://localhost:3500/login', {
