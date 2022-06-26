@@ -21,7 +21,8 @@ mongoose.connect(uri, { useNewUrlParser: true }).catch((err) => {
 // Connect to the database
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log('Pomyślnie połączono z bazą danych MongoDB!')
+    console.log('Pomyślnie połączono z bazą danych MongoDB!');
+    console.log(mongoose.modelNames())
 })
 
 // Routes
