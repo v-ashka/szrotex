@@ -29,6 +29,24 @@ const userRouter = require('./routes/users');
 
 app.use('', userRouter);
 
+// deploy
+
+__dirname = path.resolve();
+// test = path.resolve().split('\\');
+// newArr = test.slice(0,-1);
+// __dirname = "";
+// newArr.map((item) => __dirname+=item+'\\');
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+        // console.log(__dirname);
+    }
+    );
+}
+
 
 app.listen(port, () => {
     console.log(`Server start running at port: ${port}`);

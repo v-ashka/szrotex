@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 // import Navbar from './pages/Navbar'
 import Login from './pages/Login'

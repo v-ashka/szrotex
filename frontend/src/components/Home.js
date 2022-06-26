@@ -4,7 +4,8 @@ import bugico from '../pages/img/bug.svg'
 import editico from '../pages/img/edit.svg'
 import moneyico from '../pages/img/money.svg'
 import faceico from '../pages/img/face.svg'
-
+import helpico from '../pages/img/public_img/help.svg';
+import arrow from '../pages/img/public_img/north-east-arr.svg';
 const customCard = {
     minHeight: '330px',
     maxWidth: '540px',
@@ -42,13 +43,13 @@ function App() {
                             <div className="card mb-3" style={customCard}>
                                 <div className="row g-0 p-5">
                                     <div className="col-md-4 d-flex justify-content-center align-items-center">
-                                    <img src="img/help.svg" className="img-fluid rounded-start" style={customImg} alt="..." />
+                                    <img src={helpico} className="img-fluid rounded-start" style={customImg} alt="..." />
                                     </div>
                                     <div className="col-md-8">
                                     <div className="card-body" style={customCardBody}>
                                         <h5 className="card-title">Brakująca część?</h5>
                                         <p className="card-text">Znajdź swój i porównaj go z innymi centrami demontażu pojazdów.</p>
-                                        <p className="card-text d-flex"><Link to={"/list"} style={customLink}>Zobacz listę produktów </Link><img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
+                                        <p className="card-text d-flex"><Link to={"/list"} style={customLink}>Zobacz listę produktów </Link><img src={arrow} className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                                     </div>
                                     </div>
                                 </div>
@@ -95,7 +96,7 @@ function App() {
                                     <div className="card-body" style={customCardBody}>
                                         <h5 className="card-title">Pomyłka w dodawaniu produktu?</h5>
                                         <p className="card-text">Pamiętaj że każdy produkt możesz zmodyfikować w dowolnej chwili!</p>
-                                        <p className="card-text d-flex"><Link to={"/dashboard"} style={customLink}>Przejdź do panelu </Link><img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
+                                        <p className="card-text d-flex"><Link to={"/dashboard"} style={customLink}>Przejdź do panelu </Link><img src={arrow} className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                                     </div>
                                     </div>
                                 </div>
@@ -108,13 +109,13 @@ function App() {
              <div className="card mb-3" style={customCard}>
                 <div className="row g-0 p-5">
                     <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <img src="img/help.svg" className="img-fluid rounded-start" style={customImg} alt="..." />
+                    <img src={helpico} className="img-fluid rounded-start" style={customImg} alt="..." />
                     </div>
                     <div className="col-md-8">
                     <div className="card-body" style={customCardBody}>
                         <h5 className="card-title">Brakująca część?</h5>
                         <p className="card-text">Znajdź swój i porównaj go z innymi centrami demontażu pojazdów</p>
-                        <p className="card-text d-flex"><Link to={"/list"} style={customLink}>Zobacz listę produktów </Link><img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
+                        <p className="card-text d-flex"><Link to={"/list"} style={customLink}>Zobacz listę produktów </Link><img src={arrow} className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                     </div>
                     </div>
                 </div>
@@ -130,7 +131,7 @@ function App() {
                     <div className="card-body" style={customCardBody}>
                         <h5 className="card-title">Pierwszy raz na stronie?</h5>
                         <p className="card-text">Załóż konto, w celu uzyskania większych możliwości</p>
-                        <p className="card-text d-flex"><Link to={"/register"} style={customLink}>Załóż konto</Link><img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
+                        <p className="card-text d-flex"><Link to={"/register"} style={customLink}>Załóż konto</Link><img src={arrow} className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                     </div>
                     </div>
                 </div>

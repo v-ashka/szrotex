@@ -8,6 +8,15 @@ import { getActualDate, normalizeWeek } from "../components/ProductItem/ProductI
 import scheduleImg from './img/schedule.svg'
 import Reservation from "../components/ReservationList"
 
+// arrow ico
+import arrow from '../pages/img/public_img/north-east-arr.svg';
+import user_ico from '../pages/img/public_img/user.svg';
+import user_info from '../pages/img/public_img/info.svg';
+import user_add from '../pages/img/public_img/add.svg';
+
+import edit_ico from '../pages/img/public_img/edit.svg';
+import delete_ico from '../pages/img/public_img/delete.svg';
+import no_img from '../pages/img/public_img/no-img.png';
 const customCard = {
         height: '100%',
         width: '100%',
@@ -111,7 +120,7 @@ const UserProductList = ({ product, tableWidth }) => {
                 </tr>
                 <tr>
                     <th scope="col">Zdjęcie</th>
-                    <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ("/img/no-img.png")} alt={product.name} /></td>
+                    <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ({no_img})} alt={product.name} /></td>
                 </tr>
                 <tr>
                     <th scope="col">Cena</th>
@@ -124,8 +133,8 @@ const UserProductList = ({ product, tableWidth }) => {
                 <tr>
                     <th scope="col">Opcja</th>
                     <td>
-                        <Link to={"edit/" + product._id} className={ styles.customLinkEdit} ><img src="img/edit.svg" width="25" alt="Edit"/></Link> |
-                        <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src="img/delete.svg" width="25" alt="Delete"/></Link>
+                        <Link to={"edit/" + product._id} className={ styles.customLinkEdit} ><img src={edit_ico} width="25" alt="Edit"/></Link> |
+                        <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src={delete_ico} width="25" alt="Delete"/></Link>
                     </td>
                </tr>
            </tbody>
@@ -136,12 +145,12 @@ const UserProductList = ({ product, tableWidth }) => {
         <tr key={product._id}>
             <td><abbr style={{ textDecoration: 'none' }} title={product.name}>{ product.name.slice(0,25)}...</abbr></td>
             <td><abbr style={{textDecoration: 'none'}} title={product.desc}>{ product.desc.slice(0,50)}...</abbr></td>
-            <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ("/img/no-img.png")} alt={product.name}/></td>
+            <td><img onError={handleImageError} width="50px" height="50px" src={product.img.length > 0 ? (product.img) : ({no_img})} alt={product.name}/></td>
             <td>{product.price} zł</td>
             <td style={{ justifyContent: 'center', display:'flex' }}> {product.reservation ? ('TAK'):('NIE') }</td>
             <td>
-                <Link to={"edit/" + product._id} className={ styles.customLinkEdit} ><img src="img/edit.svg" width="25" alt="Edit"/></Link> |
-                <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src="img/delete.svg" width="25" alt="Delete"/></Link>
+                <Link to={"edit/" + product._id} className={ styles.customLinkEdit} ><img src={edit_ico} width="25" alt="Edit"/></Link> |
+                <Link to={"delete/" + product._id } className={styles.customLinkDelete}><img src={delete_ico} width="25" alt="Delete"/></Link>
             </td>
         </tr>
         )  
@@ -163,11 +172,11 @@ const UserInfo = ({ user, additional, openModal}) => {
                     <>
                         <p><span className="fw-bolder">Opis firmy: </span> <abbr title={user.description} style={{ textDecoration: 'none' }}>{user.description.slice(0, 200)}...</abbr></p>
                       <p><span className="fw-bolder">Adres kontaktowy:</span> {user.region.street} {user.region.city} {user.region.zip} woj. {user.region.voivodeship}</p>
-                      <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Edytuj profil</button>  <img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
+                      <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Edytuj profil</button>  <img src={arrow} className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                     </>
                 ) : (<>
                         <h6>Dodaj opis i godziny pracy swojej firmy</h6>
-                        <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Dodaj informacje</button>  <img src="img/north-east-arr.svg" className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
+                        <p className="d-flex"><button className={`${styles.customLink}`} onClick={openModal}>Dodaj informacje</button>  <img src={arrow} className="img-fluid rounded-start" alt="link arrow" width="20" /></p>
                        
                     </>)
             }
@@ -440,7 +449,7 @@ const Dashboard = () => {
                     <div className="card mb-3" style={customCard}>
                         <div className="row g-0 p-5 flex-column">
                             <div className={`col-md-4 d-flex align-items-center ${styles.columnGap}`} style={customWidth}>
-                                <img src="img/user.svg" className="img-fluid rounded-start" width="60px" alt="User information image" />
+                                <img src={user_ico} className="img-fluid rounded-start" width="60px" alt="User information image" />
                                  <h5 className={`card-title ${styles.primaryColor}`}>Twoje podstawowe informacje</h5>
                             </div>
                             <div className="col-md-12">
@@ -482,7 +491,7 @@ const Dashboard = () => {
                     <div className="card mb-3" style={customCard}>
                         <div className="row g-0 p-5 flex-column">
                             <div className={`col-md-4 d-flex align-items-center ${styles.columnGap}`} style={customWidth}>
-                                <img src="img/info.svg" className="img-fluid rounded-start" width="60px" alt="Information image" />
+                                <img src={user_info} className="img-fluid rounded-start" width="60px" alt="Information image" />
                                  <h5 className={`card-title ${styles.primaryColor}`}>Porada</h5>
                             </div>
                             <div className="col-md-12">
@@ -504,7 +513,7 @@ const Dashboard = () => {
                     <div className="card mb-3" style={customCardProducts}>
                         <div className="row g-0 p-5 flex-column">
                             <div className="col-md-4 d-flex align-items-center" style={customWidth}>
-                                <img src="img/add.svg" className="img-fluid rounded-start" width="60px" alt="Add image" />
+                                <img src={user_add} className="img-fluid rounded-start" width="60px" alt="Add image" />
                                 <h5 className={`card-title ${styles.primaryColor}`}>Dodaj nowy produkt</h5>
                             </div>
                             <div className="col-md-12">

@@ -1,0 +1,23 @@
+{
+  "name": "szrotex",
+  "version": "1.0.0",
+  "description": "It's simple CRUD application made in MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v-ashka/szrotex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v-ashka/szrotex/issues"
+  },
+  "homepage": "https://github.com/v-ashka/szrotex#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.18"
+  }
+}
