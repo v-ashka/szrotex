@@ -231,7 +231,7 @@ const AddProduct = () => {
                 productDesc,
                 productImg,
                 reservation,
-                productTags: productTags.split(','),
+                productTags: 'cat',
                 productCategory,
             })
         })
