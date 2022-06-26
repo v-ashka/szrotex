@@ -1,5 +1,5 @@
 # About project
-
+# [LIVE](https://szrotex-app.herokuapp.com/)
 It's simple CRUD application made in MERN stack
 
 # How to start app
