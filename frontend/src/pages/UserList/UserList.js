@@ -5,6 +5,7 @@ import {SearchList} from '../../components/SearchList'
 import { Link } from 'react-router-dom'
 import style from '../../styles/styles.module.css';
 import "./UserList.css"
+import env from "react-dotenv";
 
 const Lists = ({ lists }) => {
     const arr = []
@@ -98,7 +99,7 @@ const App = ({value, isClicked, checkedVoivode, category}) => {
     // console.log(list)
     //Fetch List
     const fetchList = async () => {
-        const res = await fetch('http://localhost:3500/lists')
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/lists')
         const data = await res.json()
         //  console.log(data);
         const productList= [];

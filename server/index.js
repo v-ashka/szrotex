@@ -12,11 +12,33 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json())
 
+
+const {
+    MONGO_USERNAME,
+    MONGO_PASSWORD,
+    MONGO_HOSTNAME,
+    MONGO_PORT,
+    MONGO_DB,
+    MONGO_REPLICASET
+  } = process.env;
+
 // Initialize database connection
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true }).catch((err) => {
+// const uri = process.env.ATLAS_URI;
+// const url2 = `mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb`
+// const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?replicaSet=${MONGO_REPLICASET}&authSource=admin`;
+
+const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/dev'
+
+// mongoose.connect(uri, { useNewUrlParser: true }).catch((err) => {
+//     console.log(`Błąd połączenia z bazą danych!: ${err}`)
+// })
+
+
+mongoose.connect(mongoURL, { useNewUrlParser: true }).catch((err) => {
     console.log(`Błąd połączenia z bazą danych!: ${err}`)
 })
+
+
 
 // Connect to the database
 const connection = mongoose.connection;

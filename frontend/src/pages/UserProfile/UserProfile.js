@@ -8,6 +8,7 @@ import "./UserProfile.css"
 import { Hours, normalizeWeek, getActualDate } from "../../components/ProductItem/ProductItem.js";
 import clockIco from '../../pages/img/schedule.svg'
 import contactIco from '../../pages/img/face.svg'
+import env from "react-dotenv";
 
 const SellerProducts = ({ user }) => {
     // const location = useLocation();
@@ -76,7 +77,7 @@ const App = () => {
 
 
     const fetchUser = async () => {
-        const res = await fetch('http://localhost:3500/user/' + id, {
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/user/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

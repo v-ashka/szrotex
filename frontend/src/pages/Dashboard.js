@@ -17,6 +17,10 @@ import user_add from '../pages/img/public_img/add.svg';
 import edit_ico from '../pages/img/public_img/edit.svg';
 import delete_ico from '../pages/img/public_img/delete.svg';
 import no_img from '../pages/img/public_img/no-img.png';
+
+import env from "react-dotenv";
+
+
 const customCard = {
         height: '100%',
         width: '100%',
@@ -218,7 +222,7 @@ const AddProduct = () => {
 
     const addProduct = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard_panel/add', {
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -395,7 +399,7 @@ const Dashboard = () => {
 
     const fetchProducts = async () => {
         setLoading(true);
-        const res = await fetch('http://localhost:3500/dashboard_panel', {
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel', {
             headers: {
                 'x-access-token': localStorage.getItem('token')
             },
@@ -414,7 +418,7 @@ const Dashboard = () => {
 
     const fetchUserInfo = async () => {
         setLoading(true);
-        const res = await fetch('http://localhost:3500/dashboard_panel', {
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel', {
             headers: {
                 'x-access-token': localStorage.getItem('token')
             },

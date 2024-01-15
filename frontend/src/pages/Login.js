@@ -5,6 +5,11 @@ import {customCardBody, customCard, customWidth} from './Styles'
 import user_ico from '../pages/img/public_img/user.svg';
 import user_info from '../pages/img/public_img/info.svg';
 
+
+import env from "react-dotenv";
+
+
+
 function App() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -12,7 +17,7 @@ function App() {
     async function loginUser(e) {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:3500/login_user', {
+        const response = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/login_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

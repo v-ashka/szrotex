@@ -5,6 +5,7 @@ import styles from '../styles/styles.module.css';
 import {customCardBody, customCard, customWidth} from './Styles'
 import user_ico from '../pages/img/public_img/user.svg';
 import user_info from '../pages/img/public_img/info.svg';
+import env from "react-dotenv";
 
 function App() {
     let navigation = useNavigate();
@@ -20,7 +21,7 @@ function App() {
     async function registerUser(e) {
         e.preventDefault();
         
-        const response = await fetch('http://localhost:3500/register_user', {
+        const response = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/register_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

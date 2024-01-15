@@ -5,6 +5,9 @@ import styles from '../styles/styles.module.css';
 import icon from '../pages/img/repair.svg';
 import { customCardProducts, customCardBody, customWidth } from "./Styles";
 
+
+import env from "react-dotenv";
+
 function Edit() {
     const navigate = useNavigate();
     const [product, setProduct] = useState([]);
@@ -22,7 +25,7 @@ function Edit() {
     const { id } = useParams()
 
     const editProduct = async () => {
-        const res = await fetch('http://localhost:3500/dashboard_panel/edit/' + id, {
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/edit/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +45,7 @@ function Edit() {
 
     const updateProduct = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3500/dashboard_panel/edit/' + id, {
+        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/edit/' + id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
