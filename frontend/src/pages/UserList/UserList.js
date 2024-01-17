@@ -99,9 +99,10 @@ const App = ({value, isClicked, checkedVoivode, category}) => {
     // console.log(list)
     //Fetch List
     const fetchList = async () => {
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/lists')
+        const res = await fetch('/api/lists')
+        console.log(res)
         const data = await res.json()
-        //  console.log(data);
+         console.log(data);
         const productList= [];
         data.filter((product) => {
             if(product.products.length > 0){

@@ -77,7 +77,7 @@ const App = () => {
 
 
     const fetchUser = async () => {
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/user/' + id, {
+        const res = await fetch(process.env.REACT_APP_FETCH_ADDR+  '/user/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -28,7 +28,7 @@ const ReservationList = ({ products, tableWidth }) => {
     const cancelReservation = async (e, product) => {
         // console.log('cancel reservation, prodId: ', productId, reservationId, product)
         const elem = e.target.parentElement.parentElement.parentElement;
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/remove-item', {
+        const res = await fetch(process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/remove-item', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -128,7 +128,7 @@ const ProductItem = () => {
     }, [])
     //Fetch List
     const fetchList = async () => {
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/lists/' + product._id, {
+        const res = await fetch( process.env.REACT_APP_FETCH_ADDR+  '/lists/' + product._id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const ProductItem = () => {
         if (user.length < 1) {
             user = ''
         }
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/lists/' + product._id, {
+        const res = await fetch( process.env.REACT_APP_FETCH_ADDR+  '/lists/' + product._id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

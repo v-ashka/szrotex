@@ -222,7 +222,7 @@ const AddProduct = () => {
 
     const addProduct = async (e) => {
         e.preventDefault();
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/add', {
+        const res = await fetch(process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -399,7 +399,7 @@ const Dashboard = () => {
 
     const fetchProducts = async () => {
         setLoading(true);
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel', {
+        const res = await fetch( process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel', {
             headers: {
                 'x-access-token': localStorage.getItem('token')
             },
@@ -418,7 +418,7 @@ const Dashboard = () => {
 
     const fetchUserInfo = async () => {
         setLoading(true);
-        const res = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel', {
+        const res = await fetch( process.env.REACT_APP_FETCH_ADDR+  '/dashboard_panel', {
             headers: {
                 'x-access-token': localStorage.getItem('token')
             },

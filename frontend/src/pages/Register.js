@@ -21,7 +21,7 @@ function App() {
     async function registerUser(e) {
         e.preventDefault();
         
-        const response = await fetch('http://' + process.env.REACT_APP_FETCH_ADDR+  '/register_user', {
+        const response = await fetch(process.env.REACT_APP_FETCH_ADDR+  '/register_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

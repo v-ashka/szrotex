@@ -51,7 +51,7 @@ connection.once('open', () => {
 console.log('before user router');
 const userRouter = require('./routes/users');
 
-app.use('', userRouter);
+app.use('/api', userRouter);
 console.log('after user router');
 // deploy
 
