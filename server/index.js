@@ -1,78 +1,72 @@
-const express = require('express');
-const app = express();
-const cors = require('cors')
-const path = require('path');
-
-// DB Mongo
-const mongoose = require('mongoose');
-const port = process.env.PORT || 3500;
-
 require("dotenv").config();
+const express = require('express');
+require('express-async-errors')
+const { logger, logEvents} = require("./middleware/logger");
+const app = express();
+const path = require('path');
+const cors = require('cors')
+const corsOptions = require("./config/corsOptions");
+const port = process.env.PORT || 3500;
+const cookieParser = require('cookie-parser')
+// DB Mongo
+const connectDB = require("./config/dbConnect");
+const mongoose = require('mongoose');
+const errorHandler = require("./middleware/errorHandler");
+const fileUpload = require('express-fileupload');
 
-app.use(cors());
+connectDB()
+app.use(logger)
+app.use(cors(corsOptions));
 app.use(express.json())
+app.use(cookieParser())
+app.use('/', express.static(path.join(__dirname, '/public')))
+app.use('/', require('./routes/root'))
+app.use(fileUpload({
+    limits: {
+        fileSize: 10000000
+    },
+    abortOnLimit: true,
+}))
+// routes
+app.use('/users', require('./routes/userRoutes'))
+app.use('/upload', require('./routes/mediaRoute'))
+app.use('/product', require('./routes/productRoute'))
 
-
-const {
-    MONGO_USERNAME,
-    MONGO_PASSWORD,
-    MONGO_HOSTNAME,
-    MONGO_PORT,
-    MONGO_DB,
-    MONGO_REPLICASET
-  } = process.env;
-
-// Initialize database connection
-// const uri = process.env.ATLAS_URI;
-// const url2 = `mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb`
-// const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?replicaSet=${MONGO_REPLICASET}&authSource=admin`;
-
-const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/dev'
-
-// mongoose.connect(uri, { useNewUrlParser: true }).catch((err) => {
-//     console.log(`Błąd połączenia z bazą danych!: ${err}`)
-// })
-
-
-mongoose.connect(mongoURL, { useNewUrlParser: true }).catch((err) => {
-    console.log(`Błąd połączenia z bazą danych!: ${err}`)
-})
-
-
-
-// Connect to the database
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('Pomyślnie połączono z bazą danych MongoDB!');
-    console.log(mongoose.modelNames())
-})
-
-// Routes
-console.log('before user router');
-const userRouter = require('./routes/users');
-
-app.use('/api', userRouter);
-console.log('after user router');
-// deploy
-
-__dirname = path.resolve();
-// test = path.resolve().split('\\');
-// newArr = test.slice(0,-1);
-// __dirname = "";
-// newArr.map((item) => __dirname+=item+'\\');
-
-console.log(__dirname);
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, "/frontend/build")));
-
-    app.get("*", (req, res) => {
-        console.log(__dirname);
-        res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+app.all("*", (req,res) => {
+    res.status(404)
+    if(req.accepts('html')){
+        res.sendFile(path.join(__dirname, 'views', '404.html'))
+    } else if(req.accepts('json')){
+        res.json({message: "404 Not Found"})
+    } else {
+        res.type('txt').send('404 Not Found')
     }
-    );
-}
+})
+
+app.use(errorHandler)
 
 
-app.listen(port, () => {
-    console.log(`Server start running at port: ${port}`);
-});
+mongoose.connection.once('open', () => {
+    console.log(`Connected to MongoDB - dbname: ${mongoose.connection.db.databaseName}`)
+    app.listen(port, () => console.log(`Server running on port: ${port}`))
+})
+
+mongoose.connection.on('error', err => {
+    console.log(err)
+    const reDot = /[.]/
+    const mongoMessageIndex = err.stack.search(reDot)
+    const mongoMessage = err.stack.slice(0, mongoMessageIndex)
+    logEvents(`Error code: ${err.code}: ${err.codeName}\t${err.errorLabels}\t${mongoMessage}`, 'mongoErrLog.log')
+})
+
+// OLD - Routes
+// console.log('before user router');
+// const userRouter = require('./routes/users');
+
+// app.use('/api', userRouter);
+// console.log('after user router');
+
+
+// app.listen(port, () => {
+//     console.log(`Server start running at port: ${port}`);
+// });

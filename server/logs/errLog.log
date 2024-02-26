@@ -1,0 +1,29 @@
+20/02/2024	 12:18:46	e60c762d-6bd8-4157-b0b2-e666d016a8a8	ReferenceError: userObject is not defined	POST	/users	undefined
+20/02/2024	 13:57:41	0f8167c4-134f-4146-bce3-cc73733965f0	ReferenceError: username is not defined	PATCH	/users	undefined
+20/02/2024	 13:57:46	3727159a-2c57-4f99-b844-6ca3706d1246	ReferenceError: username is not defined	PATCH	/users	undefined
+20/02/2024	 14:25:31	f00c257d-0cfa-4fef-a017-6a2fbf5421c9	TypeError: Cannot set properties of null (setting 'region')	PATCH	/users	undefined
+20/02/2024	 14:32:03	2934feb7-2f57-418c-92e3-e1425d2165d2	TypeError: Cannot read properties of null (reading 'region')	PATCH	/users	undefined
+20/02/2024	 14:32:24	b9bae0b3-02ec-46e9-8236-02548472b306	TypeError: Cannot read properties of null (reading 'region')	PATCH	/users	undefined
+20/02/2024	 14:44:51	5af762b6-9601-47a5-b74e-f3fc14848871	TypeError: Cannot read properties of null (reading 'region')	PATCH	/users	undefined
+20/02/2024	 14:45:50	eab6f5f2-59e7-47f9-a881-13f155ceea88	TypeError: userDetails.save is not a function	PATCH	/users	undefined
+20/02/2024	 14:46:26	6085da2e-5b12-4048-9a4c-bf01fcf8c5c1	TypeError: userDetails.save is not a function	PATCH	/users	undefined
+20/02/2024	 15:11:02	2a948331-dcb3-4085-9ef5-8c8984606a0a	TypeError: UserDetails.save is not a function	PATCH	/users	undefined
+20/02/2024	 15:12:23	6660b73e-fd17-4578-8690-1371414b98e1	TypeError: UserDetails.save is not a function	PATCH	/users	undefined
+20/02/2024	 15:12:43	035a0d39-1198-4a25-af39-05236996aaad	ValidationError: userDetails validation failed: region: Cast to Object failed for value "asdsad" (type string) at path "region", workSchedule.0.startTime: Cast to date failed for value "00-00-0000" (type string) at path "startTime", workSchedule.0.endTime: Cast to date failed for value "00-00-0000" (type string) at path "endTime"	PATCH	/users	undefined
+20/02/2024	 15:16:24	c06b49f8-f420-4bc0-aaea-3b88f77cafd1	ValidationError: userDetails validation failed: region: Cast to Object failed for value "asdsad" (type string) at path "region"	PATCH	/users	undefined
+20/02/2024	 15:16:43	c15f45c7-07b6-4fb3-be66-339c1b31e4b0	ValidationError: userDetails validation failed: region: Cast to Object failed for value "abcd" (type string) at path "region"	PATCH	/users	undefined
+20/02/2024	 15:16:49	c1c27d57-d467-4b9f-8232-f6665f603944	ValidationError: userDetails validation failed: region: Cast to Object failed for value "abcd0" (type string) at path "region"	PATCH	/users	undefined
+20/02/2024	 15:29:12	c63df3a4-7f4e-4bf1-a57a-8fece21153cc	CastError: Cast to ObjectId failed for value "{ user: '65d4acb451d9eed273cea092' }" (type Object) at path "_id" for model "userDetails"	PATCH	/users	undefined
+21/02/2024	 08:49:27	555b7179-37cb-4a9a-b900-cf7b3c220659	SyntaxError: Expected double-quoted property name in JSON at position 231 (line 12 column 1)	PATCH	/users	undefined
+21/02/2024	 08:50:50	e9b9f0aa-1d8b-4459-a733-cc0c6be26ee7	SyntaxError: Expected double-quoted property name in JSON at position 97 (line 7 column 1)	PATCH	/users	undefined
+21/02/2024	 08:56:06	436c2114-97a4-4374-be19-e4478b586f03	TypeError: userDetails.update is not a function	PATCH	/users	undefined
+21/02/2024	 09:45:54	e0a802b2-fe99-4463-b0bf-57334bb34a41	ReferenceError: Note is not defined	DELETE	/users	undefined
+21/02/2024	 09:46:11	1b9b1597-b619-45d8-b582-742c5ed122af	TypeError: user.deletOne is not a function	DELETE	/users	undefined
+21/02/2024	 09:46:27	074f5e19-46d5-42d7-ad6f-8736c0fd580b	TypeError: user.deletOne is not a function	DELETE	/users	undefined
+21/02/2024	 11:42:51	674ebe70-a55c-44e3-a9fb-96d35c1b710f	CastError: Cast to ObjectId failed for value "aaa" (type string) at path "_id" for model "szrotexUser"	POST	/upload	undefined
+21/02/2024	 12:24:44	55b6c9ea-846f-4747-a671-be0b1f8b9a44	Error: Cannot set headers after they are sent to the client	POST	/upload	undefined
+21/02/2024	 12:25:14	6a64d832-26ff-48a0-a298-c16667786e8a	Error: Cannot set headers after they are sent to the client	POST	/upload	undefined
+21/02/2024	 12:27:01	bf92cbb1-8576-4f11-9648-7e1352f04446	Error: Cannot set headers after they are sent to the client	POST	/upload	undefined
+21/02/2024	 12:45:30	4a20e20b-1c33-4b64-b70a-a075ef76814f	TypeError: Cannot read properties of undefined (reading 'mimetype')	POST	/upload/background-img	undefined
+21/02/2024	 14:55:30	5eddda91-e78e-47c2-928c-bd7effb6df98	TypeError: Product.find is not a function	GET	/product	undefined
+21/02/2024	 15:44:20	84ead2bc-7cc1-4ea0-90c8-92d20a7cd35c	Error: Invalid select: select only takes 1 argument	GET	/product	undefined

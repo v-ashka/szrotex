@@ -1,0 +1,2 @@
+20/02/2024	 10:12:02	8c1e2f66-a9d1-47e4-bb6d-8f69e8120706	Error code: 8000: AtlasError	HandshakeError,ResetPool	MongoServerError: bad auth : Authentication failed
+20/02/2024	 10:12:03	9721823b-a8b4-40af-9620-53ffb58da659	Error code: 8000: AtlasError	HandshakeError,ResetPool	MongoServerError: bad auth : Authentication failed
