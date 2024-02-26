@@ -52,3 +52,33 @@ Use mongoose.model(name, schema)	GET	/product	undefined
 26/02/2024	 14:07:20	8177064c-2a1d-4362-aa8a-8a060ddf30b9	MissingSchemaError: Schema hasn't been registered for model "User".
 Use mongoose.model(name, schema)	GET	/product	undefined
 26/02/2024	 14:09:25	2bb2af5d-2643-4712-ba11-72571ff00b52	StrictPopulateError: Cannot populate path `user.userDetails` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/product	undefined
+26/02/2024	 14:48:17	5ba75adc-fbb1-4611-bde5-98f1877e5ee6	TypeError: Product.findById(...).exec(...).lean is not a function	PATCH	/product/65dc86f4cba249176c6083ad	undefined
+26/02/2024	 14:48:53	e3e371e5-d599-4b84-a7bf-aaac1e129b17	TypeError: Product.findById(...).exec(...).lean is not a function	PATCH	/product/65dc86f4cba249176c6083ad	undefined
+26/02/2024	 14:49:04	8b2acfc6-d56f-4334-9a66-69cc4a99dbc5	TypeError: Product.findById(...).exec(...).lean is not a function	PATCH	/product/65dc86f4cba249176c6083ad	undefined
+26/02/2024	 14:50:07	265153e5-947c-4ecc-aa03-8189a4aff6f6	TypeError: Cannot read properties of null (reading 'user')	GET	/product/65dc86f4cba249176c6083ad	undefined
+26/02/2024	 14:50:11	ba8a58b6-eeca-4229-9cd1-08e14eccb70a	TypeError: Cannot read properties of null (reading 'user')	GET	/product/65dc86f4cba249176c6083ad	undefined
+26/02/2024	 14:56:55	3a0bc5c3-68dc-4259-b98e-895684da9bff	CastError: Cast to ObjectId failed for value "{ email: 'janczak@o2.pl', firstName: '', lastName: '' }" (type Object) at path "user" for model "userDetails"	GET	/product/	undefined
+26/02/2024	 14:57:01	afba5774-d0ef-45df-b9e6-f9073aa9a829	MongoServerError: Cannot do exclusion on field id in inclusion projection	GET	/product/	undefined
+26/02/2024	 15:35:09	bdcb43d7-ec59-43a4-8212-e2146a2adeab	TypeError: Product.save is not a function	PATCH	/product/reservation/65dc89b199e7f4814384fb30	undefined
+26/02/2024	 15:35:25	11b5e9d2-04b7-424c-87ac-3fa1513fd400	TypeError: Product.save is not a function	PATCH	/product/reservation/65dc89b199e7f4814384fb30	undefined
+26/02/2024	 15:35:59	5ca0cd3d-2376-4421-b792-328d337ec749	TypeError: Product.findById(...).select(...).exec(...).lean is not a function	PATCH	/product/reservation/65dc89b199e7f4814384fb30	undefined
+26/02/2024	 15:37:52	54fe6c19-923f-4601-a0e7-d1316858ebc9	ValidationError: product validation failed: productReservation.reservationStartDate: Cast to date failed for value "Invalid Date" (type Date) at path "productReservation.reservationStartDate", productReservation.reservationEndDate: Cast to date failed for value "NaN" (type number) at path "productReservation.reservationEndDate"	PATCH	/product/reservation/65dc89b199e7f4814384fb30	undefined
+26/02/2024	 15:41:17	6b77d673-867e-496c-a0ca-2f87e6dc91f7	TypeError: product.productReservation.reservationEndDate.toDate is not a function	PATCH	/product/reservation/65dc89b199e7f4814384fb30	undefined
+26/02/2024	 15:43:04	006f8f95-9ff2-42b4-a42f-1916e42fd861	ReferenceError: format is not defined	PATCH	/product/reservation/65dc89b199e7f4814384fb30	undefined
+26/02/2024	 15:54:34	3771947b-ba28-4a49-a1d5-687787bf0124	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation/	undefined
+26/02/2024	 15:54:51	14b206ce-c088-45bc-bdea-4a8d4bc43d73	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation/	undefined
+26/02/2024	 15:55:08	30797efe-0e99-44f0-b7cd-2e910b7e873c	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation/	undefined
+26/02/2024	 15:55:09	767f00d6-03e2-41d9-86ed-c61eeace320e	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation/	undefined
+26/02/2024	 15:55:10	61a40a3c-93be-41a0-8412-65b1229aca9e	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:55:11	abcb50de-e1fa-4ef7-b5a8-8b8e5c59cdf8	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:55:50	54cb7e1a-2b31-433a-a4aa-dfebe442b88c	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:56:42	af41df42-d752-423a-9a29-f4fbc329aff5	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:56:55	2b5f2b74-3e49-468e-95a0-1b2264ccf511	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:57:31	efa0db12-b302-41d2-ba0c-20e4ff27436d	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:57:33	53370a73-d03a-4e0d-ad0f-01fa63c694e0	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:57:59	29e53b67-ddb2-4645-b00a-2178f06e9029	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:58:00	c8162f6b-8501-4761-a021-97ce80f86f01	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:58:29	4e9505f3-831e-4f71-8932-7c53cce121c9	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:58:40	adb01691-89b5-49ec-b292-6f1c116df69d	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:59:09	2adabca3-5ec7-4ca7-b632-9b48cd189d48	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined
+26/02/2024	 15:59:35	de67b652-8729-43ca-b90c-110db7c26f1f	CastError: Cast to ObjectId failed for value "reservation" (type string) at path "_id" for model "product"	GET	/product/reservation	undefined

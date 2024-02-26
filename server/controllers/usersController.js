@@ -131,7 +131,8 @@ const updateUser = async (req,res) => {
         return res.status(409).json({message: 'Duplicate username'})
     }
 
-    user.email = email
+    user.email = email || user.email
+
     if(role !== "CLIENT" && role !== "COMPANY"){
         return res.status(400).json({message: 'Role field not match with explicit values COMPANY or CLIENT'})
     }
@@ -155,29 +156,15 @@ const updateUser = async (req,res) => {
         }else{
             userDetails.workSchedule = workSchedule
         }
-
-        if(imageBackgroundPage){ 
-            userDetails.imageBackgroundPage = imageBackgroundPage
-        }
+            userDetails.imageBackgroundPage = imageBackgroundPage || userDetails.imageBackgroundPage
     }
     
-    user.role = role
+    user.role = role || user.role
     // user details
-    if(firstName){
-        user.firstName = firstName
-    }
-
-    if(lastName){
-        user.lastName = lastName
-    }
-
-    if(region){
-        userDetails.region = region
-    }
-
-    if(phoneNumber){
-        userDetails.phoneNumber = phoneNumber
-    }
+    user.firstName = firstName || user.firstName
+    user.lastName = lastName || user.lastName
+    userDetails.region = region || userDetails.region
+    userDetails.phoneNumber = phoneNumber || userDetails.phoneNumber
     
     if(password){
         // hash password
