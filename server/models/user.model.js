@@ -33,10 +33,15 @@ const User = new mongoose.Schema(
             type: String,
             default: ''
         },
+        details: {
+            type: mongoose.Schema.Types.ObjectId,
+            require: true,
+            ref: "userDetails"
+        },
         createdAt: {
             type: Date,
             default: Date.now
-        }
+        },
     },
     {collection: 'szrotexUser'}
 )

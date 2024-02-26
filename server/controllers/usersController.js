@@ -19,6 +19,26 @@ const getAllUsers = async (req,res) => {
     res.json(users)
 }
 
+// @desc Get user by :id
+// @route GET /users/:id
+// @access Private
+const getUserById = async (req,res) => {
+    // Get user by id
+    const {id} = req.params
+    const user = await User.findById(id).select('-password').populate('userDetails').lean()
+
+    if(!user){
+        return res.status(400).json({message: 'User not found'})
+    }
+
+    const userDetails = await UserDetails.findOne({user: id}).exec()
+    if(!userDetails){
+        res.json(user)
+    }else{
+        const userObj = {user, userDetails}
+        res.json(userObj)
+    }
+}
 
 // @desc Create new user
 // @route POST /users
@@ -203,5 +223,6 @@ module.exports = {
     getAllUsers,
     createNewUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUserById
 }

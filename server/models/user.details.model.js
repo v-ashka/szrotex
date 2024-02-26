@@ -9,30 +9,24 @@ const userDetails = new mongoose.Schema({
     },
     companyName: {
         type: String,
-        default: ""
     },
     region: {
         voivodeship: {
             type: String,
-            default: ""
         },
         street: {
             type: String,
-            default: ""
         },
         zip: {
             type: String,
-            default: ""
         },
         city: {
             type: String,
-            default: ""
         }
     },
     description: { 
         type: String,
         required: false,
-        default: ''
     },
     workSchedule: [
         {
@@ -43,7 +37,6 @@ const userDetails = new mongoose.Schema({
     ],
     phoneNumber: { 
         type: Number,
-        default: '', 
     },
     imageBackgroundPage: {
         type: String,

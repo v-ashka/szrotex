@@ -8,4 +8,7 @@ router.route('/avatar')
 router.route('/background-img')
     .post(mediaController.uploadBackgroundImage)
 
+router.route('/product-upload')
+    .post(mediaController.uploadProductImage)
+
 module.exports = router

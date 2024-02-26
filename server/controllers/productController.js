@@ -8,8 +8,7 @@ const path = require('path')
 // @access Private
 const getAllProducts = async (req, res) => {
     // Get all products from MongoDB
-    const products = await Product.find().lean()
-
+    const products = await Product.find().populate('user', 'firstName lastName email' ).lean().exec();
     // If no notes 
     if (!products?.length) {
         return res.status(400).json({ message: 'No products found' })
@@ -17,8 +16,10 @@ const getAllProducts = async (req, res) => {
 
     // You could also do this with a for...of loop
     const productsWithUser = await Promise.all(products.map(async (product) => {
-        const user = await User.findById(product.user).select('-password -_id').lean().exec()
-        return {...product, ...user}
+        // const user = await User.findById(product.user).select('-password -_id').lean().exec()
+        const userDetails = await UserDetails.findOne({user: product.user}).select('-user -imageBackgroundPage -description -workSchedule -companyName').lean().exec()
+        // const userObj = {user, userDetails}
+        return {...product, ...userDetails}
     }))
 
     res.json(productsWithUser)
@@ -43,14 +44,19 @@ const getProductById = async (req,res) => {
 const createNewProduct = async (req,res) => {
     const { user, name, description,
      price, tags, productProperties,
-     productReservation, category} = req.body
+     productReservation, category, productRegion } = req.body
 
     if(!user || !name || !description || !price || !category?.length ){
         return res.status(400).json({message: "All fields are required"})
     }
 
+    const userDetails = await UserDetails.findOne({user: user}).exec()
+    if(!userDetails.region?.city && !productRegion){
+        return res.status(400).json({message: "No information is provided about the product's sales region. Please provide this data in your profile or directly in product"})
+    }
+
     // Create and store new product
-    const product = await Product.create({user, name, description, price, category})
+    const product = await Product.create({user, name, description, price, category, productRegion})
 
 
     if(product) { //Created

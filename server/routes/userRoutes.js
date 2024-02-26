@@ -8,5 +8,6 @@ router.route('/')
     .post(userContoller.createNewUser)
     .patch(userContoller.updateUser)
     .delete(userContoller.deleteUser)
-
+router.route('/:id')
+    .get(userContoller.getUserById)
 module.exports = router

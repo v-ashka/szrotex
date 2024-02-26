@@ -27,3 +27,28 @@
 21/02/2024	 12:45:30	4a20e20b-1c33-4b64-b70a-a075ef76814f	TypeError: Cannot read properties of undefined (reading 'mimetype')	POST	/upload/background-img	undefined
 21/02/2024	 14:55:30	5eddda91-e78e-47c2-928c-bd7effb6df98	TypeError: Product.find is not a function	GET	/product	undefined
 21/02/2024	 15:44:20	84ead2bc-7cc1-4ea0-90c8-92d20a7cd35c	Error: Invalid select: select only takes 1 argument	GET	/product	undefined
+26/02/2024	 09:43:10	68fa55b8-5674-45a1-81ce-84c15cc9305d	CastError: Cast to ObjectId failed for value "{ user: '65d5f388adf69f1495ac3e23' }" (type Object) at path "_id" for model "product"	POST	/upload/product-upload	undefined
+26/02/2024	 09:43:36	80b9a119-ae0e-46eb-aedd-de8339217c1a	CastError: Cast to ObjectId failed for value "{ user: '65d5f388adf69f1495ac3e23' }" (type Object) at path "_id" for model "product"	POST	/upload/product-upload	undefined
+26/02/2024	 09:44:27	edf7f1b3-8585-49a8-b1b0-f211f609993f	CastError: Cast to ObjectId failed for value "{ user: '65d5f388adf69f1495ac3e23' }" (type Object) at path "_id" for model "product"	POST	/upload/product-upload	undefined
+26/02/2024	 09:46:25	5a6a5119-a791-44ee-a829-9e16296299aa	TypeError: Product.findByOne is not a function	POST	/upload/product-upload	undefined
+26/02/2024	 10:04:15	7d4fad6f-b29c-412b-8ae3-296044d93cf2	TypeError: Cannot read properties of null (reading 'user')	GET	/product/65d609103f743b29aab4e116	undefined
+26/02/2024	 10:09:05	b37b79a5-0c29-42d7-8719-847a2db932dc	Error: Malformed part header	POST	/upload/product-upload	undefined
+26/02/2024	 10:09:12	c521424e-35f6-4981-b5e7-97691be4a1bb	ReferenceError: id is not defined	POST	/upload/product-upload	undefined
+26/02/2024	 10:21:03	4022b9eb-918a-47fa-b1ff-4a441afac03c	ReferenceError: id is not defined	POST	/upload/product-upload	undefined
+26/02/2024	 10:21:04	c8475311-9ed0-4d23-84fa-01967cbe3333	ReferenceError: id is not defined	POST	/upload/product-upload	undefined
+26/02/2024	 10:21:19	cfbca4d1-8a30-4936-b061-3bc604dd5078	ReferenceError: id is not defined	POST	/upload/product-upload	undefined
+26/02/2024	 10:21:20	b5c9862a-b1ea-4383-b8ff-99dde3d65c60	ReferenceError: id is not defined	POST	/upload/product-upload	undefined
+26/02/2024	 10:21:39	aa8e9f4c-9a09-482b-8773-f408f6c0d667	TypeError: The "path" argument must be of type string. Received an instance of ObjectId	POST	/upload/product-upload	undefined
+26/02/2024	 10:22:13	54f45ace-e5eb-4347-af8c-dfa8f020925e	TypeError: The "path" argument must be of type string. Received an instance of ObjectId	POST	/upload/product-upload	undefined
+26/02/2024	 10:22:21	a6614e03-dcb7-465b-ab2a-cfbc4e894883	TypeError: The "path" argument must be of type string. Received an instance of ObjectId	POST	/upload/product-upload	undefined
+26/02/2024	 10:23:58	3d38a398-5882-4c76-af3a-c92745603980	TypeError: The "path" argument must be of type string. Received an instance of ObjectId	POST	/upload/product-upload	undefined
+26/02/2024	 12:47:49	f0920afc-fc37-4b57-be82-59e4cbda3a49	TypeError: Cannot convert undefined or null to object	POST	/product	undefined
+26/02/2024	 13:07:06	684c8e9d-4b0f-47fb-8609-df88aaeb4347	TypeError: Cannot read properties of undefined (reading 'email')	GET	/product	undefined
+26/02/2024	 13:09:51	ccfd2d21-4473-460d-b405-41d34bd0b7f9	TypeError: Product.find(...).populated is not a function	GET	/product	undefined
+26/02/2024	 13:46:57	3c8d2a90-b853-4c22-8498-67b4820f1f44	TypeError: Cannot read properties of null (reading 'save')	PATCH	/users	undefined
+26/02/2024	 13:54:41	fa6222db-8290-4e8d-b9d9-82b79e28c0f7	StrictPopulateError: Cannot populate path `userDetails` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/product	undefined
+26/02/2024	 14:07:15	b738f8ea-72af-4e06-84a2-bc54f5e8caef	MissingSchemaError: Schema hasn't been registered for model "User".
+Use mongoose.model(name, schema)	GET	/product	undefined
+26/02/2024	 14:07:20	8177064c-2a1d-4362-aa8a-8a060ddf30b9	MissingSchemaError: Schema hasn't been registered for model "User".
+Use mongoose.model(name, schema)	GET	/product	undefined
+26/02/2024	 14:09:25	2bb2af5d-2643-4712-ba11-72571ff00b52	StrictPopulateError: Cannot populate path `user.userDetails` because it is not in your schema. Set the `strictPopulate` option to false to override.	GET	/product	undefined

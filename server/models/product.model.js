@@ -23,6 +23,25 @@ const productSchema = new mongoose.Schema({
         type: Number,
         require: true,
     },
+    quantity:{
+        type: Number,
+        require: true,
+        default: 0
+    },
+    currency: {
+        name: {
+            type: String,
+            default: 'PLN'
+        },
+        value: {
+            type: String,
+            default: 'zł'
+        }
+    },
+    deliveryOption: {
+        type: Boolean,
+        default: false
+    },
     productImg: {
         type: String,
         require: false,
@@ -53,11 +72,23 @@ const productSchema = new mongoose.Schema({
         },
         reservationStartDate: {
             type: Date,
-            default: Date.now()
         },
         reservationEndDate: {
             type: Date,
-            default: Date.now() + 7
+        }
+    },
+    productRegion: {
+        voivodeship: {
+            type: String,
+        },
+        street: {
+            type: String,
+        },
+        zip: {
+            type: String,
+        },
+        city: {
+            type: String,
         }
     },
     category: {

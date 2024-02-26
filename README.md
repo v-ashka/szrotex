@@ -3,4 +3,4 @@ Szrotex v2 is my first MERN fullstack application. The main concept of this proj
 
 # Before you start
 
-In /server directory, type **npm install** to install all node packages. Next, you need to specify **NODE_ENV** value and **DATABASE_URI** (for MongoDB Atlas Driver) in .env file.  To run server just type into terminal **npm run dev** (for developer purpose)
+In /server directory, type ``npm install`` to install all node packages. Next, you need to specify ``NODE_ENV=development`` value and ``DATABASE_URI`` (for MongoDB Atlas Driver) in .env file.  To run server just type into terminal ``npm run dev`` (for developer purpose)
