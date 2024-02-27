@@ -10,14 +10,11 @@ const searchProduct = async (req, res) => {
     const { name, category, minPrice, maxPrice } = req.body
     // Get all products from MongoDB
     const filter = {}
-    // user.firstName = firstName || user.firstName
     if(name){
-        // filter.name = { $regex: new RegExp(name, "i") }
         filter.$or = [
             { "name": { $regex: new RegExp(name, "i") } },
             { "description": { $regex: new RegExp(name, "i") } },
         ]
-        // filter.description = {$regex: new RegExp(name, "i")}
     }
     
     if(category){
@@ -35,36 +32,7 @@ const searchProduct = async (req, res) => {
     if(maxPrice){
         filter.price = { $lte: maxPrice}
     }
-    
-    
-
-    console.log(filter)
     const searchResults = await Product.find(filter).exec()
-
-
-    // // if(!category){
-    // //     products = await Product.find({
-    // //               $or: [
-    // //                 { "name": },
-    // //                 { "description": { $regex: new RegExp(name, "i") } },
-    // //               ],
-    // //       }).exec()
-    // // }else{
-    // //     products = await Product.find({
-    // //         $and: [
-    // //             { "category" : {$in: category} },
-    // //             {
-    // //                 $or: [
-    // //                 { "name": { $regex: new RegExp(name, "i") } },
-    // //                 { "description": { $regex: new RegExp(name, "i") } },
-    // //               ],
-    // //             }
-    // //         ]
-            
-    // // }).exec()
-
-    // }
-
     res.json(searchResults)
 }
 
