@@ -3,19 +3,19 @@ const UserDetails = require('../models/user.details.model')
 const Product = require('../models/product.model')
 const path = require('path')
 const { format } = require('date-fns')
+const { logEvents } = require('../middleware/logger')
 
 // @desc Get all products
-// @droute GET /products
+// @droute GET /product
 // @access Private
 const getAllProducts = async (req, res) => {
     // Get all products from MongoDB
     const products = await Product.find().populate('user', "email firstName lastName").lean().exec();
-    // If no notes 
+    // If no products 
     if (!products?.length) {
         return res.status(400).json({ message: 'No products found' })
     }
 
-    // You could also do this with a for...of loop
     const productsWithUser = await Promise.all(products.map(async (product) => {
         // const user = await User.findById(product.user).select('-password -_id').lean().exec()
         const userDetails = await UserDetails.findOne({user: product.user}).select('-user -imageBackgroundPage -description -workSchedule -companyName -_id ').lean().exec()
@@ -26,6 +26,9 @@ const getAllProducts = async (req, res) => {
     res.json(productsWithUser)
 }
 
+// @desc Get product by id
+// @droute GET /product/:id
+// @access Private
 const getProductById = async (req,res) => {
     console.log(req.params)
     const {id} = req.params
@@ -43,6 +46,9 @@ const getProductById = async (req,res) => {
     res.json(productObj)
 }
 
+// @desc Create new product
+// @droute POST /product
+// @access Private
 const createNewProduct = async (req,res) => {
     const { user, name, description,
      price, tags, productProperties,
@@ -68,6 +74,9 @@ const createNewProduct = async (req,res) => {
     }
 }
 
+// @desc Update product by id
+// @droute PATCH /product/:id
+// @access Private
 const updateProduct = async (req,res) => {
     const {id} = req.params
     const { 
@@ -106,10 +115,14 @@ const updateProduct = async (req,res) => {
     res.json({message: `Product ID: ${productUpdated._id} updated`})
 }
 
+
+// @desc Change product reservation, if product is not reserved
+// @droute PATCH /reservation/:id
+// @access Private
 const changeProductReservation = async (req,res) => {
     const { id } = req.params
     const { user_id } = req.body
-
+    console.log(req.params)
     // Does product exists
     const product = await Product.findById(id).select('productReservation _id').exec()
     if(!product){
@@ -123,25 +136,48 @@ const changeProductReservation = async (req,res) => {
     product.productReservation = {
         userId: user_id,
         reservationStartDate: new Date(),
-        reservationEndDate: new Date() + 7 
+        reservationEndDate: new Date(+new Date() + 7*24*60*60*1000) 
     }
 
     const updatedProduct = await product.save()
     res.json({message: `Product ${updatedProduct._id} reserved successfully`})
 }
 
+
+// @desc List products with old reservation and remove reservation
+// @droute GET /reservation
+// @access Private
 const checkReservationDate = async (req,res) => {
-    console.log('test')
-    const products = await Product.find().lean().exec();
-    // const product = await Product.find().select('productReservation').lean().exec()
-    console.log(products)
-    // if(product.productReservation.userId)
-    const startDate = new Date()    
+    const products = await Product.find({
+        "productReservation": {
+            $exists: true,
+        },
+        "productReservation.reservationEndDate": {
+            $lte: new Date()
+        }
+    }).select('productReservation _id').lean().exec();
 
-    // if(Date.parse(startDate) > Date.parse()){
-
-    // }
-    res.json(products)
+    let recordDeleted = false
+    for (const product of products){
+        try{
+            // await Product.findByIdAndDelete(product._id)
+            await Product.updateMany(
+                { "_id": { $in: product._id} },
+                { $unset: { "productReservation": 1} }
+            )
+            recordDeleted = true
+            logEvents(`Record with ID: ${product._id} deleted\t EndDate: ${product.reservationEndDate}\t TodayDate: ${new Date()}`, 'reservationsLog.log')
+        }catch(err){
+            res.status(400).json({message: `Delete record error. Err code: ${err}`})
+        }
+    }
+    
+    if(recordDeleted){
+        return res.status(200).json({message: 'Old reservation records deleted'})
+    }else{
+        return res.json({message: 'Old records not found'})
+    }
+    
 }
 
 module.exports = {

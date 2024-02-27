@@ -31,6 +31,7 @@ app.use(fileUpload({
 app.use('/users', require('./routes/userRoutes'))
 app.use('/upload', require('./routes/mediaRoute'))
 app.use('/product', require('./routes/productRoute'))
+app.use('/reservation', require('./routes/reservationRoute'))
 
 app.all("*", (req,res) => {
     res.status(404)
