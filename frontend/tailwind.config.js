@@ -14,11 +14,12 @@ module.exports = {
         // black
         'text-clr-primary-100': '#282C31',
         // white
-        'text-clr-secondary-100': '#B5B5B5',
-        'text-clr-secondary-200': '#F2F2F2',
+        'text-clr-secondary-100': '#cccccc',
+        'text-clr-secondary-200': '#B5B5B5',
         'text-clr-secondary-300': '#F2F2F2',
-        'text-clr-secondary-400': '#F5F5F5',
-        'text-clr-secondary-500': '#FFFFFF'
+        'text-clr-secondary-400': '#F2F2F2',
+        'text-clr-secondary-500': '#F5F5F5',
+        'text-clr-secondary-600': '#FFFFFF'
       }
     },
   },
