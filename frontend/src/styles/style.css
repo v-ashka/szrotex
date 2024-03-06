@@ -1,0 +1,7 @@
+.row > * {
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.svgItem {
+  transform: scale(1.2);
+}

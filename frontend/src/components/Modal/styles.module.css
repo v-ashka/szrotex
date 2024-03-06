@@ -1,0 +1,127 @@
+.background_Modal {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.modalWrapper {
+  width: 80%;
+  height: 90%;
+  overflow: scroll;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #000;
+  display: flex;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+  padding: 2em;
+}
+
+.modalContent {
+  line-height: 1.8;
+  color: #141414;
+}
+
+.content {
+  height: 100%;
+}
+
+.content h2 {
+  margin-bottom: 25px;
+}
+
+.content form {
+  width: 90%;
+  display: flex;
+  flex-flow: wrap;
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.form_group {
+  display: flex;
+  column-gap: 20px;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+
+.form_group input,
+textarea {
+  width: 50%;
+}
+
+.form_group input[type="submit"] {
+  width: 150px;
+}
+
+.addProductForm {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.addProductForm div {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+.addProductForm label {
+  font-weight: bold;
+}
+
+.addProductForm input {
+  width: 200px;
+  height: 40px;
+}
+
+.addProductForm input[type="text"] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px dotted #003c3ce6;
+  color: rgba(0, 68, 68, 0.9);
+}
+
+.formButton {
+  margin-top: 50px;
+  background-color: rgb(19 92 60 / 14%);
+  border: none;
+  color: rgba(0, 68, 68, 0.9);
+  font-weight: 600;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.formButton:hover {
+  background-color: rgb(19 92 60 / 30%);
+  color: rgba(22, 43, 43, 0.9);
+}
+
+.form_group:first-child {
+  flex-flow: column;
+}
+
+.form_group > label {
+  width: 100px;
+}
+
+.form_group input[type="time"] {
+  width: 80px;
+}
+
+.form_group:first-child textarea {
+  width: 100%;
+  height: 100%;
+}
+
+.form_group:nth-of-type(2) {
+  justify-content: start !important;
+}

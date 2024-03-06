@@ -1,0 +1,28 @@
+.user-product-p {
+  font-size: small;
+}
+
+.img-reservation-item::before {
+  content: "ZAREZERWOWANE";
+  font-size: 40px;
+  font-weight: bold;
+  background-color: rgba(114, 114, 114, 0.784);
+  color: #003c3ce6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 97.6%;
+  margin: 0% 0% 0% 1.2%;
+  height: 100%;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 800px) {
+  .img-reservation-item::before {
+    font-size: 30px;
+  }
+}
