@@ -2,19 +2,15 @@
 ```
 // @desc Listuje wszystkich userow
 // @droute GET /api/lists
-// @access Public```
+// @access Public
 
-```
 // @desc Listuje usera po ID produktu jaki posiada
 // @droute GET /api/lists/:id
 // @access Public
-```
 
-```
 // @desc Rezerwuje produkt o podanym ID
 // @droute POST /api/lists/:id
 // @access Private
-
 
 // @desc Rejestruje uzytkownika
 // @droute POST /api/regiser_user
