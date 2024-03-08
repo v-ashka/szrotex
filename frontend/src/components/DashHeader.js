@@ -33,7 +33,7 @@ const DashHeader = () => {
 
 
   const content = (
-    <header className='primary-header border-b-2 pb-1 border-clr-primary-300 transition-all group group-data-[overlay] data-[overlay]:z-5' ref={primaryHeader}>
+    <header className='primary-header group group-data-[overlay] data-[overlay]:z-10 container mx-auto' ref={primaryHeader}>
         <div className='flex justify-between items-center px-2 py-1 group-data-[overlay]:grid group-data-[overlay]:grid-cols-2 group-data-[overlay]:z-50 group-data-[overlay]:sticky group-data-[overlay]:bg-clr-primary-200 group-data-[overlay]:w-full group-data-[overlay]:h-fit group-data-[overlay]:pb-5'>
             <Link className='group-data-[overlay]:col-span-4 group-data-[overlay]:z-50' to={'/'}><img src={Logo}/></Link>
             <div className='flex justify-end items-center gap-6 group-data-[overlay]:order-2 group-data-[overlay]:flex-col group-data-[overlay]:col-span-2 group-data-[overlay]:z-50'>
