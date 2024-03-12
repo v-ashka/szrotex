@@ -90,8 +90,10 @@ body{
     bottom: 0;
     left: 0;
     z-index: -1;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s linear;
     opacity: 0;
+    border-end-end-radius: 2rem;
+    border-end-start-radius: 2rem;
     background-image: linear-gradient(to bottom,
      transparent 10%,
      rgba(0, 60, 60, 0.1) 15%,
@@ -211,11 +213,11 @@ body{
 
     /* categories */
     .categories-item{
-        @apply rounded-xl size-32 sm:size-36 lg:size-52 xl:size-64 2xl:size-72 relative image-filter-overlay-second; 
+        @apply rounded-xl size-48 sm:size-44 lg:size-52 xl:size-64 2xl:size-72 relative image-filter-overlay-second; 
     }
 
     .categories-item img{
-        @apply size-32 sm:size-36 lg:size-52 xl:size-64 2xl:size-72;
+        @apply size-48 sm:size-44 lg:size-52 xl:size-64 2xl:size-72;
     }
 
     .categories-item__name{
@@ -229,6 +231,26 @@ body{
     .categories-item__image{
         @apply relative -z-10 block  lg:h-full object-cover rounded-2xl -scale-x-100 aspect-square 2xl:h-[760px];
     }
+
+    /* ContentStations.js */
+    /* companies */
+
+    .companies__box{
+        @apply grid py-2 grid-cols-1 sm:grid-cols-2 justify-between lg:grid-cols-4 xl:gap-12;
+    }
+
+    .company{
+        @apply flex flex-col relative size-48 lg:size-52 xl:size-64 2xl:size-80; 
+    }
+
+    .company__desc{
+        @apply bg-clr-primary-300 rounded-xl absolute bottom-0 w-full p-4;
+    }
+
+    .company__img{
+        @apply rounded-xl object-cover aspect-square;
+    }
+
 
     /* footer */
     .footer-header{
