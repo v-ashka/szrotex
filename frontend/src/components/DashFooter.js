@@ -24,8 +24,8 @@ const DashFooter = () => {
           <form className='my-4 md:flex flex-wrap gap-4' onSubmit={handleNewsletter}>
             <input type='email' className='form-input' placeholder='Podaj adres email' value={userEmail} onChange={(e) => setUserEmail(e.target.value)}/>
             <div className='my-4 gpdr-form md:order-3'>
-              <input type='checkbox' defaultChecked={gpdrCheckbox}  onChange={() => setGpdrCheckbox(!gpdrCheckbox)} className='mr-4'/>
-              <label className='text-xs'>Wyrażam zgodę na przetwarzanie moich danych osobowych przez Szrotex Sp. z o.o. z siedzibą w Lublinie, ul. Długa 56 20-001 Lublin Polska w celu przesyłania na mój adres e-mail newslettera zawierającego informacje o promocjach oraz najświeższych informacjach ze strony szrotex.com. Podanie danych osobowych jest dobrowolne, ale niezbędne do przesyłania newslettera.</label>
+              <input type='checkbox' defaultChecked={gpdrCheckbox}  onChange={() => setGpdrCheckbox(!gpdrCheckbox)} className='mr-4 h-4 w-4'/>
+              <label className='text-xs text-pretty'>Wyrażam zgodę na przetwarzanie moich danych osobowych przez Szrotex Sp. z o.o. z siedzibą w Lublinie, ul. Długa 56 20-001 Lublin Polska w celu przesyłania na mój adres e-mail newslettera zawierającego informacje o promocjach oraz najświeższych informacjach ze strony szrotex.com. Podanie danych osobowych jest dobrowolne, ale niezbędne do przesyłania newslettera.</label>
             </div>
             <button type='submit' className='btn-submit disabled:bg-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed md:w-32 lg:w-1/4 md:order-1' disabled={!gpdrCheckbox} >Zapisz się</button>
           </form>
@@ -79,7 +79,7 @@ const DashFooter = () => {
                 </Link>
             </ul>
           </div>
-          <div className='footer-nav-last mx-3 flex flex-col mb-2'>
+          <div className='footer-nav-last flex flex-col mb-2'>
             <ul>
               <p className='text-xl font-semibold mt-2'>Dla kupujących</p>
                 <Link to={'#'}>
