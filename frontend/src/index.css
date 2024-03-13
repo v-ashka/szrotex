@@ -213,11 +213,11 @@ body{
 
     /* categories */
     .categories-item{
-        @apply rounded-xl size-48 sm:size-44 lg:size-52 xl:size-64 2xl:size-72 relative image-filter-overlay-second; 
+        @apply rounded-xl size-48 xs:size-44 lg:size-52 xl:size-64 2xl:size-72 relative image-filter-overlay-second; 
     }
 
     .categories-item img{
-        @apply size-48 sm:size-44 lg:size-52 xl:size-64 2xl:size-72;
+        @apply size-48 xs:size-44 lg:size-52 xl:size-64 2xl:size-72;
     }
 
     .categories-item__name{
@@ -236,7 +236,7 @@ body{
     /* companies */
 
     .companies__box{
-        @apply grid py-2 grid-cols-1 sm:grid-cols-2 justify-between lg:grid-cols-4 xl:gap-12;
+        @apply grid py-2 grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 justify-between md:grid-cols-3 lg:grid-cols-4 xl:gap-12 justify-items-center gap-8;
     }
 
     .company{

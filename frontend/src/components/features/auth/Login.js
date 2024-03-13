@@ -1,8 +1,16 @@
 import React from 'react'
+import TopHeader from '../../TopHeader'
+import DashHeader from '../../DashHeader'
+import DashFooter from '../../DashFooter'
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <>
+    <DashHeader/>
+    <div className='h-dvh'>Login</div>
+    <DashFooter/>
+    </>
+    
   )
 }
 

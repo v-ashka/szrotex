@@ -5,7 +5,7 @@ const ContentStations = ({className}) => {
   return (
     <div className={`${className}`}>
           <div className='companies'>
-              <div className='py-4'>
+              <div className='pb-8'>
                 <p className='text-2xl font-semibold md:text-4xl'>Renomowane stacje demontażu pojazdów</p>
                 <p className='text-base font-normal md:text-xl'>Szukasz pewnego i sprawdzonego źródła używanych części samochodowych? Skorzystaj z listy renomowanych stacji demontażu pojazdów zebranych w bazie naszego serwisu!</p>
               </div>

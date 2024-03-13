@@ -8,7 +8,7 @@ import TopBannerImage6 from '../img/categories/suspension.jpg'
 import TopBannerImage7 from '../img/categories/electric-circut.jpg'
 import TopBannerImage8 from '../img/categories/others.jpg'
 import { Link } from 'react-router-dom'
-import { faCar, faRecycle, faRepeat, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faCar, faCarAlt, faCarTunnel, faRecycle, faRepeat, faSearch, faWrench } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ContentCategories = ({className}) => {
   return (
@@ -17,7 +17,7 @@ const ContentCategories = ({className}) => {
         <div className='about-us my-12'>
           <div className='about-us__item'>
             <div className='flex justify-center h-7'>
-              <FontAwesomeIcon icon={faCar} className='about-us__icon' />
+              <FontAwesomeIcon icon={faWrench} className='about-us__icon' />
             </div>
             <div className='about-us__desc'>
               <p className='about-us__title'>Szybka i łatwa wysyłka</p>
@@ -26,7 +26,7 @@ const ContentCategories = ({className}) => {
           </div>
           <div className='about-us__item flex flex-col'>
             <div className='flex justify-center h-7'>
-              <FontAwesomeIcon icon={faRepeat} className='about-us__icon' />
+              <FontAwesomeIcon icon={faCar} className='about-us__icon' />
             </div>
             <div className='about-us__desc'>
               <p className='about-us__title'>Znajdź używane części do swojego auta</p>
@@ -49,7 +49,7 @@ const ContentCategories = ({className}) => {
         </div>
 
         <div className='categories '>
-          <div className='categories__desc py-4'>
+          <div className='categories__desc py-8'>
             <p className='text-2xl font-semibold md:text-4xl'>Kategorie główne</p>
             <p className='text-base font-normal md:text-xl'>Używane części oryginalne i zamienne do samochodów wszystkich marek i modeli.</p>
           </div>

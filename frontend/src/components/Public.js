@@ -12,8 +12,8 @@ const Public = () => {
     <DashHeader/>
         <main className='w-full'>
             <TopHeader className="container mx-auto "/>
-            <ContentCategories className="py-8"/>
-            <ContentStations className="container mx-auto"/>
+            <ContentCategories className="py-10"/>
+            <ContentStations className="container mx-auto py-10"/>
         </main>
     <DashFooter/>
     </>
