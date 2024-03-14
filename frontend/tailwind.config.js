@@ -42,7 +42,9 @@ module.exports = {
         'text-clr-secondary-300': '#F2F2F2',
         'text-clr-secondary-400': '#F2F2F2',
         'text-clr-secondary-500': '#F5F5F5',
-        'text-clr-secondary-600': '#FFFFFF'
+        'text-clr-secondary-600': '#FFFFFF',
+
+      
       }
     },
   },

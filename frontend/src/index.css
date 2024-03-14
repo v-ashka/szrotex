@@ -297,4 +297,56 @@ body{
     .btn-primary > svg:hover{
         @apply text-white;
     }
+
+    .footer-nav-last {
+        @apply grow-[2];
+    }
+
+    /* Login.js */
+
+    .item-link{
+        @apply font-semibold text-clr-primary-300;
+    }
+
+    .item-link:hover{
+        @apply text-clr-primary-200;
+    }
+
+    .btn-login{
+        @apply bg-clr-primary-300 text-text-clr-secondary-600 rounded-lg font-semibold py-3 border-2 border-clr-primary-300 transition-colors;
+    }
+    .btn-login:active,
+    .btn-login:focus,
+    .btn-login:hover{
+        @apply bg-clr-primary-200 border-2 border-clr-primary-300;
+    }
+
+    .form-input-auth{
+        @apply border-2 border-clr-primary-300 rounded-lg pr-2 relative;
+    }
+
+    .form-input-auth input{
+        @apply rounded-lg py-2 w-11/12 relative z-10 bg-transparent px-4;
+    }
+
+    .form-input-auth input:focus-visible{
+        @apply  outline-clr-primary-300 outline-0
+    }
+
+    
+    .auth-label{
+        @apply absolute 
+                top-2.5
+                left-4
+              text-text-clr-secondary-200 transition-all;
+    }
+
+    .form-input-auth:has(.filled) ~ .auth-label ,
+    .form-input-auth:has(input:focus-visible) ~ .auth-label    {
+        @apply bg-text-clr-secondary-600 -top-2.5 text-sm px-2 rounded-xl;
+    }
+
+    .form-auth-icon{
+        @apply w-1/12 ;
+    }
 }
