@@ -26,11 +26,11 @@ const Login = () => {
           <p className='text-lg font-normal'>Załóż konto i zyskaj dodatkowe funkcjonalności</p>
         </div>
       </section>
-      <section className='right-column bg-text-clr-secondary-600 text-text-clr-primary-100 w-full md:w-1/2 flex flex-col justify-center items-center order-1 sm:py-24 md:order-4'>
-        <div className='form-section'>
+      <section className='right-column bg-text-clr-secondary-600 text-text-clr-primary-100 w-full md:w-1/2 flex flex-col justify-center items-center order-1 p-4 sm:p-0 sm:py-24 md:order-4'>
+        <div className='form-section md:w-3/5 2xl:w-1/3'>
           <section className='form-header mb-6'>
             <p className='text-4xl font-normal'>Zaloguj się</p>
-            <p className='text-lg font-light'>Nie masz jeszcze konta? <Link className='item-link' to={"#register"}>Zarejestruj się</Link></p>
+            <p className='text-lg font-light'>Nie masz jeszcze konta? <Link className='item-link' to={"/register"}>Zarejestruj się</Link></p>
           </section>
           <form onSubmit={e => handleSubmitAuth(e)} className='flex flex-col gap-4'>
             <div className='relative'>
