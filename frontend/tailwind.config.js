@@ -39,6 +39,7 @@ module.exports = {
         'clr-primary-400': '#00C571',
         // black
         'text-clr-primary-100': '#282C31',
+        'text-clr-primary-200': '#454269',
         // white
         'text-clr-secondary-100': '#cccccc',
         'text-clr-secondary-200': '#B5B5B5',

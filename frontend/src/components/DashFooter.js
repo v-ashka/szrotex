@@ -15,7 +15,7 @@ const DashFooter = () => {
   }
 
   const content = (
-    <footer className='bg-white pt-8 tracking-wide py-4 h-full bg-bg-pattern bg-no-repeat bg-cover	'>
+    <footer className='bg-white tracking-wide py-20 h-full bg-bg-pattern bg-no-repeat bg-cover	'>
       <div className='container mx-auto'>
         <div className="newsletter-section">
           <div className='newsletter'>

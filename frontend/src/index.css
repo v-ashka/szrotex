@@ -171,7 +171,7 @@ body{
     /* ContentCategories.js - styles */
 
     /* about us */
-    .about-us{
+    /* .about-us{
         @apply flex flex-wrap sm:py-4;  
     }
 
@@ -209,6 +209,37 @@ body{
 
     .about-us__desc{
         @apply py-6 px-4;
+    } */
+
+    /* hero section - override about us */
+    .hero-section > div {
+        @apply flex gap-8 flex-col md:flex-row;
+    }
+
+    .hero-left-section{
+        @apply sticky px-4 flex flex-col md:w-1/2;
+    }
+
+
+    .hero-section__item{
+        @apply flex flex-row gap-8 border-clr-primary-100 border-2 bg-clr-primary-300 p-4 md:p-12 rounded-xl items-center;
+    }
+
+    .hero-section__item:nth-of-type(2n){
+        @apply bg-clr-primary-100 border-clr-primary-300 border-2;
+    }
+
+    .hero-section__item h2{
+       @apply font-bold text-xl;
+    }
+
+
+    .hero-section__items{
+        @apply md:w-1/2 text-text-clr-secondary-300;
+    }
+
+    .hero-icon{
+        @apply text-[44px] md:size-20 size-16;
     }
 
     /* categories */

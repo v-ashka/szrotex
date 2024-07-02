@@ -9,7 +9,7 @@ const ShowSectionFade = ({children, className}) => {
             if(entry.isIntersecting && !isIntersecting)
                 setIsIntersecting(entry.isIntersecting);
         }, 
-        {rootMargin: "-300px"}    
+        {rootMargin: "-200px"}    
     );
         // console.log(isIntersecting);
         if(ref.current)

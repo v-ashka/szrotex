@@ -13,13 +13,13 @@ const Home = () => {
     <>
     <DashHeader/>
         <main className='w-full'>
-            <TopHeader className="container mx-auto pb-20"/>
+            <TopHeader className="container mx-auto py-20"/>
             <ContentCategories className="pb-20"/>
             <div className='container mx-auto py-20 overflow-hidden'>
                 <ShowSectionFade>
                     <ContentStations className="container mx-auto py-20"/>    
                 </ShowSectionFade>
-                <div className="opinions">
+                <section className="opinions">
                     <div className='pb-8'>
                         <p className='text-2xl font-semibold md:text-4xl'>Co mówią o nas klienci?</p>
                         <ul>
@@ -33,7 +33,7 @@ const Home = () => {
                             </Link>
                         </ul>
                     </div>
-                </div>
+                </section>
             </div>
         </main>
     <DashFooter/>
