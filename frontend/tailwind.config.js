@@ -28,6 +28,9 @@ module.exports = {
       }
     },
     extend: {
+      backgroundImage: {
+        'bg-pattern': "url('img/background-vector.svg')",
+      },
       colors: {
         // green variants 
         'clr-primary-100': '#003C3C',

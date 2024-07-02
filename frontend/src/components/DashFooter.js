@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import LogoInverted from '../img/logo-inverted.svg'
+import LogoInverted from '../img/logo-inverted_V2.svg'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMailBulk, faPercent, faPhoneFlip } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ const DashFooter = () => {
   }
 
   const content = (
-    <footer className='bg-white pt-8 tracking-wide py-4 h-full'>
+    <footer className='bg-white pt-8 tracking-wide py-4 h-full bg-bg-pattern bg-no-repeat bg-cover	'>
       <div className='container mx-auto'>
         <div className="newsletter-section">
           <div className='newsletter'>
@@ -27,13 +27,13 @@ const DashFooter = () => {
               <input type='checkbox' defaultChecked={gpdrCheckbox}  onChange={() => setGpdrCheckbox(!gpdrCheckbox)} className='mr-4 h-4 w-4'/>
               <label className='text-xs text-pretty'>Wyrażam zgodę na przetwarzanie moich danych osobowych przez Szrotex Sp. z o.o. z siedzibą w Lublinie, ul. Długa 56 20-001 Lublin Polska w celu przesyłania na mój adres e-mail newslettera zawierającego informacje o promocjach oraz najświeższych informacjach ze strony szrotex.com. Podanie danych osobowych jest dobrowolne, ale niezbędne do przesyłania newslettera.</label>
             </div>
-            <button type='submit' className='btn-submit disabled:bg-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed md:w-32 lg:w-1/4 md:order-1' disabled={!gpdrCheckbox} >Zapisz się</button>
+            <button type='submit' className='btn-submit disabled:bg-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed md:w-32 lg:w-1/4 md:order-1 transition-all ease-[cubic-bezier(0.95,0.05,0.795,0.035)] delay-350' disabled={!gpdrCheckbox} >Zapisz się</button>
           </form>
           </div>
           <div className="hero-footer rounded-2xl aspect-square w-full max-sm:hidden sm:h-full lg:h-96">
           </div>
         </div>
-        <div className='footer-navigation'>
+        <div className='footer-navigation bg-white'>
           <div className='footer-header'>
           <Link className='' to={'/'}><img src={LogoInverted}/></Link>
           <div className='shop-data'>

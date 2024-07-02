@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ImageExample from '../img/categories/auto-szrot.jpg'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const ContentStations = ({className}) => {
   return (
     <div className={`${className}`}>
@@ -13,9 +16,15 @@ const ContentStations = ({className}) => {
                 <Link to={"#"}>
                     <li className='company'>
                         <img src={ImageExample} alt={""} className='company__img'/>
-                        <div className='company__desc'>
-                            <p className='company__title'>Auto-Szrot "Gigant"</p>
-                            <p className='company__address'>Lublin</p>
+                        <div className='company__desc flex flex-wrap justify-between items-center'>
+                            <div className='comapny__desc-info'>
+                                <p className='company__title'>Auto-Szrot "Gigant"</p>
+                                <p className='company__address'>Lublin</p>
+                            </div>
+                            <div className='company__desc-rating'>
+                                <FontAwesomeIcon icon={faStar} /> 
+                                <span>3,5/5</span>
+                            </div>
                         </div>
                     </li>
                 </Link>

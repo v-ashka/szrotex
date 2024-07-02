@@ -10,11 +10,15 @@ import TopBannerImage8 from '../img/categories/others.jpg'
 import { Link } from 'react-router-dom'
 import { faCar, faCarAlt, faCarTunnel, faRecycle, faRepeat, faSearch, faWrench } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ShowSectionFade from './common/ShowSectionFade'
+import BackgroundVector from '../img/background-vector.svg'
+
 const ContentCategories = ({className}) => {
   return (
-    <div className={`bg-white text-text-clr-primary-100 relative -z-0 ${className}`}>
-      <div className='container mx-auto'>
-        <div className='about-us my-12'>
+    <div className={`bg-white text-text-clr-primary-100 relative -z-0 ${className} bg-bg-pattern bg-no-repeat bg-cover	`}>
+      <div className='container mx-auto py-36'>
+        <ShowSectionFade className="about-us my-12 py-12">
+            
           <div className='about-us__item'>
             <div className='flex justify-center h-7'>
               <FontAwesomeIcon icon={faWrench} className='about-us__icon' />
@@ -46,9 +50,9 @@ const ContentCategories = ({className}) => {
               <p className='text-lg'>Kupując używane części na Szrotex możesz dać drugie życie swojemu autu i zaoszczędzić pieniądze.</p>
             </div>
           </div>
-        </div>
+          </ShowSectionFade>
 
-        <div className='categories '>
+        <ShowSectionFade className='categories '>
           <div className='categories__desc py-8'>
             <p className='text-2xl font-semibold md:text-4xl'>Kategorie główne</p>
             <p className='text-base font-normal md:text-xl'>Używane części oryginalne i zamienne do samochodów wszystkich marek i modeli.</p>
@@ -120,7 +124,7 @@ const ContentCategories = ({className}) => {
               </li>
             </Link>
           </ul>
-        </div>
+        </ShowSectionFade>
       </div>
     </div>
   )

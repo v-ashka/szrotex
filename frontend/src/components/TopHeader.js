@@ -4,12 +4,16 @@ import ProductExampleImg from '../img/hero-image2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import ImageWithFade from '../components/common/ImageWithFade';
+import ShowSectionFade from './common/ShowSectionFade'
+import CountUp from 'react-countup'
 
 const TopHeader = ({className}) => {
   return (
-    <div className={`top-header ${className}`}>
+    <ShowSectionFade className={`top-header ${className}`}>
       <div className="banner-product-search image-filter-overlay">
-          <img src={TopBannerImage} className='relative -z-10 block w-full h-[450px] lg:h-full object-cover rounded-2xl -scale-x-100 aspect-square 2xl:h-[760px]' />
+          {/* <img src={TopBannerImage} className='relative -z-10 block w-full h-[450px] lg:h-full object-cover rounded-2xl -scale-x-100 aspect-square 2xl:h-[760px]' /> */}
+          <ImageWithFade src={TopBannerImage} alt={"Banner"} styles="relative -z-10 block w-full h-[450px] lg:h-full object-cover rounded-2xl -scale-x-100 aspect-square 2xl:h-[760px]" />
           <div className='absolute p-4 bottom-5 block sm:p-8'>
             <div className='text-4xl font-normal my-4 lg:text-6xl'>
               <p>Szukasz części używanych w <span className='font-bold'>Krakowie</span>?</p>
@@ -28,17 +32,17 @@ const TopHeader = ({className}) => {
           </div>
           <div className='info-box__stats'>
             <div className='info-box__item'>
-              <p className='text-3xl font-bold'>99999</p>
+              <p className='text-3xl font-bold'><CountUp end={9999} duration={2.5} /></p>
               <p className='text-xs font-light'>Nowych produktów</p>
             </div>
 
             <div className='info-box__item'>
-              <p className='text-3xl font-bold'>23598</p>
+              <p className='text-3xl font-bold'><CountUp end={23598} duration={3} /></p>
               <p className='text-xs font-light'>Wystawionych opinii</p>
             </div>
 
             <div className='info-box__item'>
-              <p className='text-3xl font-bold'>10352</p>
+              <p className='text-3xl font-bold'><CountUp end={10352} duration={3.5}/></p>
               <p className='text-xs font-light'>Nowych użytkowników</p>
             </div>
           </div>
@@ -52,7 +56,8 @@ const TopHeader = ({className}) => {
           </div>
           <Link to={"###"}>
             <div className='new-product__item'>
-              <img src={ProductExampleImg} className='h-fit'/>
+              {/* <img src={ProductExampleImg} className='h-fit'/> */}
+              <ImageWithFade src={ProductExampleImg} className="h-fit" alt={"Wymiana części"}/>
               <div className='new-product__data'>
                 <p className='font-semibold text-lg md:truncate'>Silnik z pełnym wyposażeniem 1.6 HDI asdasdasdasdasds</p>
                 <p className='new-product__price text-3xl font-bold'>3899 zł</p>
@@ -65,7 +70,7 @@ const TopHeader = ({className}) => {
           </Link>
         </div>
       </div>
-    </div>
+    </ShowSectionFade>
   )
 }
 

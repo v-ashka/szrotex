@@ -4,11 +4,32 @@ import ImageLogin from '../../../img/login/login-hero.png'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
-
+import ImageWithFade from '../../common/ImageWithFade';
 const Login = () => {
-
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
+
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entry => {
+      entry.forEach(entry => setIsVisible(entry.isIntersecting));
+    })
+
+    const currentElement = domRef.current;
+    if(currentElement){
+      observer.observe(currentElement);
+    }
+  
+    return () => {
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
+    }
+  }, []);
+
+ 
 
   const handleSubmitAuth = (e) => {
     e.preventDefault();
@@ -16,12 +37,14 @@ const Login = () => {
     console.log(`pwd: ${pwd}`)
   }
 
+    // console.log(isLoaded);
   return (
+    <>
     <GoogleOAuthProvider clientId="<your_client_id>">
     <div className='flex flex-col md:flex-row h-dvh'>
       <section className='left-column m-auto w-full md:w-1/2 flex flex-col justify-center items-center p-6 order-2 md:order-1 sm:p-24'>
-        <img src={ImageLogin} alt='Dashboard page functions presentation'/>
-        <div className='flex flex-col text-text-clr-secondary-600 tracking-wider'>
+        <ImageWithFade src={ImageLogin} alt={'Dashboard page functions presentation'} />
+        <div className={`flex flex-col text-text-clr-secondary-600 tracking-wider fade-in-section ${isVisible ? 'loaded' : ''}`} ref={domRef}>
           <p className='text-lg font-medium'>Sprzedawaj, rezerwuj, kupuj produkty</p>
           <p className='text-lg font-normal'>Załóż konto i zyskaj dodatkowe funkcjonalności</p>
         </div>
@@ -65,7 +88,7 @@ const Login = () => {
       </section>
     </div>
     </GoogleOAuthProvider>
-    
+    </>
   )
 }
 
