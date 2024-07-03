@@ -55,7 +55,7 @@ const TopHeader = ({className}) => {
             <p className='font-light text-base tracking-wide'>Sprawdź ostatnie produkty dodane przez użytkowników</p>
           </div>
           <Link to={"###"}>
-            <div className='new-product__item'>
+            <ShowSectionFade as='div' rootMargin={'0px 0px'} duration={0.25} translateDir='Y' translateValue={'400'} className='new-product__item'>
               {/* <img src={ProductExampleImg} className='h-fit'/> */}
               <ImageWithFade src={ProductExampleImg} className="h-fit" alt={"Wymiana części"}/>
               <div className='new-product__data'>
@@ -66,7 +66,7 @@ const TopHeader = ({className}) => {
                   <p className='new-product__date'>10.02.2024</p>
                 </div>
               </div>
-            </div>
+            </ShowSectionFade>
           </Link>
         </div>
       </div>

@@ -16,7 +16,7 @@ const DashFooter = () => {
 
   const content = (
     <footer className='bg-white tracking-wide py-20 h-full bg-bg-pattern bg-no-repeat bg-cover	'>
-      <div className='container mx-auto'>
+      <div className='px-4 md:px-0 md:container md:mx-auto '>
         <div className="newsletter-section">
           <div className='newsletter'>
             <h1 className='font-semibold text-4xl mb-2'>Zostań z nami na dłużej</h1>

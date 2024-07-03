@@ -1,6 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const ShowSectionFade = ({children, className}) => {
+const fadeStyles = {
+    fadeInSection: (duration, translateDir, translateValue) => ({
+        opacity: 0,
+        transition: `all ${duration}s ease-in-out`,
+        transform: `translate${translateDir}(${translateValue}px)`
+    }),
+    loaded: () => ({
+        opacity: 1,
+        transform: `translate(0px)`,
+    })
+}
+
+const ShowSectionFade = ({
+    as: Component = 'div',
+    children,
+    className,
+    duration = 0.25,
+    translateDir = 'Y',
+    translateValue = 200,
+    rootMargin = "-100px 0px",
+}) => {
     const [isIntersecting, setIsIntersecting] = useState(false);
     const ref = useRef(null);
 
@@ -9,7 +29,7 @@ const ShowSectionFade = ({children, className}) => {
             if(entry.isIntersecting && !isIntersecting)
                 setIsIntersecting(entry.isIntersecting);
         }, 
-        {rootMargin: "-200px"}    
+        {rootMargin}    
     );
         // console.log(isIntersecting);
         if(ref.current)
@@ -31,9 +51,13 @@ const ShowSectionFade = ({children, className}) => {
         }
     }, [isIntersecting]);
 
-    const combinedClassName = `fade-in-section ${isIntersecting ? 'loaded' : ''} ${className || ''}`.trim();
+    // const combinedClassName = `fade-in-section ${isIntersecting ? 'loaded' : ''} ${className || ''}`.trim();
+    const style = {
+        ...fadeStyles.fadeInSection(duration, translateDir, translateValue),
+        ...(isIntersecting ? fadeStyles.loaded() : {})
+    }
     return (
-    <div ref={ref} className={combinedClassName}>{children}</div>
+    <Component ref={ref} className={` ${className}`} style={style}>{children}</Component>
   );
 }
 

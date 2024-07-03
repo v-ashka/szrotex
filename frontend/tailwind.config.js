@@ -33,10 +33,16 @@ module.exports = {
       },
       colors: {
         // green variants 
+        'clr-primary-50': '#003737',
         'clr-primary-100': '#003C3C',
+        'clr-primary-150': '#004949',
         'clr-primary-200': '#005555',
+        'clr-primary-250': '#006F6F',
         'clr-primary-300': '#008888',
+        'clr-primary-350': '#179393',
+        'clr-primary-370': '#00A77D',
         'clr-primary-400': '#00C571',
+        'clr-primary-450': '#17CA7E',
         // black
         'text-clr-primary-100': '#282C31',
         'text-clr-primary-200': '#454269',
