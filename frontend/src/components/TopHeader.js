@@ -10,11 +10,11 @@ import CountUp from 'react-countup'
 
 const TopHeader = ({className}) => {
   return (
-    <ShowSectionFade className={`top-header ${className}`}>
-      <div className="banner-product-search image-filter-overlay">
+    <div className={`top-header ${className}`}>
+      <div className="banner-product-search image-filter-overlay" >
           {/* <img src={TopBannerImage} className='relative -z-10 block w-full h-[450px] lg:h-full object-cover rounded-2xl -scale-x-100 aspect-square 2xl:h-[760px]' /> */}
           <ImageWithFade src={TopBannerImage} alt={"Banner"} styles="relative -z-10 block w-full h-[450px] lg:h-full object-cover rounded-2xl -scale-x-100 aspect-square 2xl:h-[760px]" />
-          <div className='absolute p-4 bottom-5 block sm:p-8'>
+          <ShowSectionFade className='absolute p-4 bottom-5 block sm:p-8' duration={0.25} translateDir='X' translateValue={'200'}>
             <div className='text-4xl font-normal my-4 lg:text-6xl'>
               <p>Szukasz części używanych w <span className='font-bold'>Krakowie</span>?</p>
               <p>Znajdziesz je na Szrotex!</p>
@@ -22,9 +22,9 @@ const TopHeader = ({className}) => {
             <button onClick={null} className='btn-primary lg:text-xl lg:mt-4'>
             <FontAwesomeIcon icon={faSearch} className='text-blacmr-2' />  Wyświetl części z Krakowa
             </button>
-          </div>
+          </ShowSectionFade>
       </div>
-      <div className='info-box rounded-2xl border-2 border-clr-primary-300 tracking-wider'>
+      <ShowSectionFade className='info-box rounded-2xl border-2 border-clr-primary-300 tracking-wider' duration={0.40} translateDir='X' translateValue={'-200'}>
         <div className='p-4 sm:p-8 lg:flex lg:flex-col lg:gap-y-4'>
           <div className='info-box__header-text'>
             <p className='font-semibold text-3xl'>Szrotex - Twój partner w naprawach auta.</p>
@@ -47,8 +47,8 @@ const TopHeader = ({className}) => {
             </div>
           </div>
         </div>
-      </div>
-      <div className='latest-added-product bg-clr-primary-100 rounded-2xl'>
+      </ShowSectionFade>
+      <ShowSectionFade className='latest-added-product bg-clr-primary-100 rounded-2xl' duration={0.6} translateDir='X' translateValue={'-200'}>
         <div className='p-4 sm:p-8'>
           <div className='new-product__info'>
             <p className='font-semibold text-3xl tracking-wide lg:text-4xl'>Ostatnio dodany produkt</p>
@@ -69,8 +69,8 @@ const TopHeader = ({className}) => {
             </ShowSectionFade>
           </Link>
         </div>
-      </div>
-    </ShowSectionFade>
+      </ShowSectionFade>
+    </div>
   )
 }
 
