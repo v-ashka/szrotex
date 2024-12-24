@@ -1,107 +1,162 @@
 const mongoose = require('mongoose')
-const AutoIncrement = require('mongoose-sequence')(mongoose)
+const { create } = require('./addressRegion.model')
+
+const vehicleDeatilsSchema = new mongoose.Schema({
+    model:{
+        type: String,
+    },
+    yearFrom:{
+        type: Number,
+    },
+    yearTo: {
+        type: Number,
+    },
+    type: {
+        type: String,
+        enum: ['car', 'motorcycle', 'truck', 'bus', 'other', 'tractor'],
+        required: true,
+    },
+    engineType: String,
+    engineCapacity: Number,
+    generation: String,
+})
+
+const partDetailsSchema = new mongoose.Schema({
+    manufacturer: String,
+    partNumber: String,
+    condition: {
+        type: String,
+        enum: ['new', 'used', 'refurbished'],
+        required: true,
+    },
+    weight: Number,
+    dimensions: {
+        width: Number,
+        height: Number,
+        length: Number,
+    },
+    originalPart: Boolean,
+    warranty: {
+        available: Boolean,
+        months: Number,
+    },
+    additionalProperties: [{
+        name: String,
+        value: String,
+    }]
+})
+
+const deliveryDetailsSchema = new mongoose.Schema({
+    shippingAvailable: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    personalPickup:{
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    shippingMethods: [{
+        method: String,
+        price: Number
+    }],
+    pickupLocation: {
+        address:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Address',
+            required: true,
+        },
+        type: {
+            type: String,
+            enum: ['store', 'private'],
+            required: true,
+        }
+    }
+})
+
+const productImageSchema = new mongoose.Schema({
+    url: {
+        type: String,
+        required: true,
+    },
+    isMain: {
+        type: Boolean,
+        default: false,
+    },
+    order: {
+        type: Number,
+        default: 0,
+    }
+})
 
 const productSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        require: true,
-        ref: "szrotexUser"
-    },
     name: {
         type: String,
-        maxLength: 40,
-        require: true,
+        required: true,
+        index: true,
     },
     description: {
         type: String,
-        maxLength: 300,
-        require: false,
-        default: ''
-        
+        required: true,
     },
     price: {
-        type: Number,
-        require: true,
-    },
-    quantity:{
-        type: Number,
-        require: true,
-        default: 0
-    },
-    currency: {
-        name: {
-            type: String,
-            default: 'PLN'
+        current: {
+            type: Number,
+            required: true,
         },
-        value: {
-            type: String,
-            default: 'zł'
-        }
-    },
-    deliveryOption: {
-        type: Boolean,
-        default: false
-    },
-    productImg: {
-        type: String,
-        require: false,
-        default: ''
-    },
-    tags: [{
-        type: [String],
-    }],
-    active: {
-        type: Boolean,
-        default: true
-    },
-    productProperties: [{
-        id: {
-            type: mongoose.Schema.Types.ObjectId
+        negotiable: {
+            type: Boolean,
+            default: true,
         },
-        name: {
-            type: String
-        },
-        value: {
-            type: String
-        }
-    }],
-    productReservation: {
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "szrotexUser"
-        },
-        reservationStartDate: {
-            type: Date,
-        },
-        reservationEndDate: {
-            type: Date,
-        }
-    },
-    productRegion: {
-        voivodeship: {
-            type: String,
-        },
-        street: {
-            type: String,
-        },
-        zip: {
-            type: String,
-        },
-        city: {
-            type: String,
-        }
     },
     category: {
-        type: [String],
+        main: {
+            type: String,
+            required: true,
+            index: true,
+        },
+        sub: String
+    },
+    images: [productImageSchema],
+    vehicleDetails: vehicleDeatilsSchema,
+    partDetails: partDetailsSchema,
+    deliveryDetails: deliveryDetailsSchema,
+    seller: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    status: {
+        type: String,
+        enum: ['active', 'reserved', 'sold', 'inactive'],
+        required: true,
+        default: 'active',
+        index: true,
+    },
+    reservationDetails: {
+        isReserved: {
+            type: Boolean,
+            default: false,
+        },
+        reservedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        reservedUntil: Date,
+    },
+    views: {
+        type: Number,
+        default: 0,
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        index: true,
     },
-    modifiedAt: {
-        type: Date,
-        default: Date.now
-    }
+    updatedAt: Date,
 })
+
+
 
 module.exports = mongoose.model("product", productSchema)

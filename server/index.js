@@ -6,6 +6,7 @@ const app = express();
 const path = require('path');
 const cors = require('cors')
 const corsOptions = require("./config/corsOptions");
+
 const port = process.env.PORT || 3500;
 const cookieParser = require('cookie-parser')
 // DB Mongo
@@ -33,6 +34,7 @@ app.use('/upload', require('./routes/mediaRoute'))
 app.use('/product', require('./routes/productRoute'))
 app.use('/reservation', require('./routes/reservationRoute'))
 app.use('/search', require('./routes/searchRoute'))
+app.use('/address', require('./routes/addressRoute'))
 
 app.all("*", (req,res) => {
     res.status(404)

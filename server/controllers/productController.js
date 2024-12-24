@@ -53,14 +53,14 @@ const createNewProduct = async (req,res) => {
     const { user, name, description,
      price, tags, productProperties,
      productReservation, category, productRegion } = req.body
-
+        console.log(req.body)
     if(!user || !name || !description || !price || !category?.length ){
         return res.status(400).json({message: "All fields are required"})
     }
 
     const userDetails = await UserDetails.findOne({user: user}).exec()
     if(!userDetails.region?.city && !productRegion){
-        return res.status(400).json({message: "No information is provided about the product's sales region. Please provide this data in your profile or directly in product"})
+        return res.status(400).json({message: "User sales region or product sale region not found"})
     }
 
     // Create and store new product
